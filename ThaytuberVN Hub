@@ -89,6 +89,7 @@ return function()
 
     -- Tạo cửa sổ chính
     function Framework:CreateWindow(options)
+        print("[Framework] Menu đã được mở thành công!")
         showLoading(options.LoadingTitle or "Đang tải...", options.LoadingSubtitle or "")
 
         if options.KeySystem then
