@@ -1,16 +1,8 @@
---[[
-⚙️ ThaytuberVN Framework (Rayfield-style)
-✅ Features:
-- CreateWindow
-- Drag UI
-- Toggle visibility with keybind
-- Rainbow border toggle in Settings
-- Setting icon + menu
-]]
+-- ThaytuberVN Framework (Rayfield-style drag fix)
 
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
 
 local Framework = {}
 
@@ -40,23 +32,22 @@ function Framework:CreateWindow(config)
     config = config or {}
     local name = config.Name or "My Menu"
     local key = config.ToggleUIKeybind or "K"
-    local enableDrag = config.EnableDrag ~= false
     local enableRainbow = config.RainbowBorder == true
 
-    -- Main ScreenGui
+    local player = Players.LocalPlayer
     local gui = Instance.new("ScreenGui")
     gui.Name = "CustomUI"
     gui.ResetOnSpawn = false
-    gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    gui.Parent = player:WaitForChild("PlayerGui")
 
-    -- Main Frame
     local main = Instance.new("Frame")
     main.Size = UDim2.new(0, 400, 0, 300)
     main.Position = UDim2.new(0.5, -200, 0.5, -150)
     main.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     main.BorderSizePixel = 0
-    main.ClipsDescendants = true
     main.AnchorPoint = Vector2.new(0.5, 0.5)
+    main.Active = true
+    main.Draggable = true
     main.Parent = gui
 
     local uicorner = Instance.new("UICorner")
@@ -70,9 +61,9 @@ function Framework:CreateWindow(config)
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.Font = Enum.Font.GothamBold
     title.TextSize = 18
+    title.Name = "TitleBar"
     title.Parent = main
 
-    -- Settings button
     local gear = Instance.new("ImageButton")
     gear.Size = UDim2.new(0, 24, 0, 24)
     gear.Position = UDim2.new(0, 4, 0, 3)
@@ -80,10 +71,9 @@ function Framework:CreateWindow(config)
     gear.Image = "rbxassetid://6031091002"
     gear.Parent = main
 
-    -- Settings Frame
     local settings = Instance.new("Frame")
     settings.Size = UDim2.new(1, 0, 1, 0)
-    settings.Position = UDim2.new(1, 0, 0, 0)
+    settings.Position = UDim2.new(0, 0, 0, 0)
     settings.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     settings.Visible = false
     settings.Parent = main
@@ -121,53 +111,19 @@ function Framework:CreateWindow(config)
         end
     end)
 
-    -- Open/Close Settings
     gear.MouseButton1Click:Connect(function()
         settings.Visible = not settings.Visible
     end)
 
-        local dragging = false
-        local dragInput, dragStart, startPos
-
-        title.InputBegan:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                dragging = true
-                dragStart = input.Position
-                startPos = main.Position
-
-                input.Changed:Connect(function()
-                    if input.UserInputState == Enum.UserInputState.End then
-                        dragging = false
-                    end
-                end)
-            end
-        end)
-
-        UserInputService.InputChanged:Connect(function(input)
-            if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then
-                local delta = input.Position - dragStart
-                main.Position = UDim2.new(
-                    startPos.X.Scale,
-                    startPos.X.Offset + delta.X,
-                    startPos.Y.Scale,
-                    startPos.Y.Offset + delta.Y
-                )
-            end
-        end)
-
-
-    -- Toggle Key
     local isVisible = true
-    UserInputService.InputBegan:Connect(function(input)
-        if input.KeyCode == Enum.KeyCode[key] then
+    UserInputService.InputBegan:Connect(function(input, gpe)
+        if not gpe and input.KeyCode == Enum.KeyCode[key] then
             isVisible = not isVisible
-            local goal = { Size = isVisible and UDim2.new(0, 400, 0, 300) or UDim2.new(0, 0, 0, 0), Transparency = isVisible and 0 or 1 }
-            TweenService:Create(main, TweenInfo.new(0.3, Enum.EasingStyle.Quad), { Size = goal.Size }):Play()
             main.Visible = isVisible
         end
     end)
 
-    print("[Framework] Menu đã được mở thành công!")
+    print("[Framework] Menu da duoc mo thanh cong!")
 
     local API = {}
 
