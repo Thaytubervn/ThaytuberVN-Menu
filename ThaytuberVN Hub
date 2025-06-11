@@ -92,31 +92,64 @@ function Framework:CreateWindow(config)
     buttonHolder.Size = UDim2.new(1, 0, 0, 36)
     buttonHolder.BackgroundTransparency = 1
 
-    local function createTab(name)
-        local btn = Instance.new("TextButton", buttonHolder)
-        btn.Size = UDim2.new(0, 100, 1, 0)
-        btn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-        btn.Text = name
-        btn.Font = Enum.Font.Gotham
-        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-        btn.TextSize = 14
-
-        local tabFrame = Instance.new("Frame", holder)
-        tabFrame.Position = UDim2.new(0, 0, 0, 72)
-        tabFrame.Size = UDim2.new(1, 0, 1, -72)
-        tabFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-        tabFrame.Visible = false
-
-        local layout = Instance.new("UIListLayout", tabFrame)
-        layout.Padding = UDim.new(0, 6)
-
-        btn.MouseButton1Click:Connect(function()
-            switchTab(name)
-        end)
-
-        tabs[name] = { Frame = tabFrame, Button = btn }
-        return tabFrame
+function Window:CreateTab(tabName)
+    -- Nếu tab đã tồn tại, trả về luôn
+    if self.Tabs and self.Tabs[tabName] then
+        return self.Tabs[tabName]
     end
+
+    -- Tạo bảng chứa tab nếu chưa có
+    self.Tabs = self.Tabs or {}
+
+    -- Frame UI cho tab mới
+    local tabFrame = Instance.new("Frame")
+    tabFrame.Name = tabName
+    tabFrame.Size = UDim2.new(1, 0, 1, 0)
+    tabFrame.BackgroundTransparency = 1
+    tabFrame.Visible = false
+    tabFrame.Parent = self.ContentHolder -- self.ContentHolder là chỗ chứa nội dung của menu
+
+    -- Tạo bảng tab object để người dùng thêm button
+    local tabObject = {}
+
+    function tabObject:CreateButton(data)
+        local button = Instance.new("TextButton")
+        button.Size = UDim2.new(0.9, 0, 0, 30)
+        button.Position = UDim2.new(0.05, 0, 0, #tabFrame:GetChildren() * 35)
+        button.Text = data.Name
+        button.Parent = tabFrame
+
+        button.MouseButton1Click:Connect(function()
+            if data.Callback then
+                data.Callback()
+            end
+        end)
+    end
+
+    -- Lưu lại tab và hiển thị quản lý
+    self.Tabs[tabName] = tabObject
+    tabObject._Frame = tabFrame
+
+    -- Thêm vào hệ thống tab switcher nếu cần
+    if self.TabButtons then
+        local tabButton = Instance.new("TextButton")
+        tabButton.Text = tabName
+        tabButton.Size = UDim2.new(0, 100, 0, 30)
+        tabButton.Parent = self.TabButtons
+
+        tabButton.MouseButton1Click:Connect(function()
+            for _, tab in pairs(self.Tabs) do
+                if tab._Frame then
+                    tab._Frame.Visible = false
+                end
+            end
+            tabFrame.Visible = true
+        end)
+    end
+
+    return tabObject
+end
+
 
     local playerTab = createTab("Player")
     local settingTab = createTab("Setting")
