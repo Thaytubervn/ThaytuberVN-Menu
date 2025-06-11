@@ -1,205 +1,189 @@
---[[
-🌈 ThaytuberVN UI Framework v2 (Rayfield-style)
-✅ Tab system | ✅ RGB Border | ✅ Smooth drag | ✅ Keybind toggle
---]]
-
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
 
 local Framework = {}
+local rainbowRunning = false
 
-local function CreateRainbowFrame(parent)
-    local border = Instance.new("Frame")
-    border.Size = UDim2.new(1, 8, 1, 8)
-    border.Position = UDim2.new(0, -4, 0, -4)
-    border.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-    border.BorderSizePixel = 0
-    border.ZIndex = 0
-    border.Name = "RainbowBorder"
-    border.Parent = parent
+local function createRGBFrame(parent)
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(1, 8, 1, 8)
+    frame.Position = UDim2.new(0, -4, 0, -4)
+    frame.BackgroundTransparency = 1
+    frame.ZIndex = 0
+    frame.Parent = parent
 
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(0, 10)
-    corner.Parent = border
+    local uiGradient = Instance.new("UIGradient")
+    uiGradient.Rotation = 0
+    uiGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromHSV(0, 1, 1)),
+        ColorSequenceKeypoint.new(1, Color3.fromHSV(1, 1, 1))
+    })
+    uiGradient.Parent = frame
 
-    local hue = 0
-    local running = true
     coroutine.wrap(function()
-        while running and border.Parent do
-            hue = (hue + 1) % 360
-            border.BackgroundColor3 = Color3.fromHSV(hue/360, 1, 1)
-            task.wait(0.02)
+        while rainbowRunning do
+            uiGradient.Rotation = (uiGradient.Rotation + 1) % 360
+            task.wait(0.01)
         end
     end)()
 
-    return border, function()
-        running = false
-        border:Destroy()
-    end
+    return frame
 end
 
 function Framework:CreateWindow(config)
     config = config or {}
-    local name = config.Name or "Menu"
-    local key = config.ToggleUIKeybind or "K"
+    local toggleKey = config.ToggleUIKeybind or Enum.KeyCode.K
+    local enableDrag = config.EnableDrag ~= false
+    local player = Players.LocalPlayer
 
-    local gui = Instance.new("ScreenGui")
-    gui.Name = "FrameworkUI"
+    local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
     gui.ResetOnSpawn = false
-    gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+    gui.Name = "RayUI"
 
-    local main = Instance.new("Frame")
-    main.Size = UDim2.new(0, 500, 0, 350)
-    main.Position = UDim2.new(0.5, -250, 0.5, -175)
-    main.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-    main.BorderSizePixel = 0
-    main.AnchorPoint = Vector2.new(0.5, 0.5)
-    main.ClipsDescendants = true
-    main.Parent = gui
+    -- Main Container
+    local holder = Instance.new("Frame")
+    holder.Size = UDim2.new(0, 500, 0, 350)
+    holder.Position = UDim2.new(0.5, 0, 0.5, 0)
+    holder.AnchorPoint = Vector2.new(0.5, 0.5)
+    holder.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    holder.ClipsDescendants = true
+    holder.Visible = false
+    holder.Parent = gui
 
-    local uiCorner = Instance.new("UICorner")
-    uiCorner.CornerRadius = UDim.new(0, 8)
-    uiCorner.Parent = main
+    local corner = Instance.new("UICorner", holder)
+    corner.CornerRadius = UDim.new(0, 10)
 
-    local title = Instance.new("TextLabel")
-    title.Text = name
-    title.Size = UDim2.new(1, 0, 0, 30)
+    local rainbow = createRGBFrame(holder)
+    rainbowRunning = true
+
+    -- TopBar
+    local top = Instance.new("Frame")
+    top.Size = UDim2.new(1, 0, 0, 36)
+    top.BackgroundTransparency = 1
+    top.Name = "Top"
+    top.Parent = holder
+
+    local title = Instance.new("TextLabel", top)
+    title.Text = config.Name or "Framework UI"
+    title.Size = UDim2.new(1, -80, 1, 0)
+    title.Position = UDim2.new(0, 10, 0, 0)
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextXAlignment = Enum.TextXAlignment.Left
     title.BackgroundTransparency = 1
-    title.TextColor3 = Color3.new(1, 1, 1)
     title.Font = Enum.Font.GothamBold
-    title.TextSize = 18
-    title.Parent = main
+    title.TextSize = 16
 
-    -- Tabs container
-    local tabButtons = Instance.new("Frame")
-    tabButtons.Size = UDim2.new(1, 0, 0, 35)
-    tabButtons.Position = UDim2.new(0, 0, 0, 30)
-    tabButtons.BackgroundTransparency = 1
-    tabButtons.Parent = main
-
-    local contentFrame = Instance.new("Frame")
-    contentFrame.Size = UDim2.new(1, 0, 1, -65)
-    contentFrame.Position = UDim2.new(0, 0, 0, 65)
-    contentFrame.BackgroundTransparency = 1
-    contentFrame.Name = "TabContent"
-    contentFrame.Parent = main
-
+    -- Tab Buttons
     local tabs = {}
     local currentTab = nil
 
-    local function switchTo(tab)
-        for _, t in ipairs(contentFrame:GetChildren()) do
-            if t:IsA("Frame") then
-                t.Visible = false
-            end
+    local function switchTab(tabName)
+        for name, elements in pairs(tabs) do
+            local isVisible = name == tabName and currentTab ~= tabName
+            elements.Frame.Visible = isVisible
+            elements.Button.BackgroundColor3 = isVisible and Color3.fromRGB(50, 50, 50) or Color3.fromRGB(35, 35, 35)
         end
-        for _, b in ipairs(tabButtons:GetChildren()) do
-            if b:IsA("TextButton") then
-                b.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-            end
-        end
-        tab.Frame.Visible = true
-        tab.Button.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
-        currentTab = tab
+        currentTab = currentTab == tabName and nil or tabName
     end
 
-    local API = {}
+    local buttonHolder = Instance.new("Frame", holder)
+    buttonHolder.Position = UDim2.new(0, 0, 0, 36)
+    buttonHolder.Size = UDim2.new(1, 0, 0, 36)
+    buttonHolder.BackgroundTransparency = 1
 
-    function API:CreateTab(tabName)
-        local button = Instance.new("TextButton")
-        button.Size = UDim2.new(0, 100, 1, 0)
-        button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-        button.TextColor3 = Color3.new(1, 1, 1)
-        button.Font = Enum.Font.Gotham
-        button.TextSize = 14
-        button.Text = tabName
-        button.Parent = tabButtons
+    local function createTab(name)
+        local btn = Instance.new("TextButton", buttonHolder)
+        btn.Size = UDim2.new(0, 100, 1, 0)
+        btn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+        btn.Text = name
+        btn.Font = Enum.Font.Gotham
+        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        btn.TextSize = 14
 
-        local tabFrame = Instance.new("Frame")
-        tabFrame.Size = UDim2.new(1, 0, 1, 0)
-        tabFrame.BackgroundTransparency = 1
+        local tabFrame = Instance.new("Frame", holder)
+        tabFrame.Position = UDim2.new(0, 0, 0, 72)
+        tabFrame.Size = UDim2.new(1, 0, 1, -72)
+        tabFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         tabFrame.Visible = false
-        tabFrame.Parent = contentFrame
 
-        button.MouseButton1Click:Connect(function()
-            switchTo({ Frame = tabFrame, Button = button })
+        local layout = Instance.new("UIListLayout", tabFrame)
+        layout.Padding = UDim.new(0, 6)
+
+        btn.MouseButton1Click:Connect(function()
+            switchTab(name)
         end)
 
-        local tabAPI = {}
+        tabs[name] = { Frame = tabFrame, Button = btn }
+        return tabFrame
+    end
 
-        function tabAPI:CreateButton(cfg)
+    local playerTab = createTab("Player")
+    local settingTab = createTab("Setting")
+
+    -- Rainbow toggle in settings
+    local toggle = Instance.new("TextButton", settingTab)
+    toggle.Size = UDim2.new(1, -20, 0, 30)
+    toggle.Position = UDim2.new(0, 10, 0, 10)
+    toggle.Text = "Toggle Rainbow"
+    toggle.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggle.Font = Enum.Font.Gotham
+    toggle.TextSize = 14
+
+    toggle.MouseButton1Click:Connect(function()
+        rainbow.Visible = not rainbow.Visible
+    end)
+
+    -- Dragging
+    if enableDrag then
+        local dragging, dragInput, startPos, startInput
+        top.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging = true
+                startInput = input
+                startPos = holder.Position
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then dragging = false end
+                end)
+            end
+        end)
+
+        UserInputService.InputChanged:Connect(function(input)
+            if dragging and input == UserInputService:GetMouseDelta() then
+                local delta = UserInputService:GetMouseDelta()
+                holder.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            end
+        end)
+    end
+
+    -- Toggle UI
+    UserInputService.InputBegan:Connect(function(input)
+        if input.KeyCode == toggleKey then
+            holder.Visible = not holder.Visible
+            if holder.Visible then
+                holder.Size = UDim2.new(0, 0, 0, 0)
+                TweenService:Create(holder, TweenInfo.new(0.25, Enum.EasingStyle.Quad), {
+                    Size = UDim2.new(0, 500, 0, 350)
+                }):Play()
+            end
+        end
+    end)
+
+    return {
+        CreateButton = function(tab, text, callback)
             local btn = Instance.new("TextButton")
-            btn.Size = UDim2.new(0, 200, 0, 30)
-            btn.Position = UDim2.new(0, 10, 0, #tabFrame:GetChildren() * 35)
+            btn.Size = UDim2.new(1, -20, 0, 32)
+            btn.Position = UDim2.new(0, 10, 0, 0)
+            btn.Text = text
             btn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-            btn.TextColor3 = Color3.new(1, 1, 1)
+            btn.TextColor3 = Color3.fromRGB(255, 255, 255)
             btn.Font = Enum.Font.Gotham
             btn.TextSize = 14
-            btn.Text = cfg.Name or "Button"
-            btn.Parent = tabFrame
-            btn.MouseButton1Click:Connect(function()
-                if cfg.Callback then cfg.Callback() end
-            end)
+            btn.Parent = tabs[tab].Frame
+            btn.MouseButton1Click:Connect(callback)
         end
-
-        return tabAPI
-    end
-
-    -- Toggle visibility with key
-    local visible = true
-    UserInputService.InputBegan:Connect(function(input, gpe)
-        if not gpe and input.KeyCode == Enum.KeyCode[key] then
-            visible = not visible
-            main.Visible = visible
-        end
-    end)
-
-    -- Drag system improved
-    local dragging = false
-    local dragStart = Vector2.new()
-    local startPos = UDim2.new()
-
-    title.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = true
-            dragStart = input.Position
-            startPos = main.Position
-        end
-    end)
-
-    UserInputService.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = false
-        end
-    end)
-
-    RunService.RenderStepped:Connect(function()
-        if dragging then
-            local delta = UserInputService:GetMouseLocation() - dragStart
-            main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-        end
-    end)
-
-    -- RGB border toggle
-    local rainbowBorder, stopRGB = CreateRainbowFrame(main)
-
-    function API:ToggleRGB(state)
-        if state and not rainbowBorder then
-            rainbowBorder, stopRGB = CreateRainbowFrame(main)
-        elseif not state and stopRGB then
-            stopRGB()
-            rainbowBorder = nil
-        end
-    end
-
-    print("[Framework] UI created.")
-    return API
+    }
 end
 
-return function()
-    return Framework
-end
+return Framework
