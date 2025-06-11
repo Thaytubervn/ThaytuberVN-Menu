@@ -1,0 +1,147 @@
+return function()
+    local Framework = {}
+
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+    local UIS = game:GetService("UserInputService")
+
+    -- Nội bộ: Hiện loading UI
+    local function showLoading(title, subtitle)
+        local gui = Instance.new("ScreenGui", PlayerGui)
+        gui.Name = "Framework_Loading"
+        local frame = Instance.new("Frame", gui)
+        frame.Size = UDim2.new(0, 300, 0, 150)
+        frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+        frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        Instance.new("UICorner", frame)
+
+        local titleLabel = Instance.new("TextLabel", frame)
+        titleLabel.Size = UDim2.new(1, 0, 0.4, 0)
+        titleLabel.Text = title or "Loading..."
+        titleLabel.Font = Enum.Font.GothamBold
+        titleLabel.TextSize = 22
+        titleLabel.TextColor3 = Color3.new(1, 1, 1)
+        titleLabel.BackgroundTransparency = 1
+
+        local subtitleLabel = Instance.new("TextLabel", frame)
+        subtitleLabel.Position = UDim2.new(0, 0, 0.4, 0)
+        subtitleLabel.Size = UDim2.new(1, 0, 0.6, 0)
+        subtitleLabel.Text = subtitle or ""
+        subtitleLabel.Font = Enum.Font.Gotham
+        subtitleLabel.TextSize = 16
+        subtitleLabel.TextColor3 = Color3.new(1, 1, 1)
+        subtitleLabel.BackgroundTransparency = 1
+
+        wait(2)
+        gui:Destroy()
+    end
+
+    -- Nội bộ: Key system
+    local function handleKeySystem(keySettings)
+        if not keySettings or not keySettings.Key then return true end
+
+        local correctKeys = keySettings.Key
+        local keyPassed = false
+
+        local keyGui = Instance.new("ScreenGui", PlayerGui)
+        keyGui.Name = "Framework_Key"
+
+        local frame = Instance.new("Frame", keyGui)
+        frame.Size = UDim2.new(0, 300, 0, 150)
+        frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+        frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        Instance.new("UICorner", frame)
+
+        local textBox = Instance.new("TextBox", frame)
+        textBox.Position = UDim2.new(0.1, 0, 0.3, 0)
+        textBox.Size = UDim2.new(0.8, 0, 0.3, 0)
+        textBox.PlaceholderText = "Nhập key..."
+        textBox.Font = Enum.Font.Gotham
+        textBox.TextSize = 14
+        textBox.Text = ""
+        textBox.ClearTextOnFocus = false
+        textBox.TextColor3 = Color3.new(1, 1, 1)
+        textBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        Instance.new("UICorner", textBox)
+
+        local submit = Instance.new("TextButton", frame)
+        submit.Position = UDim2.new(0.3, 0, 0.7, 0)
+        submit.Size = UDim2.new(0.4, 0, 0.2, 0)
+        submit.Text = "Xác nhận"
+        submit.Font = Enum.Font.GothamBold
+        submit.TextColor3 = Color3.new(1,1,1)
+        submit.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+        Instance.new("UICorner", submit)
+
+        submit.MouseButton1Click:Connect(function()
+            for _, key in ipairs(correctKeys) do
+                if textBox.Text == key then
+                    keyPassed = true
+                    keyGui:Destroy()
+                end
+            end
+        end)
+
+        repeat task.wait() until keyPassed
+        return true
+    end
+
+    -- Tạo cửa sổ chính
+    function Framework:CreateWindow(options)
+        showLoading(options.LoadingTitle or "Đang tải...", options.LoadingSubtitle or "")
+
+        if options.KeySystem then
+            handleKeySystem(options.KeySettings or {Key = {"123"}})
+        end
+
+        local gui = Instance.new("ScreenGui", PlayerGui)
+        gui.Name = "MyFramework"
+        gui.ResetOnSpawn = false
+
+        local frame = Instance.new("Frame", gui)
+        frame.Size = UDim2.new(0, 400, 0, 300)
+        frame.Position = UDim2.new(0.5, -200, 0.5, -150)
+        frame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+        Instance.new("UICorner", frame)
+
+        local container = Instance.new("Frame", frame)
+        container.BackgroundTransparency = 1
+        container.Size = UDim2.new(1, -20, 1, -20)
+        container.Position = UDim2.new(0, 10, 0, 10)
+
+        local layout = Instance.new("UIListLayout", container)
+        layout.Padding = UDim.new(0, 6)
+        layout.SortOrder = Enum.SortOrder.LayoutOrder
+
+        local win = {}
+
+        function win:CreateButton(data)
+            local btn = Instance.new("TextButton", container)
+            btn.Size = UDim2.new(1, 0, 0, 40)
+            btn.Text = data.Name or "Button"
+            btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+            btn.TextColor3 = Color3.new(1, 1, 1)
+            btn.Font = Enum.Font.Gotham
+            btn.TextSize = 16
+            Instance.new("UICorner", btn)
+
+            btn.MouseButton1Click:Connect(function()
+                pcall(data.Callback or function() end)
+            end)
+        end
+
+        -- Ẩn/Hiện bằng phím
+        if options.ToggleUIKeybind then
+            UIS.InputBegan:Connect(function(input, gpe)
+                if not gpe and input.KeyCode == Enum.KeyCode[options.ToggleUIKeybind] then
+                    gui.Enabled = not gui.Enabled
+                end
+            end)
+        end
+
+        return win
+    end
+
+    return Framework
+end
