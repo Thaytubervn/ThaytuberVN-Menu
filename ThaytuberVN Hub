@@ -1,227 +1,214 @@
---// ThaytuberVN Framework UI (Final Version)
-local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("UserInputService")
-local CoreGui = game:GetService("CoreGui")
+--[[
+  ThaytuberVN UI Framework
+  Đã chỉnh sửa:
+  - Tăng kích thước menu
+  - Nút bo tròn góc
+  - Hỗ trợ theme truyền vào
+  - RGB border rõ toàn khung
+  - Kéo toàn khung menu
+  - Không còn nút ToggleRGB (dùng RainbowEnabled)
+  - Tab Setting mặc định + nút chọn phím toggle menu
+  - Tab system toggle đúng (ấn lại tab đang mở thì tắt)
+--]]
 
 local Framework = {}
+Framework.__index = Framework
 
--- Utility
-local function CreateInstance(class, props)
-    local inst = Instance.new(class)
-    for k, v in pairs(props) do
-        inst[k] = v
-    end
-    return inst
-end
+-- Services
+local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
 
-local function MakeDraggable(frame)
-    local dragging, dragInput, dragStart, startPos
-    frame.InputBegan:Connect(function(input)
+local LocalPlayer = Players.LocalPlayer
+
+-- Theme mặc định nếu không truyền vào
+local DefaultTheme = {
+    TextColor = Color3.fromRGB(255, 255, 255),
+    Background = Color3.fromRGB(20, 20, 20),
+    Topbar = Color3.fromRGB(30, 30, 30),
+    Shadow = Color3.fromRGB(0, 0, 0),
+    TabBackground = Color3.fromRGB(40, 40, 40),
+    TabTextColor = Color3.fromRGB(200, 200, 200),
+    TabBackgroundSelected = Color3.fromRGB(0, 128, 255),
+    SelectedTabTextColor = Color3.fromRGB(255, 255, 255),
+    ElementBackground = Color3.fromRGB(50, 50, 50),
+    ElementStroke = Color3.fromRGB(70, 70, 70)
+}
+
+-- Create UI Window
+function Framework:CreateWindow(config)
+    local self = setmetatable({}, Framework)
+
+    local name = config.Name or "Menu"
+    local keybind = config.ToggleUIKeybind or "K"
+    local rainbowEnabled = config.RainbowEnabled or false
+    local theme = config.Theme or DefaultTheme
+
+    local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+    ScreenGui.Name = "ThaytuberVN_UI"
+    ScreenGui.ResetOnSpawn = false
+
+    local Holder = Instance.new("Frame", ScreenGui)
+    Holder.Size = UDim2.fromOffset(500, 400)
+    Holder.Position = UDim2.fromScale(0.5, 0.5)
+    Holder.AnchorPoint = Vector2.new(0.5, 0.5)
+    Holder.BackgroundColor3 = theme.Background
+    Holder.BorderSizePixel = 0
+
+    -- Scale-in animation
+    Holder.Size = UDim2.new(0, 0, 0, 0)
+    TweenService:Create(Holder, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+        Size = UDim2.fromOffset(500, 400)
+    }):Play()
+
+    -- Dragging
+    local dragging, offset
+    Holder.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = true
-            dragStart = input.Position
-            startPos = frame.Position
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then dragging = false end
-            end)
+            offset = Vector2.new(input.Position.X, input.Position.Y) - Holder.AbsolutePosition
         end
     end)
-
-    frame.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseMovement then
-            dragInput = input
+    UIS.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end
+    end)
+    UIS.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+            Holder.Position = UDim2.new(0, input.Position.X - offset.X, 0, input.Position.Y - offset.Y)
         end
     end)
-
-    UserInputService.InputChanged:Connect(function(input)
-        if input == dragInput and dragging then
-            local delta = input.Position - dragStart
-            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-        end
-    end)
-end
-
-function Framework:CreateWindow(options)
-    local RainbowBorder = options.RainbowBorder or false
-    local ToggleKey = options.ToggleUIKeybind or "K"
-    local WindowName = options.Name or "Framework UI"
-
-    local ScreenGui = CreateInstance("ScreenGui", {
-        Name = "ThaytuberUI",
-        ResetOnSpawn = false,
-        Parent = CoreGui
-    })
-
-    local MainFrame = CreateInstance("Frame", {
-        Name = "Main",
-        Size = UDim2.new(0, 500, 0, 300),
-        Position = UDim2.new(0.5, -250, 0.5, -150),
-        BackgroundColor3 = Color3.fromRGB(25, 25, 25),
-        BorderSizePixel = 0,
-        AnchorPoint = Vector2.new(0.5, 0.5),
-        Parent = ScreenGui
-    })
 
     -- RGB Border
-    local RGBBorder = CreateInstance("Frame", {
-        Size = UDim2.new(1, 6, 1, 6),
-        Position = UDim2.new(0, -3, 0, -3),
-        BackgroundColor3 = Color3.fromRGB(255, 0, 0),
-        BorderSizePixel = 0,
-        ZIndex = 0,
-        Parent = MainFrame
-    })
-
-    if RainbowBorder then
-        coroutine.wrap(function()
-            while wait() do
-                local t = tick() * 100
-                RGBBorder.BackgroundColor3 = Color3.fromHSV((t % 255) / 255, 1, 1)
-            end
-        end)()
-    else
-        RGBBorder.Visible = false
-    end
-
-    -- UI Scaling Animation
-    MainFrame.Size = UDim2.new(0, 0, 0, 0)
-    TweenService:Create(MainFrame, TweenInfo.new(0.25), { Size = UDim2.new(0, 500, 0, 300) }):Play()
-
-    -- Drag support
-    MakeDraggable(MainFrame)
-
-    -- Tabs
-    local TabsFrame = CreateInstance("Frame", {
-        Name = "TabsFrame",
-        Size = UDim2.new(0, 120, 1, 0),
-        BackgroundColor3 = Color3.fromRGB(35, 35, 35),
-        BorderSizePixel = 0,
-        Parent = MainFrame
-    })
-
-    local ContentFrame = CreateInstance("Frame", {
-        Name = "ContentFrame",
-        Size = UDim2.new(1, -120, 1, 0),
-        Position = UDim2.new(0, 120, 0, 0),
-        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
-        BorderSizePixel = 0,
-        Parent = MainFrame
-    })
-
-    local Tabs = {}
-    local ActiveTab = nil
-
-    local function ToggleTab(tab)
-        if ActiveTab == tab then
-            tab.Page.Visible = false
-            ActiveTab = nil
-        else
-            if ActiveTab then ActiveTab.Page.Visible = false end
-            tab.Page.Visible = true
-            ActiveTab = tab
-        end
-    end
-
-    function Tabs:CreateTab(tabName)
-        local Button = CreateInstance("TextButton", {
-            Text = tabName,
-            Size = UDim2.new(1, 0, 0, 30),
-            BackgroundColor3 = Color3.fromRGB(60, 60, 60),
-            BorderSizePixel = 0,
-            TextColor3 = Color3.new(1, 1, 1),
-            Parent = TabsFrame
-        })
-
-        local Page = CreateInstance("Frame", {
-            Name = tabName .. "Page",
-            Visible = false,
-            Size = UDim2.new(1, 0, 1, 0),
-            BackgroundTransparency = 1,
-            Parent = ContentFrame
-        })
-
-        local Layout = CreateInstance("UIListLayout", {
-            Padding = UDim.new(0, 5),
-            SortOrder = Enum.SortOrder.LayoutOrder,
-            Parent = Page
-        })
-
-        local tab = {
-            Page = Page,
-            Button = Button
-        }
-
-        Button.MouseButton1Click:Connect(function()
-            ToggleTab(tab)
-        end)
-
-        function tab:CreateButton(opt)
-            local btn = CreateInstance("TextButton", {
-                Text = opt.Name,
-                Size = UDim2.new(1, -10, 0, 30),
-                BackgroundColor3 = Color3.fromRGB(70, 70, 70),
-                BorderSizePixel = 0,
-                TextColor3 = Color3.new(1, 1, 1),
-                Parent = Page
-            })
-
-            btn.MouseButton1Click:Connect(function()
-                opt.Callback()
-            end)
-        end
-
-        function tab:CreateKeybind(opt)
-            local btn = CreateInstance("TextButton", {
-                Text = opt.Name .. ": [" .. (opt.Key or "None") .. "]",
-                Size = UDim2.new(1, -10, 0, 30),
-                BackgroundColor3 = Color3.fromRGB(70, 70, 70),
-                BorderSizePixel = 0,
-                TextColor3 = Color3.new(1, 1, 1),
-                Parent = Page
-            })
-
-            local listening = false
-            btn.MouseButton1Click:Connect(function()
-                btn.Text = opt.Name .. ": [...]"
-                listening = true
-            end)
-
-            UserInputService.InputBegan:Connect(function(input)
-                if listening and input.UserInputType == Enum.UserInputType.Keyboard then
-                    listening = false
-                    btn.Text = opt.Name .. ": [" .. input.KeyCode.Name .. "]"
-                    opt.Callback(input.KeyCode.Name)
+    if rainbowEnabled then
+        local RGB = Instance.new("UIStroke", Holder)
+        RGB.Thickness = 4
+        RGB.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        task.spawn(function()
+            while true do
+                for i = 0, 1, 0.01 do
+                    RGB.Color = ColorSequence.new(Color3.fromHSV(i, 1, 1))
+                    task.wait(0.01)
                 end
+            end
+        end)
+    end
+
+    -- Tab system
+    local TabsFrame = Instance.new("Frame", Holder)
+    TabsFrame.Name = "Tabs"
+    TabsFrame.Size = UDim2.new(0, 120, 1, 0)
+    TabsFrame.BackgroundColor3 = theme.Topbar
+    TabsFrame.BorderSizePixel = 0
+
+    local ContentFrame = Instance.new("Frame", Holder)
+    ContentFrame.Name = "Content"
+    ContentFrame.Position = UDim2.new(0, 120, 0, 0)
+    ContentFrame.Size = UDim2.new(1, -120, 1, 0)
+    ContentFrame.BackgroundColor3 = theme.Background
+    ContentFrame.BorderSizePixel = 0
+
+    local tabs = {}
+    local selectedTab = nil
+
+    function self:CreateTab(tabName)
+        local TabButton = Instance.new("TextButton", TabsFrame)
+        TabButton.Size = UDim2.new(1, 0, 0, 40)
+        TabButton.Text = tabName
+        TabButton.BackgroundColor3 = theme.TabBackground
+        TabButton.TextColor3 = theme.TabTextColor
+        TabButton.BorderSizePixel = 0
+
+        local TabContent = Instance.new("Frame", ContentFrame)
+        TabContent.Size = UDim2.new(1, 0, 1, 0)
+        TabContent.Visible = false
+        TabContent.BackgroundTransparency = 1
+
+        local UIList = Instance.new("UIListLayout", TabContent)
+        UIList.Padding = UDim.new(0, 10)
+        UIList.SortOrder = Enum.SortOrder.LayoutOrder
+
+        local tab = {}
+
+        function tab:CreateButton(config)
+            local btn = Instance.new("TextButton", TabContent)
+            btn.Size = UDim2.new(0, 200, 0, 40)
+            btn.BackgroundColor3 = theme.ElementBackground
+            btn.TextColor3 = theme.TextColor
+            btn.Text = config.Name
+            btn.BorderColor3 = theme.ElementStroke
+            local corner = Instance.new("UICorner", btn)
+            corner.CornerRadius = UDim.new(0, 6)
+            btn.MouseButton1Click:Connect(function()
+                config.Callback()
             end)
         end
+
+        function tab:CreateKeybind(config)
+            local btn = Instance.new("TextButton", TabContent)
+            btn.Size = UDim2.new(0, 200, 0, 40)
+            btn.BackgroundColor3 = theme.ElementBackground
+            btn.TextColor3 = theme.TextColor
+            btn.Text = config.Name .. ": " .. config.Key
+            btn.BorderColor3 = theme.ElementStroke
+            local corner = Instance.new("UICorner", btn)
+            corner.CornerRadius = UDim.new(0, 6)
+
+            btn.MouseButton1Click:Connect(function()
+                btn.Text = config.Name .. ": [Press any key]"
+                local conn
+                conn = UIS.InputBegan:Connect(function(input)
+                    if input.UserInputType == Enum.UserInputType.Keyboard then
+                        config.Key = input.KeyCode.Name
+                        btn.Text = config.Name .. ": " .. config.Key
+                        if config.Callback then config.Callback(input.KeyCode) end
+                        conn:Disconnect()
+                    end
+                end)
+            end)
+        end
+
+        table.insert(tabs, {
+            Button = TabButton,
+            Content = TabContent,
+            Name = tabName
+        })
+
+        TabButton.MouseButton1Click:Connect(function()
+            if selectedTab == TabContent then
+                TabContent.Visible = false
+                selectedTab = nil
+                TabButton.BackgroundColor3 = theme.TabBackground
+            else
+                for _, t in pairs(tabs) do
+                    t.Content.Visible = false
+                    t.Button.BackgroundColor3 = theme.TabBackground
+                end
+                TabContent.Visible = true
+                selectedTab = TabContent
+                TabButton.BackgroundColor3 = theme.TabBackgroundSelected
+            end
+        end)
 
         return tab
     end
 
-    -- Toggle Keybind
-    UserInputService.InputBegan:Connect(function(input)
-        if input.KeyCode.Name == ToggleKey then
-            ScreenGui.Enabled = not ScreenGui.Enabled
-        end
-    end)
-
-    -- Add default Setting tab
-    local SettingTab = Tabs:CreateTab("Setting")
-
-    SettingTab:CreateKeybind({
+    -- Setting Tab mặc định
+    local settingTab = self:CreateTab("Setting")
+    settingTab:CreateKeybind({
         Name = "Toggle Menu",
-        Key = ToggleKey,
-        Callback = function(key)
-            ToggleKey = key
+        Key = keybind,
+        Callback = function(newKey)
+            keybind = newKey
         end
     })
 
-    return {
-        CreateTab = function(_, name)
-            return Tabs:CreateTab(name)
+    UIS.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode.Name == keybind then
+            Holder.Visible = not Holder.Visible
         end
-    }
+    end)
+
+    return self
 end
 
-return Framework
+return setmetatable({}, Framework)
