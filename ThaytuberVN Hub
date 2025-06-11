@@ -1,188 +1,173 @@
--- ThaytuberVN Framework v3 – Rayfield-style (sửa lỗi CreateKeybind)
+-- ThaytuberVN Rayfield‑style Framework v4
+
 local UIS = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
-local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 local Framework = {}
 Framework.__index = Framework
 
--- Tạo viền RGB rõ ràng chạy bao quanh menu
+-- Tạo viền RGB chạy bao quanh menu rõ ràng (bao 4 cạnh)
 local function createRGBFrame(parent)
     local frame = Instance.new("Frame")
     frame.Name = "RGBBorder"
     frame.Position = UDim2.new(0, -4, 0, -4)
     frame.Size = UDim2.new(1, 8, 1, 8)
     frame.BorderSizePixel = 0
-    frame.BackgroundColor3 = Color3.fromHSV(0,1,1)
     frame.ZIndex = 0
+    frame.BackgroundColor3 = Color3.fromHSV(0,1,1)
     frame.Parent = parent
 
-    local corner = Instance.new("UICorner", frame)
-    corner.CornerRadius = UDim.new(0, 8)
+    Instance.new("UICorner", frame).CornerRadius = UDim.new(0,8)
 
-    local hue = 0
-    local running = true
-    coroutine.wrap(function()
-        while running and frame.Parent do
+    task.spawn(function()
+        local hue = 0
+        while frame and frame.Parent do
             hue = (hue + 1) % 360
-            frame.BackgroundColor3 = Color3.fromHSV(hue/360, 1, 1)
+            frame.BackgroundColor3 = Color3.fromHSV(hue/360,1,1)
             task.wait(0.02)
         end
-    end)()
+    end)
 
-    return frame, function()
-        running = false
-        if frame and frame.Parent then frame:Destroy() end
-    end
+    return frame
 end
 
 function Framework:CreateWindow(cfg)
     cfg = cfg or {}
-    local keyToggle = cfg.ToggleUIKeybind or "K"
+    local toggleKey = cfg.ToggleUIKeybind or "K"
 
-    -- GUI chính
+    -- Tạo GUI chính
     local gui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
     gui.Name = "ThaytuberUI"
     gui.ResetOnSpawn = false
     gui.IgnoreGuiInset = true
 
+    -- Khung chính
     local main = Instance.new("Frame", gui)
     main.Name = "Main"
-    main.Size = UDim2.new(0, 500, 0, 400)
-    main.Position = UDim2.new(0.5, 0, 0.5, 0)
-    main.AnchorPoint = Vector2.new(0.5, 0.5)
+    main.Size = UDim2.new(0,500,0,400)
+    main.AnchorPoint = Vector2.new(0.5,0.5)
+    main.Position = UDim2.new(0.5,0,0.5,0)
     main.BackgroundColor3 = Color3.fromRGB(30,30,30)
     main.ClipsDescendants = false
-    main.ZIndex = 10
     main.Visible = false
-
     Instance.new("UICorner", main).CornerRadius = UDim.new(0,8)
 
     -- Viền RGB
-    local rgb, stopRGB
-    rgb, stopRGB = createRGBFrame(main)
+    local rgbBorder = createRGBFrame(main)
+    local rgbEnabled = true
 
-    -- Khung tab
+    function main:ToggleRGB(state)
+        rgbEnabled = state == nil and not rgbEnabled or state
+        rgbBorder.Visible = rgbEnabled
+    end
+
+    -- Tab frame và nội dung
     local tabFrame = Instance.new("Frame", main)
     tabFrame.Name = "TabFrame"
-    tabFrame.Size = UDim2.new(0, 130, 1, 0)
-    tabFrame.Position = UDim2.new(0,0,0,0)
+    tabFrame.Size = UDim2.new(0,130,1,0)
     tabFrame.BackgroundColor3 = Color3.fromRGB(25,25,25)
 
-    -- Khung nội dung tab
     local content = Instance.new("Frame", main)
-    content.Name = "ContentFrame"
-    content.Size = UDim2.new(1, -130, 1, 0)
-    content.Position = UDim2.new(0, 130, 0, 0)
+    content.Name = "Content"
+    content.Position = UDim2.new(0,130,0,0)
+    content.Size = UDim2.new(1,-130,1,0)
     content.BackgroundTransparency = 1
 
-    -- Thao tác kéo menu
-    local dragging, dragStart, mainPos
-    main.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = true
-            dragStart = input.Position
-            mainPos = main.Position
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
-    UIS.InputChanged:Connect(function(input)
-        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-            local delta = input.Position - dragStart
-            main.Position = UDim2.new(
-                mainPos.X.Scale, mainPos.X.Offset + delta.X,
-                mainPos.Y.Scale, mainPos.Y.Offset + delta.Y
-            )
-        end
-    end)
+    local windowData = {
+        Main = main,
+        Tabs = {},
+        Current = nil,
+        Key = toggleKey,
+    }
 
-    -- Toggle UI bằng phím
+    -- Toggle UI khi nhấn phím
     UIS.InputBegan:Connect(function(input, gpe)
-        if not gpe and input.KeyCode.Name == keyToggle then
+        if not gpe and input.KeyCode.Name == windowData.Key then
             if main.Visible then
-                TweenService:Create(main, TweenInfo.new(0.2), {Size = UDim2.new(0,0,0,0)}):Play()
+                TweenService:Create(main, TweenInfo.new(0.2), {Size=UDim2.new(0,0,0,0)}):Play()
                 task.wait(0.2)
                 main.Visible = false
             else
                 main.Size = UDim2.new(0,0,0,0)
                 main.Visible = true
-                TweenService:Create(main, TweenInfo.new(0.2), {Size = UDim2.new(0,500,0,400)}):Play()
+                TweenService:Create(main, TweenInfo.new(0.2), {Size=UDim2.new(0,500,0,400)}):Play()
             end
         end
     end)
 
-    local windowData = {
-        Main = main,
-        TabFrame = tabFrame,
-        Content = content,
-        Tabs = {},
-        Current = nil,
-        RGB = {instance = rgb, stop = stopRGB, enabled = true},
-        Keybind = keyToggle
-    }
-
-    function windowData:ToggleRGB(state)
-        self.RGB.enabled = state
-        if self.RGB.instance then
-            self.RGB.instance.Visible = state
-        end
+    -- Kéo UI mượt cả phần nội dung
+    do
+        local dragging, startPos, startInput
+        main.InputBegan:Connect(function(i)
+            if i.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging = true
+                startInput = i
+                startPos = main.Position
+                i.Changed:Connect(function()
+                    if i.UserInputState == Enum.UserInputState.End then dragging = false end
+                end)
+            end
+        end)
+        UIS.InputChanged:Connect(function(i)
+            if dragging and i.UserInputType == Enum.UserInputType.MouseMovement then
+                local delta = i.Position - startInput.Position
+                main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            end
+        end)
     end
 
+    -- Hàm tạo tab mới
     function windowData:CreateTab(name)
-        if windowData.Tabs[name] then return windowData.Tabs[name] end
+        if self.Tabs[name] then return self.Tabs[name] end
 
         local btn = Instance.new("TextButton", tabFrame)
-        btn.Name = "TabButton_"..name
+        btn.Name = "Tab_"..name
         btn.Text = name
-        btn.Size = UDim2.new(1, -10, 0, 30)
-        btn.Position = UDim2.new(0, 5, 0, 5 + (#tabFrame:GetChildren()-0)*35)
+        btn.Size = UDim2.new(1,-10,0,30)
+        btn.Position = UDim2.new(0,5,0,5 + (#tabFrame:GetChildren()-1)*35)
         btn.BackgroundColor3 = Color3.fromRGB(40,40,40)
-        btn.TextColor3 = Color3.new(1,1,1)
+        btn.TextColor3 = Color3.fromRGB(255,255,255)
         btn.Font = Enum.Font.Gotham
         btn.TextSize = 14
 
         local frame = Instance.new("Frame", content)
-        frame.Name = "Tab_"..name
+        frame.Name = "Content_"..name
         frame.Size = UDim2.new(1,0,1,0)
-        frame.BackgroundTransparency = 1
         frame.Visible = false
 
-        local Tab = {Frame = frame}
-        function Tab:CreateButton(opt)
+        local tab = {Frame = frame}
+        function tab:CreateButton(opt)
             local b = Instance.new("TextButton", frame)
             b.Text = opt.Name or ""
             b.Size = UDim2.new(0,200,0,30)
-            b.Position = UDim2.new(0,10,0, ( #frame:GetChildren() ) * 35)
+            b.Position = UDim2.new(0,10,0,10 + (#frame:GetChildren()-1)*35)
             b.BackgroundColor3 = Color3.fromRGB(60,60,60)
-            b.TextColor3 = Color3.new(1,1,1)
+            b.TextColor3 = Color3.fromRGB(255,255,255)
             b.Font = Enum.Font.Gotham
             b.TextSize = 14
             b.MouseButton1Click:Connect(opt.Callback or function() end)
         end
+        function tab:CreateKeybind(opt)
+            local b = Instance.new("TextButton", frame)
+            b.Name = "KB_"..(opt.Name or "Keybind")
+            b.Text = (opt.Name or "Keybind")..": "..windowData.Key
+            b.Size = UDim2.new(0,200,0,30)
+            b.Position = UDim2.new(0,10,0,10 + (#frame:GetChildren()-1)*35)
+            b.BackgroundColor3 = Color3.fromRGB(60,60,60)
+            b.TextColor3 = Color3.fromRGB(255,255,255)
+            b.Font = Enum.Font.Gotham
+            b.TextSize = 14
 
-        function Tab:CreateKeybind(opt)
-            local btn = Instance.new("TextButton", frame)
-            btn.Text = (opt.Name or "Keybind") .. ": " .. windowData.Keybind
-            btn.Size = UDim2.new(0,200,0,30)
-            btn.Position = UDim2.new(0,10,0, (#frame:GetChildren()) * 35)
-            btn.BackgroundColor3 = Color3.fromRGB(60,60,60)
-            btn.TextColor3 = Color3.new(1,1,1)
-            btn.Font = Enum.Font.Gotham
-            btn.TextSize = 14
-
-            btn.MouseButton1Click:Connect(function()
-                btn.Text = (opt.Name or "Keybind")..": ..."
+            b.MouseButton1Click:Connect(function()
+                b.Text = (opt.Name or "Keybind")..": ..."
                 local conn
-                conn = UIS.InputBegan:Connect(function(inp, gpe)
-                    if not gpe and inp.UserInputType == Enum.UserInputType.Keyboard then
-                        windowData.Keybind = inp.KeyCode.Name
-                        btn.Text = (opt.Name or "Keybind")..": "..windowData.Keybind
+                conn = UIS.InputBegan:Connect(function(i,gp)
+                    if not gp and i.UserInputType==Enum.UserInputType.Keyboard then
+                        windowData.Key = i.KeyCode.Name
+                        b.Text = (opt.Name or "Keybind")..": "..windowData.Key
                         conn:Disconnect()
                     end
                 end)
@@ -194,40 +179,41 @@ function Framework:CreateWindow(cfg)
                 frame.Visible = false
                 windowData.Current = nil
             else
-                for _, v in pairs(windowData.Tabs) do
-                    v.Frame.Visible = false
-                end
+                for _,v in pairs(self.Tabs) do v.Frame.Visible = false end
                 frame.Visible = true
                 windowData.Current = frame
             end
         end)
 
-        windowData.Tabs[name] = Tab
-        return Tab
+        self.Tabs[name] = tab
+        return tab
     end
 
-    -- Nút bánh răng mở tab Setting
-    local gear = Instance.new("ImageButton", main)
-    gear.Name = "SettingsGear"
-    gear.Size = UDim2.new(0,24,0,24)
-    gear.Position = UDim2.new(1, -28, 0, 4)
-    gear.BackgroundTransparency = 1
-    gear.Image = "rbxassetid://6031091002"
-    gear.MouseButton1Click:Connect(function()
-        local tab = windowData:CreateTab("Setting")
-        if windowData.Current == tab.Frame then return end
-        for _, v in pairs(windowData.Tabs) do v.Frame.Visible = false end
-        tab.Frame.Visible = true
-        windowData.Current = tab.Frame
-    end)
-
-    -- Tạo tab Setting sẵn
+    -- Nút bánh răng mở Settings
     do
-        local tab = windowData:CreateTab("Setting")
-        tab:CreateKeybind{ Name = "Toggle Menu Key" }
-        tab:CreateButton{ Name = "Toggle RGB Border", Callback = function()
-            windowData:ToggleRGB(not windowData.RGB.enabled)
-        end }
+        local gear = Instance.new("ImageButton", main)
+        gear.Name = "SettingsGear"
+        gear.Size = UDim2.new(0,24,0,24)
+        gear.Position = UDim2.new(1,-28,0,4)
+        gear.BackgroundTransparency = 1
+        gear.Image = "rbxassetid://6031091002"
+
+        gear.MouseButton1Click:Connect(function()
+            local tab = windowData:CreateTab("Setting")
+            for _,v in pairs(windowData.Tabs) do v.Frame.Visible = false end
+            tab.Frame.Visible = true
+            windowData.Current = tab.Frame
+        end)
+
+        -- Tạo sẵn tab Setting
+        local sTab = windowData:CreateTab("Setting")
+        sTab:CreateKeybind{ Name="Toggle Menu Key" }
+        sTab:CreateButton{
+            Name = "Toggle RGB Border",
+            Callback = function()
+                main:ToggleRGB()
+            end
+        }
     end
 
     return windowData
