@@ -1,228 +1,143 @@
+--// ModernUI Framework (Rewritten for Stability & Clarity)
+
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
+local CoreGui = game:GetService("CoreGui")
 
-local Library = {}
-Library.__index = Library
+local Framework = {}
+Framework.__index = Framework
 
 local Themes = {
     dark = {
-        Background = Color3.fromRGB(20, 20, 20),
-        Topbar = Color3.fromRGB(30, 30, 30),
+        Background = Color3.fromRGB(25, 25, 25),
         Border = Color3.fromRGB(255, 0, 0),
         Text = Color3.fromRGB(255, 255, 255),
-        Element = Color3.fromRGB(40, 40, 40),
         Accent = Color3.fromRGB(0, 170, 255),
+        Element = Color3.fromRGB(40, 40, 40),
     },
     sky = {
         Background = Color3.fromRGB(200, 230, 255),
-        Topbar = Color3.fromRGB(150, 200, 255),
         Border = Color3.fromRGB(0, 170, 255),
         Text = Color3.fromRGB(0, 0, 0),
-        Element = Color3.fromRGB(255, 255, 255),
         Accent = Color3.fromRGB(0, 170, 255),
+        Element = Color3.fromRGB(240, 240, 255),
     },
     water = {
         Background = Color3.fromRGB(10, 25, 50),
-        Topbar = Color3.fromRGB(15, 40, 70),
         Border = Color3.fromRGB(0, 120, 255),
         Text = Color3.fromRGB(230, 240, 255),
-        Element = Color3.fromRGB(20, 35, 60),
         Accent = Color3.fromRGB(0, 140, 255),
-    },
+        Element = Color3.fromRGB(20, 35, 60),
+    }
 }
 
--- Load theme
-local function ApplyTheme(nameOrTable)
-    if type(nameOrTable) == "string" and Themes[nameOrTable:lower()] then
-        return Themes[nameOrTable:lower()]
-    elseif type(nameOrTable) == "table" then
-        return nameOrTable
-    else
-        return Themes.dark
-    end
+local function ApplyTheme(input)
+    if typeof(input) == "table" then return input end
+    return Themes[string.lower(input)] or Themes.dark
 end
 
-function Library:CreateWindow(config)
+function Framework:CreateWindow(config)
     config = config or {}
-    local WindowName = config.Name or "My UI"
-    local ToggleKey = config.Keybind or Enum.KeyCode.K
-    local Theme = ApplyTheme(config.Theme)
-    local UseRainbowBorder = config.RainbowBorder or false
+    local theme = ApplyTheme(config.Theme)
+    local toggleKey = config.ToggleUIKeybind or Enum.KeyCode.K
+    local rainbow = config.RainbowBorder or false
 
-    -- Main Screen
-    local ScreenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-    ScreenGui.Name = "ModernUI"
-    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    ScreenGui.ResetOnSpawn = false
+    local gui = Instance.new("ScreenGui", CoreGui)
+    gui.Name = "ModernUI"
+    gui.ResetOnSpawn = false
 
-    -- Main Holder
-    local Main = Instance.new("Frame")
-    Main.Size = UDim2.new(0, 580, 0, 360)
-    Main.Position = UDim2.new(0.5, -290, 0.5, -180)
-    Main.BackgroundColor3 = Theme.Background
-    Main.AnchorPoint = Vector2.new(0.5, 0.5)
-    Main.Parent = ScreenGui
-    Main.Visible = false
-    Main.ClipsDescendants = true
-    Main.BackgroundTransparency = 0
-    Main.BorderSizePixel = 0
-    Main.Name = "MainWindow"
-    Main.Active = true
-    Main.Draggable = false
+    local main = Instance.new("Frame", gui)
+    main.Size = UDim2.new(0, 580, 0, 360)
+    main.Position = UDim2.new(0.5, -290, 0.5, -180)
+    main.BackgroundColor3 = theme.Background
+    main.AnchorPoint = Vector2.new(0.5, 0.5)
+    main.BorderSizePixel = 0
 
-    -- Round corners
-    local UICorner = Instance.new("UICorner", Main)
-    UICorner.CornerRadius = UDim.new(0, 12)
+    local border = Instance.new("Frame", main)
+    border.Position = UDim2.new(0, -3, 0, -3)
+    border.Size = UDim2.new(1, 6, 1, 6)
+    border.ZIndex = 0
+    border.BorderSizePixel = 0
+    border.BackgroundColor3 = rainbow and Color3.fromRGB(255,0,0) or theme.Border
 
-    -- Scale opening
-    Main.Size = UDim2.new(0, 0, 0, 0)
-    Main.Visible = true
-    TweenService:Create(Main, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-        Size = UDim2.new(0, 580, 0, 360)
-    }):Play()
+    local uicorner = Instance.new("UICorner", main)
+    uicorner.CornerRadius = UDim.new(0, 10)
+    Instance.new("UICorner", border).CornerRadius = UDim.new(0, 10)
 
-    -- Drag
-    local dragging, dragInput, dragStart, startPos
-    Main.InputBegan:Connect(function(input)
+    if rainbow then
+        coroutine.wrap(function()
+            while true do
+                local t = tick() * 100
+                border.BackgroundColor3 = Color3.fromHSV((t % 255) / 255, 1, 1)
+                task.wait()
+            end
+        end)()
+    end
+
+    main.Size = UDim2.new(0, 0, 0, 0)
+    TweenService:Create(main, TweenInfo.new(0.25), { Size = UDim2.new(0, 580, 0, 360) }):Play()
+
+    local dragging = false
+    local dragStart, startPos
+    main.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = true
             dragStart = input.Position
-            startPos = Main.Position
+            startPos = main.Position
         end
     end)
-    Main.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = false
-        end
+    main.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end
     end)
     UserInputService.InputChanged:Connect(function(input)
         if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
             local delta = input.Position - dragStart
-            Main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
         end
     end)
 
-    -- RGB Border
-    local RGB = Instance.new("Frame", Main)
-    RGB.Name = "RGBBorder"
-    RGB.Size = UDim2.new(1, 10, 1, 10)
-    RGB.Position = UDim2.new(0, -5, 0, -5)
-    RGB.BorderSizePixel = 0
-    RGB.BackgroundColor3 = Color3.new(1, 0, 0)
-    RGB.ZIndex = 0
+    local sidebar = Instance.new("Frame", main)
+    sidebar.Size = UDim2.new(0, 120, 1, 0)
+    sidebar.BackgroundColor3 = theme.Element
+    sidebar.BorderSizePixel = 0
 
-    local RGBCorner = Instance.new("UICorner", RGB)
-    RGBCorner.CornerRadius = UDim.new(0, 14)
+    local content = Instance.new("Frame", main)
+    content.Position = UDim2.new(0, 130, 0, 10)
+    content.Size = UDim2.new(1, -140, 1, -20)
+    content.BackgroundTransparency = 1
 
-    if UseRainbowBorder then
-        local hue = 0
-        RunService.RenderStepped:Connect(function()
-            hue = (hue + 1) % 360
-            RGB.BackgroundColor3 = Color3.fromHSV(hue / 360, 1, 1)
+    local tabs = {}
+    local currentTab = nil
+
+    local layout = Instance.new("UIListLayout", sidebar)
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+    layout.Padding = UDim.new(0, 5)
+
+    function Framework:CreateTab(name)
+        local tabBtn = Instance.new("TextButton", sidebar)
+        tabBtn.Size = UDim2.new(1, -10, 0, 36)
+        tabBtn.Text = name
+        tabBtn.BackgroundColor3 = theme.Element
+        tabBtn.TextColor3 = theme.Text
+        tabBtn.Font = Enum.Font.Gotham
+        tabBtn.TextSize = 14
+
+        local tabPage = Instance.new("Frame", content)
+        tabPage.Size = UDim2.new(1, 0, 1, 0)
+        tabPage.BackgroundTransparency = 1
+        tabPage.Visible = false
+        local list = Instance.new("UIListLayout", tabPage)
+        list.Padding = UDim.new(0, 6)
+        list.SortOrder = Enum.SortOrder.LayoutOrder
+
+        tabBtn.MouseButton1Click:Connect(function()
+            for _, t in pairs(content:GetChildren()) do if t:IsA("Frame") then t.Visible = false end end
+            tabPage.Visible = true
+            currentTab = tabPage
         end)
-    else
-        RGB.BackgroundColor3 = Theme.Border
+
+        return setmetatable({ Container = tabPage, Theme = theme }, Framework.Elements)
     end
-
-    -- Sidebar tab buttons
-    local SideBar = Instance.new("Frame", Main)
-    SideBar.Size = UDim2.new(0, 120, 1, 0)
-    SideBar.Position = UDim2.new(0, 0, 0, 0)
-    SideBar.BackgroundColor3 = Theme.Topbar
-    SideBar.BorderSizePixel = 0
-
-    local UICornerSidebar = Instance.new("UICorner", SideBar)
-    UICornerSidebar.CornerRadius = UDim.new(0, 12)
-
-    local TabList = Instance.new("UIListLayout", SideBar)
-    TabList.SortOrder = Enum.SortOrder.LayoutOrder
-    TabList.Padding = UDim.new(0, 4)
-
-    local Tabs = {}
-    local CurrentTab = nil
-
-    local ContentHolder = Instance.new("Frame", Main)
-    ContentHolder.Position = UDim2.new(0, 130, 0, 10)
-    ContentHolder.Size = UDim2.new(1, -140, 1, -20)
-    ContentHolder.BackgroundTransparency = 1
-
-    -- Toggle UI
-    local function toggleUI()
-        Main.Visible = not Main.Visible
-    end
-    UserInputService.InputBegan:Connect(function(input)
-        if input.KeyCode == ToggleKey and not UserInputService:GetFocusedTextBox() then
-            toggleUI()
-        end
-    end)
-
-    -- Return window object
-    local Window = {}
-    Window.Theme = Theme
-    Window.Tabs = Tabs
-    Window.Content = ContentHolder
-    Window.Sidebar = SideBar
-    Window.CurrentTab = nil
-    Window.Main = Main
-    Window.ToggleKey = ToggleKey
-    Window.ToggleUI = toggleUI
-    Window.ScreenGui = ScreenGui
-function Window:CreateTab(Name)
-    local TabButton = Instance.new("TextButton")
-    TabButton.Name = Name .. "TabButton"
-    TabButton.Text = Name
-    TabButton.Size = UDim2.new(1, -10, 0, 36)
-    TabButton.Position = UDim2.new(0, 5, 0, 0)
-    TabButton.BackgroundColor3 = Theme.Element
-    TabButton.TextColor3 = Theme.Text
-    TabButton.Font = Enum.Font.GothamBold
-    TabButton.TextSize = 14
-    TabButton.AutoButtonColor = false
-    TabButton.Parent = Window.Sidebar
-
-    local corner = Instance.new("UICorner", TabButton)
-    corner.CornerRadius = UDim.new(0, 8)
-
-    local TabContent = Instance.new("Frame", Window.Content)
-    TabContent.Name = Name .. "TabContent"
-    TabContent.Size = UDim2.new(1, 0, 1, 0)
-    TabContent.BackgroundTransparency = 1
-    TabContent.Visible = false
-
-    local UIList = Instance.new("UIListLayout", TabContent)
-    UIList.SortOrder = Enum.SortOrder.LayoutOrder
-    UIList.Padding = UDim.new(0, 8)
-
-    Window.Tabs[Name] = {
-        Button = TabButton,
-        Content = TabContent
-    }
-
-    TabButton.MouseButton1Click:Connect(function()
-        if Window.CurrentTab == Name then
-            -- Tắt nếu click lại
-            Window.CurrentTab = nil
-            TabContent.Visible = false
-            TabButton.BackgroundColor3 = Theme.Element
-        else
-            -- Ẩn tất cả
-            for _, t in pairs(Window.Tabs) do
-                t.Content.Visible = false
-                t.Button.BackgroundColor3 = Theme.Element
-            end
-            -- Hiện tab mới
-            TabContent.Visible = true
-            TabButton.BackgroundColor3 = Theme.Accent
-            Window.CurrentTab = Name
-        end
-    end)
-
-    return setmetatable({
-        Container = TabContent,
-        Theme = Theme
-    }, { __index = Library.Elements })
-end
 
 function Library.Elements:CreateButton(Name, Callback)
     Callback = Callback or function() end
