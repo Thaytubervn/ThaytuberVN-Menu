@@ -1,9 +1,44 @@
---// ThaytuberVN Framework UI (Final Version)
+--// ThaytuberVN Framework UI (Theme Update Version)
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local CoreGui = game:GetService("CoreGui")
 
 local Framework = {}
+
+local DefaultThemes = {
+    Sky = {
+        TextColor = Color3.fromRGB(255, 255, 255),
+        Background = Color3.fromRGB(40, 75, 120),
+        Topbar = Color3.fromRGB(30, 60, 100),
+        Tab = Color3.fromRGB(50, 90, 140),
+        Content = Color3.fromRGB(60, 110, 160),
+        Button = Color3.fromRGB(70, 130, 180)
+    },
+    Water = {
+        TextColor = Color3.fromRGB(255, 255, 255),
+        Background = Color3.fromRGB(20, 20, 60),
+        Topbar = Color3.fromRGB(25, 25, 80),
+        Tab = Color3.fromRGB(30, 30, 100),
+        Content = Color3.fromRGB(35, 35, 120),
+        Button = Color3.fromRGB(40, 40, 140)
+    },
+    Dark = {
+        TextColor = Color3.fromRGB(255, 255, 255),
+        Background = Color3.fromRGB(25, 25, 25),
+        Topbar = Color3.fromRGB(35, 35, 35),
+        Tab = Color3.fromRGB(60, 60, 60),
+        Content = Color3.fromRGB(45, 45, 45),
+        Button = Color3.fromRGB(70, 70, 70)
+    },
+    Light = {
+        TextColor = Color3.fromRGB(0, 0, 0),
+        Background = Color3.fromRGB(230, 230, 230),
+        Topbar = Color3.fromRGB(200, 200, 200),
+        Tab = Color3.fromRGB(180, 180, 180),
+        Content = Color3.fromRGB(210, 210, 210),
+        Button = Color3.fromRGB(190, 190, 190)
+    }
+}
 
 -- Utility
 local function CreateInstance(class, props)
@@ -21,7 +56,6 @@ local function MakeDraggable(frame)
             dragging = true
             dragStart = input.Position
             startPos = frame.Position
-
             input.Changed:Connect(function()
                 if input.UserInputState == Enum.UserInputState.End then dragging = false end
             end)
@@ -47,6 +81,13 @@ function Framework:CreateWindow(options)
     local ToggleKey = options.ToggleUIKeybind or "K"
     local WindowName = options.Name or "Framework UI"
 
+    local Theme = DefaultThemes.Dark
+    if type(options.Theme) == "string" and DefaultThemes[options.Theme] then
+        Theme = DefaultThemes[options.Theme]
+    elseif type(options.Theme) == "table" then
+        Theme = options.Theme
+    end
+
     local ScreenGui = CreateInstance("ScreenGui", {
         Name = "ThaytuberUI",
         ResetOnSpawn = false,
@@ -55,9 +96,9 @@ function Framework:CreateWindow(options)
 
     local MainFrame = CreateInstance("Frame", {
         Name = "Main",
-        Size = UDim2.new(0, 500, 0, 300),
-        Position = UDim2.new(0.5, -250, 0.5, -150),
-        BackgroundColor3 = Color3.fromRGB(25, 25, 25),
+        Size = UDim2.new(0, 600, 0, 400),
+        Position = UDim2.new(0.5, -300, 0.5, -200),
+        BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0,
         AnchorPoint = Vector2.new(0.5, 0.5),
         Parent = ScreenGui
@@ -84,27 +125,25 @@ function Framework:CreateWindow(options)
         RGBBorder.Visible = false
     end
 
-    -- UI Scaling Animation
+    -- UI Scale Animation
     MainFrame.Size = UDim2.new(0, 0, 0, 0)
-    TweenService:Create(MainFrame, TweenInfo.new(0.25), { Size = UDim2.new(0, 500, 0, 300) }):Play()
+    TweenService:Create(MainFrame, TweenInfo.new(0.25), { Size = UDim2.new(0, 600, 0, 400) }):Play()
 
-    -- Drag support
     MakeDraggable(MainFrame)
 
-    -- Tabs
     local TabsFrame = CreateInstance("Frame", {
         Name = "TabsFrame",
-        Size = UDim2.new(0, 120, 1, 0),
-        BackgroundColor3 = Color3.fromRGB(35, 35, 35),
+        Size = UDim2.new(0, 140, 1, 0),
+        BackgroundColor3 = Theme.Topbar,
         BorderSizePixel = 0,
         Parent = MainFrame
     })
 
     local ContentFrame = CreateInstance("Frame", {
         Name = "ContentFrame",
-        Size = UDim2.new(1, -120, 1, 0),
-        Position = UDim2.new(0, 120, 0, 0),
-        BackgroundColor3 = Color3.fromRGB(45, 45, 45),
+        Size = UDim2.new(1, -140, 1, 0),
+        Position = UDim2.new(0, 140, 0, 0),
+        BackgroundColor3 = Theme.Content,
         BorderSizePixel = 0,
         Parent = MainFrame
     })
@@ -126,10 +165,12 @@ function Framework:CreateWindow(options)
     function Tabs:CreateTab(tabName)
         local Button = CreateInstance("TextButton", {
             Text = tabName,
-            Size = UDim2.new(1, 0, 0, 30),
-            BackgroundColor3 = Color3.fromRGB(60, 60, 60),
+            Size = UDim2.new(1, 0, 0, 35),
+            BackgroundColor3 = Theme.Tab,
             BorderSizePixel = 0,
-            TextColor3 = Color3.new(1, 1, 1),
+            TextColor3 = Theme.TextColor,
+            Font = Enum.Font.Gotham,
+            TextSize = 14,
             Parent = TabsFrame
         })
 
@@ -141,8 +182,8 @@ function Framework:CreateWindow(options)
             Parent = ContentFrame
         })
 
-        local Layout = CreateInstance("UIListLayout", {
-            Padding = UDim.new(0, 5),
+        CreateInstance("UIListLayout", {
+            Padding = UDim.new(0, 6),
             SortOrder = Enum.SortOrder.LayoutOrder,
             Parent = Page
         })
@@ -159,10 +200,12 @@ function Framework:CreateWindow(options)
         function tab:CreateButton(opt)
             local btn = CreateInstance("TextButton", {
                 Text = opt.Name,
-                Size = UDim2.new(1, -10, 0, 30),
-                BackgroundColor3 = Color3.fromRGB(70, 70, 70),
+                Size = UDim2.new(1, -10, 0, 35),
+                BackgroundColor3 = Theme.Button,
                 BorderSizePixel = 0,
-                TextColor3 = Color3.new(1, 1, 1),
+                TextColor3 = Theme.TextColor,
+                Font = Enum.Font.Gotham,
+                TextSize = 14,
                 Parent = Page
             })
 
@@ -174,10 +217,12 @@ function Framework:CreateWindow(options)
         function tab:CreateKeybind(opt)
             local btn = CreateInstance("TextButton", {
                 Text = opt.Name .. ": [" .. (opt.Key or "None") .. "]",
-                Size = UDim2.new(1, -10, 0, 30),
-                BackgroundColor3 = Color3.fromRGB(70, 70, 70),
+                Size = UDim2.new(1, -10, 0, 35),
+                BackgroundColor3 = Theme.Button,
                 BorderSizePixel = 0,
-                TextColor3 = Color3.new(1, 1, 1),
+                TextColor3 = Theme.TextColor,
+                Font = Enum.Font.Gotham,
+                TextSize = 14,
                 Parent = Page
             })
 
@@ -199,14 +244,12 @@ function Framework:CreateWindow(options)
         return tab
     end
 
-    -- Toggle Keybind
     UserInputService.InputBegan:Connect(function(input)
         if input.KeyCode.Name == ToggleKey then
             ScreenGui.Enabled = not ScreenGui.Enabled
         end
     end)
 
-    -- Add default Setting tab
     local SettingTab = Tabs:CreateTab("Setting")
 
     SettingTab:CreateKeybind({
