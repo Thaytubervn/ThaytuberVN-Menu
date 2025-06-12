@@ -1,6 +1,6 @@
 --[[
 
-	ThaytuberVN_Hub Interface Suite
+	Rayfield Interface Suite
 	by Sirius
 
 	shlex | Designing + Programming
@@ -10,7 +10,7 @@
 ]]
 
 if debugX then
-	warn('Initialising ThaytuberVN_Hub')
+	warn('Initialising Rayfield')
 end
 
 local function getService(name)
@@ -71,15 +71,15 @@ end
 local requestsDisabled = true --getgenv and getgenv().DISABLE_RAYFIELD_REQUESTS
 local InterfaceBuild = '3K3W'
 local Release = "Build 1.672"
-local ThaytuberVN HubFolder = "ThaytuberVN_Hub"
-local ConfigurationFolder = ThaytuberVN HubFolder.."/Configurations"
+local RayfieldFolder = "Rayfield"
+local ConfigurationFolder = RayfieldFolder.."/Configurations"
 local ConfigurationExtension = ".rfld"
 local settingsTable = {
 	General = {
 		-- if needs be in order just make getSetting(name)
-		thaytubervn hubOpen = {Type = 'bind', Value = 'K', Name = 'ThaytuberVN_Hub Keybind'},
+		rayfieldOpen = {Type = 'bind', Value = 'K', Name = 'Rayfield Keybind'},
 		-- buildwarnings
-		-- thaytubervn hubprompts
+		-- rayfieldprompts
 
 	},
 	System = {
@@ -89,7 +89,7 @@ local settingsTable = {
 
 -- Settings that have been overridden by the developer. These will not be saved to the user's configuration file
 -- Overridden settings always take precedence over settings in the configuration file, and are cleared if the user changes the setting in the UI
-local overriddenSettings: { [string]: any } = {} -- For example, overriddenSettings["System.thaytubervn hubOpen"] = "J"
+local overriddenSettings: { [string]: any } = {} -- For example, overriddenSettings["System.rayfieldOpen"] = "J"
 local function overrideSetting(category: string, name: string, value: any)
 	overriddenSettings[`{category}.{name}`] = value
 end
@@ -126,16 +126,16 @@ local function loadSettings()
 	
 	local success, result =	pcall(function()
 		task.spawn(function()
-			if isfolder and isfolder(ThaytuberVN HubFolder) then
-				if isfile and isfile(ThaytuberVN HubFolder..'/settings'..ConfigurationExtension) then
-					file = readfile(ThaytuberVN HubFolder..'/settings'..ConfigurationExtension)
+			if isfolder and isfolder(RayfieldFolder) then
+				if isfile and isfile(RayfieldFolder..'/settings'..ConfigurationExtension) then
+					file = readfile(RayfieldFolder..'/settings'..ConfigurationExtension)
 				end
 			end
 
 			-- for debug in studio
 			if useStudio then
 				file = [[
-		{"General":{"thaytubervn hubOpen":{"Value":"K","Type":"bind","Name":"ThaytuberVN_Hub Keybind","Element":{"HoldToInteract":false,"Ext":true,"Name":"ThaytuberVN_Hub Keybind","Set":null,"CallOnChange":true,"Callback":null,"CurrentKeybind":"K"}}},"System":{"usageAnalytics":{"Value":false,"Type":"toggle","Name":"Anonymised Analytics","Element":{"Ext":true,"Name":"Anonymised Analytics","Set":null,"CurrentValue":false,"Callback":null}}}}
+		{"General":{"rayfieldOpen":{"Value":"K","Type":"bind","Name":"Rayfield Keybind","Element":{"HoldToInteract":false,"Ext":true,"Name":"Rayfield Keybind","Set":null,"CallOnChange":true,"Callback":null,"CurrentKeybind":"K"}}},"System":{"usageAnalytics":{"Value":false,"Type":"toggle","Name":"Anonymised Analytics","Element":{"Ext":true,"Name":"Anonymised Analytics","Set":null,"CurrentValue":false,"Callback":null}}}}
 	]]
 			end
 
@@ -175,7 +175,7 @@ local function loadSettings()
 	
 	if not success then 
 		if writefile then
-			warn('ThaytuberVN_Hub had an issue accessing configuration saving capability.')
+			warn('Rayfield had an issue accessing configuration saving capability.')
 		end
 	end
 end
@@ -194,7 +194,7 @@ end
 --	local fileFunctionsAvailable = isfile and writefile and readfile
 
 --	if not fileFunctionsAvailable and not useStudio then
---		warn('ThaytuberVN_Hub Interface Suite | Sirius Analytics:\n\n\nAs you don\'t have file functionality with your executor, we are unable to save whether you want to opt in or out to analytics.\nIf you do not want to take part in anonymised usage statistics, let us know in our Discord at sirius.menu/discord and we will manually opt you out.')
+--		warn('Rayfield Interface Suite | Sirius Analytics:\n\n\nAs you don\'t have file functionality with your executor, we are unable to save whether you want to opt in or out to analytics.\nIf you do not want to take part in anonymised usage statistics, let us know in our Discord at sirius.menu/discord and we will manually opt you out.')
 --		analytics = true	
 --	else
 --		prompt.create(
@@ -229,10 +229,10 @@ if not requestsDisabled then
 				end)
 				if success and reporter then
 					pcall(function()
-						reporter.report("ThaytuberVN_Hub", Release, InterfaceBuild)
+						reporter.report("Rayfield", Release, InterfaceBuild)
 					end)
 				else
-					warn("Failed to load or execute the reporter. \nPlease notify ThaytuberVN_Hub developers at sirius.menu/discord.")
+					warn("Failed to load or execute the reporter. \nPlease notify Rayfield developers at sirius.menu/discord.")
 				end
 			end)
 			if debugX then warn('Finished Report') end
@@ -249,7 +249,7 @@ if debugX then
 	warn('Moving on to continue initialisation')
 end
 
-local ThaytuberVN_Hub = {
+local RayfieldLibrary = {
 	Flags = {},
 	Theme = {
 		Default = {
@@ -640,15 +640,15 @@ local CoreGui = getService("CoreGui")
 
 -- Interface Management
 
-local ThaytuberVN_Hub = useStudio and script.Parent:FindFirstChild('ThaytuberVN_Hub') or game:GetObjects("rbxassetid://10804731440")[1]
+local Rayfield = useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://10804731440")[1]
 local buildAttempts = 0
 local correctBuild = false
 local warned
 local globalLoaded
-local thaytubervn hubDestroyed = false -- True when ThaytuberVN_Hub:Destroy() is called
+local rayfieldDestroyed = false -- True when RayfieldLibrary:Destroy() is called
 
 repeat
-	if ThaytuberVN_Hub:FindFirstChild('Build') and ThaytuberVN_Hub.Build.Value == InterfaceBuild then
+	if Rayfield:FindFirstChild('Build') and Rayfield.Build.Value == InterfaceBuild then
 		correctBuild = true
 		break
 	end
@@ -656,42 +656,42 @@ repeat
 	correctBuild = false
 
 	if not warned then
-		warn('ThaytuberVN_Hub | Build Mismatch')
-		print('ThaytuberVN_Hub may encounter issues as you are running an incompatible interface version ('.. ((ThaytuberVN_Hub:FindFirstChild('Build') and ThaytuberVN_Hub.Build.Value) or 'No Build') ..').\n\nThis version of ThaytuberVN_Hub is intended for interface build '..InterfaceBuild..'.')
+		warn('Rayfield | Build Mismatch')
+		print('Rayfield may encounter issues as you are running an incompatible interface version ('.. ((Rayfield:FindFirstChild('Build') and Rayfield.Build.Value) or 'No Build') ..').\n\nThis version of Rayfield is intended for interface build '..InterfaceBuild..'.')
 		warned = true
 	end
 
-	toDestroy, ThaytuberVN_Hub = ThaytuberVN_Hub, useStudio and script.Parent:FindFirstChild('ThaytuberVN_Hub') or game:GetObjects("rbxassetid://10804731440")[1]
+	toDestroy, Rayfield = Rayfield, useStudio and script.Parent:FindFirstChild('Rayfield') or game:GetObjects("rbxassetid://10804731440")[1]
 	if toDestroy and not useStudio then toDestroy:Destroy() end
 
 	buildAttempts = buildAttempts + 1
 until buildAttempts >= 2
 
-ThaytuberVN_Hub.Enabled = false
+Rayfield.Enabled = false
 
 if gethui then
-	ThaytuberVN_Hub.Parent = gethui()
+	Rayfield.Parent = gethui()
 elseif syn and syn.protect_gui then 
-	syn.protect_gui(ThaytuberVN_Hub)
-	ThaytuberVN_Hub.Parent = CoreGui
+	syn.protect_gui(Rayfield)
+	Rayfield.Parent = CoreGui
 elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
-	ThaytuberVN_Hub.Parent = CoreGui:FindFirstChild("RobloxGui")
+	Rayfield.Parent = CoreGui:FindFirstChild("RobloxGui")
 elseif not useStudio then
-	ThaytuberVN_Hub.Parent = CoreGui
+	Rayfield.Parent = CoreGui
 end
 
 if gethui then
 	for _, Interface in ipairs(gethui():GetChildren()) do
-		if Interface.Name == ThaytuberVN_Hub.Name and Interface ~= ThaytuberVN_Hub then
+		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
 			Interface.Enabled = false
-			Interface.Name = "ThaytuberVN_Hub-Old"
+			Interface.Name = "Rayfield-Old"
 		end
 	end
 elseif not useStudio then
 	for _, Interface in ipairs(CoreGui:GetChildren()) do
-		if Interface.Name == ThaytuberVN_Hub.Name and Interface ~= ThaytuberVN_Hub then
+		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
 			Interface.Enabled = false
-			Interface.Name = "ThaytuberVN_Hub-Old"
+			Interface.Name = "Rayfield-Old"
 		end
 	end
 end
@@ -700,7 +700,7 @@ end
 local minSize = Vector2.new(1024, 768)
 local useMobileSizing
 
-if ThaytuberVN_Hub.AbsoluteSize.X < minSize.X and ThaytuberVN_Hub.AbsoluteSize.Y < minSize.Y then
+if Rayfield.AbsoluteSize.X < minSize.X and Rayfield.AbsoluteSize.Y < minSize.Y then
 	useMobileSizing = true
 end
 
@@ -711,24 +711,50 @@ end
 
 -- Object Variables
 
-local Main = ThaytuberVN_Hub.Main
-local MPrompt = ThaytuberVN_Hub:FindFirstChild('Prompt')
+local Main = Rayfield.Main
+
+-- === [ RGB BORDER EFFECT - BẮT ĐẦU ] ===
+local RGBBorder = Instance.new("Frame")
+RGBBorder.Name = "RGBBorder"
+RGBBorder.ZIndex = 0
+RGBBorder.AnchorPoint = Vector2.new(0.5, 0.5)
+RGBBorder.Position = UDim2.new(0.5, 0, 0.5, 0)
+RGBBorder.Size = UDim2.new(0, Main.Size.X.Offset + 8, 0, Main.Size.Y.Offset + 8)
+RGBBorder.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+RGBBorder.BorderSizePixel = 0
+RGBBorder.Parent = Rayfield
+
+Main.ZIndex = 1
+
+local RunService = game:GetService("RunService")
+task.spawn(function()
+	local hue = 0
+	while true do
+		hue = (hue + 1) % 360
+		local color = Color3.fromHSV(hue/360, 1, 1)
+		RGBBorder.BackgroundColor3 = color
+		task.wait(0.03)
+	end
+end)
+-- === [ RGB BORDER EFFECT - KẾT THÚC ] ===
+
+local MPrompt = Rayfield:FindFirstChild('Prompt')
 local Topbar = Main.Topbar
 local Elements = Main.Elements
 local LoadingFrame = Main.LoadingFrame
 local TabList = Main.TabList
-local dragBar = ThaytuberVN_Hub:FindFirstChild('Drag')
+local dragBar = Rayfield:FindFirstChild('Drag')
 local dragInteract = dragBar and dragBar.Interact or nil
 local dragBarCosmetic = dragBar and dragBar.Drag or nil
 
 local dragOffset = 255
 local dragOffsetMobile = 150
 
-ThaytuberVN_Hub.DisplayOrder = 100
+Rayfield.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 
 -- Thanks to Latte Softworks for the Lucide integration for Roblox
-local Icons = useStudio and require(script.Parent.icons) or loadWithTimeout('https://raw.githubusercontent.com/SiriusSoftwareLtd/ThaytuberVN_Hub/refs/heads/main/icons.lua')
+local Icons = useStudio and require(script.Parent.icons) or loadWithTimeout('https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/refs/heads/main/icons.lua')
 -- Variables
 
 local CFileName = nil
@@ -737,28 +763,28 @@ local Minimised = false
 local Hidden = false
 local Debounce = false
 local searchOpen = false
-local Notifications = ThaytuberVN_Hub.Notifications
+local Notifications = Rayfield.Notifications
 
-local SelectedTheme = ThaytuberVN_Hub.Theme.Default
+local SelectedTheme = RayfieldLibrary.Theme.Default
 
 local function ChangeTheme(Theme)
 	if typeof(Theme) == 'string' then
-		SelectedTheme = ThaytuberVN_Hub.Theme[Theme]
+		SelectedTheme = RayfieldLibrary.Theme[Theme]
 	elseif typeof(Theme) == 'table' then
 		SelectedTheme = Theme
 	end
 
-	ThaytuberVN_Hub.Main.BackgroundColor3 = SelectedTheme.Background
-	ThaytuberVN_Hub.Main.Topbar.BackgroundColor3 = SelectedTheme.Topbar
-	ThaytuberVN_Hub.Main.Topbar.CornerRepair.BackgroundColor3 = SelectedTheme.Topbar
-	ThaytuberVN_Hub.Main.Shadow.Image.ImageColor3 = SelectedTheme.Shadow
+	Rayfield.Main.BackgroundColor3 = SelectedTheme.Background
+	Rayfield.Main.Topbar.BackgroundColor3 = SelectedTheme.Topbar
+	Rayfield.Main.Topbar.CornerRepair.BackgroundColor3 = SelectedTheme.Topbar
+	Rayfield.Main.Shadow.Image.ImageColor3 = SelectedTheme.Shadow
 
-	ThaytuberVN_Hub.Main.Topbar.ChangeSize.ImageColor3 = SelectedTheme.TextColor
-	ThaytuberVN_Hub.Main.Topbar.Hide.ImageColor3 = SelectedTheme.TextColor
-	ThaytuberVN_Hub.Main.Topbar.Search.ImageColor3 = SelectedTheme.TextColor
+	Rayfield.Main.Topbar.ChangeSize.ImageColor3 = SelectedTheme.TextColor
+	Rayfield.Main.Topbar.Hide.ImageColor3 = SelectedTheme.TextColor
+	Rayfield.Main.Topbar.Search.ImageColor3 = SelectedTheme.TextColor
 	if Topbar:FindFirstChild('Settings') then
-		ThaytuberVN_Hub.Main.Topbar.Settings.ImageColor3 = SelectedTheme.TextColor
-		ThaytuberVN_Hub.Main.Topbar.Divider.BackgroundColor3 = SelectedTheme.ElementStroke
+		Rayfield.Main.Topbar.Settings.ImageColor3 = SelectedTheme.TextColor
+		Rayfield.Main.Topbar.Divider.BackgroundColor3 = SelectedTheme.ElementStroke
 	end
 
 	Main.Search.BackgroundColor3 = SelectedTheme.TextColor
@@ -771,7 +797,7 @@ local function ChangeTheme(Theme)
 		Main.Notice.BackgroundColor3 = SelectedTheme.Background
 	end
 
-	for _, text in ipairs(ThaytuberVN_Hub:GetDescendants()) do
+	for _, text in ipairs(Rayfield:GetDescendants()) do
 		if text.Parent.Parent ~= Notifications then
 			if text:IsA('TextLabel') or text:IsA('TextBox') then text.TextColor3 = SelectedTheme.TextColor end
 		end
@@ -823,9 +849,9 @@ local function getAssetUri(id: any): string
 	if type(id) == "number" then
 		assetUri = "rbxassetid://" .. id
 	elseif type(id) == "string" and not Icons then
-		warn("ThaytuberVN_Hub | Cannot use Lucide icons as icons library is not loaded")
+		warn("Rayfield | Cannot use Lucide icons as icons library is not loaded")
 	else
-		warn("ThaytuberVN_Hub | The icon argument must either be an icon ID (number) or a Lucide icon name (string)")
+		warn("Rayfield | The icon argument must either be an icon ID (number) or a Lucide icon name (string)")
 	end
 	return assetUri
 end
@@ -921,10 +947,10 @@ local function LoadConfiguration(Configuration)
 	local success, Data = pcall(function() return HttpService:JSONDecode(Configuration) end)
 	local changed
 
-	if not success then warn('ThaytuberVN_Hub had an issue decoding the configuration file, please try delete the file and reopen ThaytuberVN_Hub.') return end
+	if not success then warn('Rayfield had an issue decoding the configuration file, please try delete the file and reopen Rayfield.') return end
 
 	-- Iterate through current UI elements' flags
-	for FlagName, Flag in pairs(ThaytuberVN_Hub.Flags) do
+	for FlagName, Flag in pairs(RayfieldLibrary.Flags) do
 		local FlagValue = Data[FlagName]
 
 		if (typeof(FlagValue) == 'boolean' and FlagValue == false) or FlagValue then
@@ -940,9 +966,9 @@ local function LoadConfiguration(Configuration)
 				end
 			end)
 		else
-			warn("ThaytuberVN_Hub | Unable to find '"..FlagName.. "' in the save file.")
+			warn("Rayfield | Unable to find '"..FlagName.. "' in the save file.")
 			print("The error above may not be an issue if new elements have been added or not been set values.")
-			--ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Flags", Content = "ThaytuberVN_Hub was unable to find '"..FlagName.. "' in the save file. Check sirius.menu/discord for help.", Image = 3944688398})
+			--RayfieldLibrary:Notify({Title = "Rayfield Flags", Content = "Rayfield was unable to find '"..FlagName.. "' in the save file. Check sirius.menu/discord for help.", Image = 3944688398})
 		end
 	end
 
@@ -957,7 +983,7 @@ local function SaveConfiguration()
 	end
 
 	local Data = {}
-	for i, v in pairs(ThaytuberVN_Hub.Flags) do
+	for i, v in pairs(RayfieldLibrary.Flags) do
 		if v.Type == "ColorPicker" then
 			Data[i] = PackColor(v.Color)
 		else
@@ -998,7 +1024,7 @@ local function SaveConfiguration()
 	end
 end
 
-function ThaytuberVN_Hub:Notify(data) -- action e.g open messages
+function RayfieldLibrary:Notify(data) -- action e.g open messages
 	task.spawn(function()
 
 		-- Notification Object Creation
@@ -1048,7 +1074,7 @@ function ThaytuberVN_Hub:Notify(data) -- action e.g open messages
 		newNotification.Visible = true
 
 		if data.Actions then
-			warn('ThaytuberVN_Hub | Not seeing your actions in notifications?')
+			warn('Rayfield | Not seeing your actions in notifications?')
 			print("Notification Actions are being sunset for now, keep up to date on when they're back in the discord. (sirius.menu/discord)")
 		end
 
@@ -1174,9 +1200,9 @@ local function Hide(notify: boolean?)
 	Debounce = true
 	if notify then
 		if useMobilePrompt then 
-			ThaytuberVN_Hub:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping 'Show ThaytuberVN_Hub'.", Duration = 7, Image = 4400697855})
+			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping 'Show Rayfield'.", Duration = 7, Image = 4400697855})
 		else
-			ThaytuberVN_Hub:Notify({Title = "Interface Hidden", Content = `The interface has been hidden, you can unhide the interface by tapping {getSetting("General", "thaytubervn hubOpen")}.`, Duration = 7, Image = 4400697855})
+			RayfieldLibrary:Notify({Title = "Interface Hidden", Content = `The interface has been hidden, you can unhide the interface by tapping {getSetting("General", "rayfieldOpen")}.`, Duration = 7, Image = 4400697855})
 		end
 	end
 
@@ -1470,7 +1496,7 @@ local function saveSettings() -- Save settings to config file
 			end
 		end
 		if writefile then
-			writefile(ThaytuberVN HubFolder..'/settings'..ConfigurationExtension, encoded)
+			writefile(RayfieldFolder..'/settings'..ConfigurationExtension, encoded)
 		end
 	end
 end
@@ -1492,14 +1518,14 @@ local function createSettings(window)
 		return
 	end
 
-	local newTab = window:CreateTab('ThaytuberVN_Hub Settings', 0, true)
+	local newTab = window:CreateTab('Rayfield Settings', 0, true)
 
-	if TabList['ThaytuberVN_Hub Settings'] then
-		TabList['ThaytuberVN_Hub Settings'].LayoutOrder = 1000
+	if TabList['Rayfield Settings'] then
+		TabList['Rayfield Settings'].LayoutOrder = 1000
 	end
 
-	if Elements['ThaytuberVN_Hub Settings'] then
-		Elements['ThaytuberVN_Hub Settings'].LayoutOrder = 1000
+	if Elements['Rayfield Settings'] then
+		Elements['Rayfield Settings'].LayoutOrder = 1000
 	end
 
 	-- Create sections and elements
@@ -1549,23 +1575,23 @@ end
 
 
 
-function ThaytuberVN_Hub:CreateWindow(Settings)
-	if ThaytuberVN_Hub:FindFirstChild('Loading') then
-		if getgenv and not getgenv().thaytubervn hubCached then
-			ThaytuberVN_Hub.Enabled = true
-			ThaytuberVN_Hub.Loading.Visible = true
+function RayfieldLibrary:CreateWindow(Settings)
+	if Rayfield:FindFirstChild('Loading') then
+		if getgenv and not getgenv().rayfieldCached then
+			Rayfield.Enabled = true
+			Rayfield.Loading.Visible = true
 
 			task.wait(1.4)
-			ThaytuberVN_Hub.Loading.Visible = false
+			Rayfield.Loading.Visible = false
 		end
 	end
 
-	if getgenv then getgenv().thaytubervn hubCached = true end
+	if getgenv then getgenv().rayfieldCached = true end
 
 	if not correctBuild and not Settings.DisableBuildWarnings then
 		task.delay(3, 
 			function() 
-				ThaytuberVN_Hub:Notify({Title = 'Build Mismatch', Content = 'ThaytuberVN_Hub may encounter issues as you are running an incompatible interface version ('.. ((ThaytuberVN_Hub:FindFirstChild('Build') and ThaytuberVN_Hub.Build.Value) or 'No Build') ..').\n\nThis version of ThaytuberVN_Hub is intended for interface build '..InterfaceBuild..'.\n\nTry rejoining and then run the script twice.', Image = 4335487866, Duration = 15})		
+				RayfieldLibrary:Notify({Title = 'Build Mismatch', Content = 'Rayfield may encounter issues as you are running an incompatible interface version ('.. ((Rayfield:FindFirstChild('Build') and Rayfield.Build.Value) or 'No Build') ..').\n\nThis version of Rayfield is intended for interface build '..InterfaceBuild..'.\n\nTry rejoining and then run the script twice.', Image = 4335487866, Duration = 15})		
 			end)
 	end
 
@@ -1576,17 +1602,17 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 			assert(pcall(function()
 				return Enum.KeyCode[keybind]
 			end), "ToggleUIKeybind must be a valid KeyCode")
-			overrideSetting("General", "thaytubervn hubOpen", keybind)
+			overrideSetting("General", "rayfieldOpen", keybind)
 		elseif typeof(keybind) == "EnumItem" then
 			assert(keybind.EnumType == Enum.KeyCode, "ToggleUIKeybind must be a KeyCode enum")
-			overrideSetting("General", "thaytubervn hubOpen", keybind.Name)
+			overrideSetting("General", "rayfieldOpen", keybind.Name)
 		else
 			error("ToggleUIKeybind must be a string or KeyCode enum")
 		end
 	end
 
-	if isfolder and not isfolder(ThaytuberVN HubFolder) then
-		makefolder(ThaytuberVN HubFolder)
+	if isfolder and not isfolder(RayfieldFolder) then
+		makefolder(RayfieldFolder)
 	end
 
 	local Passthrough = false
@@ -1602,11 +1628,11 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 	LoadingFrame.Subtitle.TextTransparency = 1
 
 	LoadingFrame.Version.TextTransparency = 1
-	LoadingFrame.Title.Text = Settings.LoadingTitle or "ThaytuberVN_Hub"
+	LoadingFrame.Title.Text = Settings.LoadingTitle or "Rayfield"
 	LoadingFrame.Subtitle.Text = Settings.LoadingSubtitle or "Interface Suite"
 
-	if Settings.LoadingTitle ~= "ThaytuberVN_Hub Interface Suite" then
-		LoadingFrame.Version.Text = "ThaytuberVN_Hub UI"
+	if Settings.LoadingTitle ~= "Rayfield Interface Suite" then
+		LoadingFrame.Version.Text = "Rayfield UI"
 	end
 
 	if Settings.Icon and Settings.Icon ~= 0 and Topbar:FindFirstChild('Icon') then
@@ -1651,12 +1677,12 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 	Elements.Visible = false
 	LoadingFrame.Visible = true
 
-	if not Settings.DisableThaytuberVN HubPrompts then
+	if not Settings.DisableRayfieldPrompts then
 		task.spawn(function()
 			while true do
 				task.wait(math.random(180, 600))
-				ThaytuberVN_Hub:Notify({
-					Title = "ThaytuberVN_Hub Interface",
+				RayfieldLibrary:Notify({
+					Title = "Rayfield Interface",
 					Content = "Enjoying this UI library? Find it at sirius.menu/discord",
 					Duration = 7,
 					Image = 4370033185,
@@ -1699,11 +1725,11 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 	end
 
 	if Settings.Discord and Settings.Discord.Enabled and not useStudio then
-		if isfolder and not isfolder(ThaytuberVN HubFolder.."/Discord Invites") then
-			makefolder(ThaytuberVN HubFolder.."/Discord Invites")
+		if isfolder and not isfolder(RayfieldFolder.."/Discord Invites") then
+			makefolder(RayfieldFolder.."/Discord Invites")
 		end
 
-		if isfile and not isfile(ThaytuberVN HubFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension) then
+		if isfile and not isfile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension) then
 			if request then
 				pcall(function()
 					request({
@@ -1723,7 +1749,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 			end
 
 			if Settings.Discord.RememberJoins then -- We do logic this way so if the developer changes this setting, the user still won't be prompted, only new users
-				writefile(ThaytuberVN HubFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension,"ThaytuberVN_Hub RememberJoins is true for this invite, this invite will not ask you to join again")
+				writefile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension,"Rayfield RememberJoins is true for this invite, this invite will not ask you to join again")
 			end
 		end
 	end
@@ -1734,8 +1760,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 			return
 		end
 
-		if isfolder and not isfolder(ThaytuberVN HubFolder.."/Key System") then
-			makefolder(ThaytuberVN HubFolder.."/Key System")
+		if isfolder and not isfolder(RayfieldFolder.."/Key System") then
+			makefolder(RayfieldFolder.."/Key System")
 		end
 
 		if typeof(Settings.KeySettings.Key) == "string" then Settings.KeySettings.Key = {Settings.KeySettings.Key} end
@@ -1747,8 +1773,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 					Settings.KeySettings.Key[i] = string.gsub(Settings.KeySettings.Key[i], " ", "")
 				end)
 				if not Success then
-					print("ThaytuberVN_Hub | "..Key.." Error " ..tostring(Response))
-					warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+					print("Rayfield | "..Key.." Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 				end
 			end
 		end
@@ -1757,9 +1783,9 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 			Settings.KeySettings.FileName = "No file name specified"
 		end
 
-		if isfile and isfile(ThaytuberVN HubFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension) then
+		if isfile and isfile(RayfieldFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension) then
 			for _, MKey in ipairs(Settings.KeySettings.Key) do
-				if string.find(readfile(ThaytuberVN HubFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension), MKey) then
+				if string.find(readfile(RayfieldFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension), MKey) then
 					Passthrough = true
 				end
 			end
@@ -1767,7 +1793,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 
 		if not Passthrough then
 			local AttemptsRemaining = math.random(2, 5)
-			ThaytuberVN_Hub.Enabled = false
+			Rayfield.Enabled = false
 			local KeyUI = useStudio and script.Parent:FindFirstChild('Key') or game:GetObjects("rbxassetid://11380036235")[1]
 
 			KeyUI.Enabled = true
@@ -1870,9 +1896,9 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 					KeyMain.Visible = false
 					if Settings.KeySettings.SaveKey then
 						if writefile then
-							writefile(ThaytuberVN HubFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension, FoundKey)
+							writefile(RayfieldFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension, FoundKey)
 						end
-						ThaytuberVN_Hub:Notify({Title = "Key System", Content = "The key for this script has been saved successfully.", Image = 3605522284})
+						RayfieldLibrary:Notify({Title = "Key System", Content = "The key for this script has been saved successfully.", Image = 3605522284})
 					end
 				else
 					if AttemptsRemaining == 0 then
@@ -1918,7 +1944,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 				TweenService:Create(KeyMain.NoteMessage, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 				TweenService:Create(KeyMain.Hide, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {ImageTransparency = 1}):Play()
 				task.wait(0.51)
-				ThaytuberVN_Hub:Destroy()
+				RayfieldLibrary:Destroy()
 				KeyUI:Destroy()
 			end)
 		else
@@ -1931,7 +1957,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 
 	Notifications.Template.Visible = false
 	Notifications.Visible = true
-	ThaytuberVN_Hub.Enabled = true
+	Rayfield.Enabled = true
 
 	task.wait(0.5)
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
@@ -2093,8 +2119,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 
 			Button.Interact.MouseButton1Click:Connect(function()
 				local Success, Response = pcall(ButtonSettings.Callback)
-				-- Prevents animation from trying to play if the button's callback called ThaytuberVN_Hub:Destroy()
-				if thaytubervn hubDestroyed then
+				-- Prevents animation from trying to play if the button's callback called RayfieldLibrary:Destroy()
+				if rayfieldDestroyed then
 					return
 				end
 				if not Success then
@@ -2102,8 +2128,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 					TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 					TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Button.Title.Text = "Callback Error"
-					print("ThaytuberVN_Hub | "..ButtonSettings.Name.." Callback Error " ..tostring(Response))
-					warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+					print("Rayfield | "..ButtonSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Button.Title.Text = ButtonSettings.Name
 					TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2201,7 +2227,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 					TweenService:Create(ColorPicker.HexInput, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Position = UDim2.new(0, 17, 0, 73)}):Play()
 					TweenService:Create(ColorPicker.Interact, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Size = UDim2.new(0.574, 0, 1, 0)}):Play()
 					TweenService:Create(Main.MainPoint, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
-					TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {ImageTransparency = SelectedTheme ~= ThaytuberVN_Hub.Theme.Default and 0.25 or 0.1}):Play()
+					TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {ImageTransparency = SelectedTheme ~= RayfieldLibrary.Theme.Default and 0.25 or 0.1}):Play()
 					TweenService:Create(Background, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 				else
 					opened = false
@@ -2361,7 +2387,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and ColorPickerSettings.Flag then
-					ThaytuberVN_Hub.Flags[ColorPickerSettings.Flag] = ColorPickerSettings
+					RayfieldLibrary.Flags[ColorPickerSettings.Flag] = ColorPickerSettings
 				end
 			end
 
@@ -2380,7 +2406,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 				TweenService:Create(ColorPicker, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 			end)
 
-			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				for _, rgbinput in ipairs(ColorPicker.RGB:GetChildren()) do
 					if rgbinput:IsA("Frame") then
 						rgbinput.BackgroundColor3 = SelectedTheme.InputBackground
@@ -2528,7 +2554,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 				end
 			end
 
-			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				Label.BackgroundColor3 = IgnoreTheme and (Color or Label.BackgroundColor3) or SelectedTheme.SecondaryElementBackground
 				Label.UIStroke.Color = IgnoreTheme and (Color or Label.BackgroundColor3) or SelectedTheme.SecondaryElementStroke
 			end)
@@ -2564,7 +2590,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 				Paragraph.Content.Text = NewParagraphSettings.Content
 			end
 
-			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				Paragraph.BackgroundColor3 = SelectedTheme.SecondaryElementBackground
 				Paragraph.UIStroke.Color = SelectedTheme.SecondaryElementStroke
 			end)
@@ -2606,8 +2632,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 					TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Input.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Input.Title.Text = "Callback Error"
-					print("ThaytuberVN_Hub | "..InputSettings.Name.." Callback Error " ..tostring(Response))
-					warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+					print("Rayfield | "..InputSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Input.Title.Text = InputSettings.Name
 					TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2650,11 +2676,11 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and InputSettings.Flag then
-					ThaytuberVN_Hub.Flags[InputSettings.Flag] = InputSettings
+					RayfieldLibrary.Flags[InputSettings.Flag] = InputSettings
 				end
 			end
 
-			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				Input.InputFrame.BackgroundColor3 = SelectedTheme.InputBackground
 				Input.InputFrame.UIStroke.Color = SelectedTheme.InputStroke
 			end)
@@ -2846,8 +2872,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 							TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 							TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 							Dropdown.Title.Text = "Callback Error"
-							print("ThaytuberVN_Hub | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
-							warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+							print("Rayfield | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
+							warn('Check docs.sirius.menu for help with Rayfield specific development.')
 							task.wait(0.5)
 							Dropdown.Title.Text = DropdownSettings.Name
 							TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2880,7 +2906,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 						end
 					end)
 
-					ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+					Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 						DropdownOption.UIStroke.Color = SelectedTheme.ElementStroke
 					end)
 				end
@@ -2895,7 +2921,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 						droption.BackgroundColor3 = SelectedTheme.DropdownSelected
 					end
 
-					ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+					Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 						if not table.find(DropdownSettings.CurrentOption, droption.Name) then
 							droption.BackgroundColor3 = SelectedTheme.DropdownUnselected
 						else
@@ -2936,8 +2962,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 					TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Dropdown.Title.Text = "Callback Error"
-					print("ThaytuberVN_Hub | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
-					warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+					print("Rayfield | "..DropdownSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Dropdown.Title.Text = DropdownSettings.Name
 					TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2968,11 +2994,11 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and DropdownSettings.Flag then
-					ThaytuberVN_Hub.Flags[DropdownSettings.Flag] = DropdownSettings
+					RayfieldLibrary.Flags[DropdownSettings.Flag] = DropdownSettings
 				end
 			end
 
-			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				Dropdown.Toggle.ImageColor3 = SelectedTheme.TextColor
 				TweenService:Create(Dropdown, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 			end)
@@ -3057,8 +3083,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 							TweenService:Create(Keybind, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 							TweenService:Create(Keybind.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 							Keybind.Title.Text = "Callback Error"
-							print("ThaytuberVN_Hub | "..KeybindSettings.Name.." Callback Error " ..tostring(Response))
-							warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+							print("Rayfield | "..KeybindSettings.Name.." Callback Error " ..tostring(Response))
+							warn('Check docs.sirius.menu for help with Rayfield specific development.')
 							task.wait(0.5)
 							Keybind.Title.Text = KeybindSettings.Name
 							TweenService:Create(Keybind, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -3099,11 +3125,11 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and KeybindSettings.Flag then
-					ThaytuberVN_Hub.Flags[KeybindSettings.Flag] = KeybindSettings
+					RayfieldLibrary.Flags[KeybindSettings.Flag] = KeybindSettings
 				end
 			end
 
-			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				Keybind.KeybindFrame.BackgroundColor3 = SelectedTheme.InputBackground
 				Keybind.KeybindFrame.UIStroke.Color = SelectedTheme.InputStroke
 			end)
@@ -3126,7 +3152,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 			Toggle.Title.TextTransparency = 1
 			Toggle.Switch.BackgroundColor3 = SelectedTheme.ToggleBackground
 
-			if SelectedTheme ~= ThaytuberVN_Hub.Theme.Default then
+			if SelectedTheme ~= RayfieldLibrary.Theme.Default then
 				Toggle.Switch.Shadow.Visible = false
 			end
 
@@ -3187,8 +3213,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Toggle.Title.Text = "Callback Error"
-					print("ThaytuberVN_Hub | "..ToggleSettings.Name.." Callback Error " ..tostring(Response))
-					warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+					print("Rayfield | "..ToggleSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Toggle.Title.Text = ToggleSettings.Name
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -3237,8 +3263,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Toggle.Title.Text = "Callback Error"
-					print("ThaytuberVN_Hub | "..ToggleSettings.Name.." Callback Error " ..tostring(Response))
-					warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+					print("Rayfield | "..ToggleSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Toggle.Title.Text = ToggleSettings.Name
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -3253,16 +3279,16 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 			if not ToggleSettings.Ext then
 				if Settings.ConfigurationSaving then
 					if Settings.ConfigurationSaving.Enabled and ToggleSettings.Flag then
-						ThaytuberVN_Hub.Flags[ToggleSettings.Flag] = ToggleSettings
+						RayfieldLibrary.Flags[ToggleSettings.Flag] = ToggleSettings
 					end
 				end
 			end
 
 
-			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				Toggle.Switch.BackgroundColor3 = SelectedTheme.ToggleBackground
 
-				if SelectedTheme ~= ThaytuberVN_Hub.Theme.Default then
+				if SelectedTheme ~= RayfieldLibrary.Theme.Default then
 					Toggle.Switch.Shadow.Visible = false
 				end
 
@@ -3295,7 +3321,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 			Slider.UIStroke.Transparency = 1
 			Slider.Title.TextTransparency = 1
 
-			if SelectedTheme ~= ThaytuberVN_Hub.Theme.Default then
+			if SelectedTheme ~= RayfieldLibrary.Theme.Default then
 				Slider.Main.Shadow.Visible = false
 			end
 
@@ -3386,8 +3412,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 								TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 								TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 								Slider.Title.Text = "Callback Error"
-								print("ThaytuberVN_Hub | "..SliderSettings.Name.." Callback Error " ..tostring(Response))
-								warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+								print("Rayfield | "..SliderSettings.Name.." Callback Error " ..tostring(Response))
+								warn('Check docs.sirius.menu for help with Rayfield specific development.')
 								task.wait(0.5)
 								Slider.Title.Text = SliderSettings.Name
 								TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -3420,8 +3446,8 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 					TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 					Slider.Title.Text = "Callback Error"
-					print("ThaytuberVN_Hub | "..SliderSettings.Name.." Callback Error " ..tostring(Response))
-					warn('Check docs.sirius.menu for help with ThaytuberVN_Hub specific development.')
+					print("Rayfield | "..SliderSettings.Name.." Callback Error " ..tostring(Response))
+					warn('Check docs.sirius.menu for help with Rayfield specific development.')
 					task.wait(0.5)
 					Slider.Title.Text = SliderSettings.Name
 					TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -3436,12 +3462,12 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and SliderSettings.Flag then
-					ThaytuberVN_Hub.Flags[SliderSettings.Flag] = SliderSettings
+					RayfieldLibrary.Flags[SliderSettings.Flag] = SliderSettings
 				end
 			end
 
-			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
-				if SelectedTheme ~= ThaytuberVN_Hub.Theme.Default then
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+				if SelectedTheme ~= RayfieldLibrary.Theme.Default then
 					Slider.Main.Shadow.Visible = false
 				end
 
@@ -3454,7 +3480,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 			return SliderSettings
 		end
 
-		ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+		Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 			TabButton.UIStroke.Color = SelectedTheme.TabStroke
 
 			if Elements.UIPageLayout.CurrentPage == TabPage then
@@ -3523,9 +3549,9 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 	function Window.ModifyTheme(NewTheme)
 		local success = pcall(ChangeTheme, NewTheme)
 		if not success then
-			ThaytuberVN_Hub:Notify({Title = 'Unable to Change Theme', Content = 'We are unable find a theme on file.', Image = 4400704299})
+			RayfieldLibrary:Notify({Title = 'Unable to Change Theme', Content = 'We are unable find a theme on file.', Image = 4400704299})
 		else
-			ThaytuberVN_Hub:Notify({Title = 'Theme Changed', Content = 'Successfully changed theme to '..(typeof(NewTheme) == 'string' and NewTheme or 'Custom Theme')..'.', Image = 4483362748})
+			RayfieldLibrary:Notify({Title = 'Theme Changed', Content = 'Successfully changed theme to '..(typeof(NewTheme) == 'string' and NewTheme or 'Custom Theme')..'.', Image = 4483362748})
 		end
 	end
 
@@ -3533,7 +3559,7 @@ function ThaytuberVN_Hub:CreateWindow(Settings)
 		createSettings(Window)
 	end)
 	
-	if not success then warn('ThaytuberVN_Hub had an issue creating settings.') end
+	if not success then warn('Rayfield had an issue creating settings.') end
 	
 	return Window
 end
@@ -3549,19 +3575,19 @@ local function setVisibility(visibility: boolean, notify: boolean?)
 	end
 end
 
-function ThaytuberVN_Hub:SetVisibility(visibility: boolean)
+function RayfieldLibrary:SetVisibility(visibility: boolean)
 	setVisibility(visibility, false)
 end
 
-function ThaytuberVN_Hub:IsVisible(): boolean
+function RayfieldLibrary:IsVisible(): boolean
 	return not Hidden
 end
 
 local hideHotkeyConnection -- Has to be initialized here since the connection is made later in the script
-function ThaytuberVN_Hub:Destroy()
-	thaytubervn hubDestroyed = true
+function RayfieldLibrary:Destroy()
+	rayfieldDestroyed = true
 	hideHotkeyConnection:Disconnect()
-	ThaytuberVN_Hub:Destroy()
+	Rayfield:Destroy()
 end
 
 Topbar.ChangeSize.MouseButton1Click:Connect(function()
@@ -3644,7 +3670,7 @@ if Topbar:FindFirstChild('Settings') then
 				end
 			end
 
-			Elements.UIPageLayout:JumpTo(Elements['ThaytuberVN_Hub Settings'])
+			Elements.UIPageLayout:JumpTo(Elements['Rayfield Settings'])
 		end)
 	end)
 
@@ -3656,7 +3682,7 @@ Topbar.Hide.MouseButton1Click:Connect(function()
 end)
 
 hideHotkeyConnection = UserInputService.InputBegan:Connect(function(input, processed)
-	if (input.KeyCode == Enum.KeyCode[getSetting("General", "thaytubervn hubOpen")]) and not processed then
+	if (input.KeyCode == Enum.KeyCode[getSetting("General", "rayfieldOpen")]) and not processed then
 		if Debounce then return end
 		if Hidden then
 			Hidden = false
@@ -3691,7 +3717,7 @@ for _, TopbarButton in ipairs(Topbar:GetChildren()) do
 end
 
 
-function ThaytuberVN_Hub:LoadConfiguration()
+function RayfieldLibrary:LoadConfiguration()
 	local config
 
 	if debugX then
@@ -3718,15 +3744,15 @@ function ThaytuberVN_Hub:LoadConfiguration()
 				end
 			else
 				notified = true
-				ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Configurations", Content = "We couldn't enable Configuration Saving as you are not using software with filesystem support.", Image = 4384402990})
+				RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "We couldn't enable Configuration Saving as you are not using software with filesystem support.", Image = 4384402990})
 			end
 		end)
 
 		if success and loaded and not notified then
-			ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Configurations", Content = "The configuration file for this script has been loaded from a previous session.", Image = 4384403532})
+			RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "The configuration file for this script has been loaded from a previous session.", Image = 4384403532})
 		elseif not success and not notified then
-			warn('ThaytuberVN_Hub Configurations Error | '..tostring(result))
-			ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Configurations", Content = "We've encountered an issue loading your configuration correctly.\n\nCheck the Developer Console for more information.", Image = 4384402990})
+			warn('Rayfield Configurations Error | '..tostring(result))
+			RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "We've encountered an issue loading your configuration correctly.\n\nCheck the Developer Console for more information.", Image = 4384402990})
 		end
 	end
 
@@ -3740,9 +3766,9 @@ if useStudio then
 	-- Feel free to place your own script here to see how it'd work in Roblox Studio before running it on your execution software.
 
 
-	local Window = ThaytuberVN_Hub:CreateWindow({
-		Name = "ThaytuberVN_Hub Example Window",
-		LoadingTitle = "ThaytuberVN_Hub Interface Suite",
+	local Window = RayfieldLibrary:CreateWindow({
+		Name = "Rayfield Example Window",
+		LoadingTitle = "Rayfield Interface Suite",
 		Theme = 'Default',
 		Icon = 0,
 		LoadingSubtitle = "by Sirius",
@@ -3761,9 +3787,9 @@ if useStudio then
 			Title = "Untitled",
 			Subtitle = "Key System",
 			Note = "No method of obtaining the key is provided",
-			FileName = "Key", -- It is recommended to use something unique as other scripts using ThaytuberVN_Hub may overwrite your key file
+			FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
 			SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-			GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like ThaytuberVN_Hub to get the key from
+			GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
 			Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
 		}
 	})
@@ -3810,7 +3836,7 @@ if useStudio then
 	})
 
 
-	--ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Interface", Content = "Welcome to ThaytuberVN_Hub. These - are the brand new notification design for ThaytuberVN_Hub, with custom sizing and ThaytuberVN_Hub calculated wait times.", Image = 4483362458})
+	--RayfieldLibrary:Notify({Title = "Rayfield Interface", Content = "Welcome to Rayfield. These - are the brand new notification design for Rayfield, with custom sizing and Rayfield calculated wait times.", Image = 4483362458})
 
 	local Section = Tab:CreateSection("Section Example")
 
@@ -3868,7 +3894,7 @@ if useStudio then
 	})
 
 	local thoptions = {}
-	for themename, theme in pairs(ThaytuberVN_Hub.Theme) do
+	for themename, theme in pairs(RayfieldLibrary.Theme) do
 		table.insert(thoptions, themename)
 	end
 
@@ -3962,7 +3988,7 @@ end
 -- end
 
 task.delay(4, function()
-	ThaytuberVN_Hub.LoadConfiguration()
+	RayfieldLibrary.LoadConfiguration()
 	if Main:FindFirstChild('Notice') and Main.Notice.Visible then
 		TweenService:Create(Main.Notice, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 100, 0, 25), Position = UDim2.new(0.5, 0, 0, -100), BackgroundTransparency = 1}):Play()
 		TweenService:Create(Main.Notice.Title, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
@@ -3972,4 +3998,4 @@ task.delay(4, function()
 	end
 end)
 
-return ThaytuberVN_Hub
+return RayfieldLibrary
