@@ -1,51 +1,15 @@
---// ThaytuberVN Framework UI (Theme Update Version)
+-- ThaytuberVN Framework (Full Version)
+
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local CoreGui = game:GetService("CoreGui")
 
 local Framework = {}
 
-local DefaultThemes = {
-    Sky = {
-        TextColor = Color3.fromRGB(255, 255, 255),
-        Background = Color3.fromRGB(40, 75, 120),
-        Topbar = Color3.fromRGB(30, 60, 100),
-        Tab = Color3.fromRGB(50, 90, 140),
-        Content = Color3.fromRGB(60, 110, 160),
-        Button = Color3.fromRGB(70, 130, 180)
-    },
-    Water = {
-        TextColor = Color3.fromRGB(255, 255, 255),
-        Background = Color3.fromRGB(20, 20, 60),
-        Topbar = Color3.fromRGB(25, 25, 80),
-        Tab = Color3.fromRGB(30, 30, 100),
-        Content = Color3.fromRGB(35, 35, 120),
-        Button = Color3.fromRGB(40, 40, 140)
-    },
-    Dark = {
-        TextColor = Color3.fromRGB(255, 255, 255),
-        Background = Color3.fromRGB(25, 25, 25),
-        Topbar = Color3.fromRGB(35, 35, 35),
-        Tab = Color3.fromRGB(60, 60, 60),
-        Content = Color3.fromRGB(45, 45, 45),
-        Button = Color3.fromRGB(70, 70, 70)
-    },
-    Light = {
-        TextColor = Color3.fromRGB(0, 0, 0),
-        Background = Color3.fromRGB(230, 230, 230),
-        Topbar = Color3.fromRGB(200, 200, 200),
-        Tab = Color3.fromRGB(180, 180, 180),
-        Content = Color3.fromRGB(210, 210, 210),
-        Button = Color3.fromRGB(190, 190, 190)
-    }
-}
-
--- Utility
+-- Utility functions
 local function CreateInstance(class, props)
     local inst = Instance.new(class)
-    for k, v in pairs(props) do
-        inst[k] = v
-    end
+    for k, v in pairs(props) do inst[k] = v end
     return inst
 end
 
@@ -56,37 +20,63 @@ local function MakeDraggable(frame)
             dragging = true
             dragStart = input.Position
             startPos = frame.Position
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then dragging = false end
-            end)
         end
     end)
-
     frame.InputChanged:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseMovement then
             dragInput = input
         end
     end)
-
     UserInputService.InputChanged:Connect(function(input)
-        if input == dragInput and dragging then
+        if dragging and input == dragInput then
             local delta = input.Position - dragStart
-            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+                                       startPos.Y.Scale, startPos.Y.Offset + delta.Y)
         end
+    end)
+    UserInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end
     end)
 end
 
+-- CreateWindow API
 function Framework:CreateWindow(options)
-    local RainbowBorder = options.RainbowBorder or false
-    local ToggleKey = options.ToggleUIKeybind or "K"
-    local WindowName = options.Name or "Framework UI"
+    -- Default themes
+    local Themes = {
+        dark = {
+            TextColor = Color3.fromRGB(255,255,255),
+            Background = Color3.fromRGB(25,25,25),
+            Topbar = Color3.fromRGB(35,35,35),
+            Tab = Color3.fromRGB(60,60,60),
+            Content = Color3.fromRGB(45,45,45),
+            Button = Color3.fromRGB(70,70,70)
+        },
+        sky = {
+            TextColor = Color3.fromRGB(0,0,0),
+            Background = Color3.fromRGB(135,206,235),
+            Topbar = Color3.fromRGB(176,226,255),
+            Tab = Color3.fromRGB(135,206,250),
+            Content = Color3.fromRGB(176,224,230),
+            Button = Color3.fromRGB(135,206,250)
+        },
+        water = {
+            TextColor = Color3.fromRGB(255,255,255),
+            Background = Color3.fromRGB(0,119,190),
+            Topbar = Color3.fromRGB(0,150,199),
+            Tab = Color3.fromRGB(0,180,216),
+            Content = Color3.fromRGB(72,202,228),
+            Button = Color3.fromRGB(144,224,239)
+        }
+    }
 
-    local Theme = DefaultThemes.Dark
-    if type(options.Theme) == "string" and DefaultThemes[options.Theme] then
-        Theme = DefaultThemes[options.Theme]
-    elseif type(options.Theme) == "table" then
-        Theme = options.Theme
-    end
+    local ti = options.Theme
+    local Theme = nil
+    if type(ti)=="table" then Theme = ti
+    elseif type(ti)=="string" and Themes[string.lower(ti)] then Theme = Themes[string.lower(ti)]
+    else Theme = Themes.dark end
+
+    local ToggleKey = options.ToggleUIKeybind or "K"
+    local RainbowBorder = options.RainbowBorder or false
 
     local ScreenGui = CreateInstance("ScreenGui", {
         Name = "ThaytuberUI",
@@ -96,147 +86,234 @@ function Framework:CreateWindow(options)
 
     local MainFrame = CreateInstance("Frame", {
         Name = "Main",
-        Size = UDim2.new(0, 600, 0, 400),
-        Position = UDim2.new(0.5, -300, 0.5, -200),
+        Size = UDim2.new(0,600,0,400),
+        Position = UDim2.new(0.5,-300,0.5,-200),
         BackgroundColor3 = Theme.Background,
         BorderSizePixel = 0,
-        AnchorPoint = Vector2.new(0.5, 0.5),
+        AnchorPoint = Vector2.new(0.5,0.5),
         Parent = ScreenGui
     })
 
-    -- RGB Border
     local RGBBorder = CreateInstance("Frame", {
-        Size = UDim2.new(1, 6, 1, 6),
-        Position = UDim2.new(0, -3, 0, -3),
-        BackgroundColor3 = Color3.fromRGB(255, 0, 0),
+        Size = UDim2.new(1,6,1,6),
+        Position = UDim2.new(0,-3,0,-3),
+        BackgroundColor3 = Color3.fromRGB(255,0,0),
         BorderSizePixel = 0,
         ZIndex = 0,
         Parent = MainFrame
     })
-
     if RainbowBorder then
         coroutine.wrap(function()
             while wait() do
-                local t = tick() * 100
-                RGBBorder.BackgroundColor3 = Color3.fromHSV((t % 255) / 255, 1, 1)
+                local t = tick()*100
+                RGBBorder.BackgroundColor3 = Color3.fromHSV((t%255)/255,1,1)
             end
         end)()
-    else
-        RGBBorder.Visible = false
-    end
+    else RGBBorder.Visible = false end
 
-    -- UI Scale Animation
-    MainFrame.Size = UDim2.new(0, 0, 0, 0)
-    TweenService:Create(MainFrame, TweenInfo.new(0.25), { Size = UDim2.new(0, 600, 0, 400) }):Play()
+    MainFrame.Size = UDim2.new(0,0,0,0)
+    TweenService:Create(MainFrame, TweenInfo.new(0.25), {Size = UDim2.new(0,600,0,400)}):Play()
 
     MakeDraggable(MainFrame)
 
     local TabsFrame = CreateInstance("Frame", {
-        Name = "TabsFrame",
-        Size = UDim2.new(0, 140, 1, 0),
-        BackgroundColor3 = Theme.Topbar,
-        BorderSizePixel = 0,
-        Parent = MainFrame
+        Name="TabsFrame",
+        Size=UDim2.new(0,140,1,0),
+        BackgroundColor3=Theme.Topbar,
+        Parent=MainFrame
     })
-
     local ContentFrame = CreateInstance("Frame", {
-        Name = "ContentFrame",
-        Size = UDim2.new(1, -140, 1, 0),
-        Position = UDim2.new(0, 140, 0, 0),
-        BackgroundColor3 = Theme.Content,
-        BorderSizePixel = 0,
-        Parent = MainFrame
+        Name="ContentFrame",
+        Size=UDim2.new(1,-140,1,0),
+        Position=UDim2.new(0,140,0,0),
+        BackgroundColor3=Theme.Content,
+        Parent=MainFrame
     })
 
     local Tabs = {}
     local ActiveTab = nil
-
     local function ToggleTab(tab)
-        if ActiveTab == tab then
-            tab.Page.Visible = false
-            ActiveTab = nil
+        if ActiveTab==tab then
+            tab.Page.Visible=false
+            ActiveTab=nil
         else
-            if ActiveTab then ActiveTab.Page.Visible = false end
-            tab.Page.Visible = true
-            ActiveTab = tab
+            if ActiveTab then ActiveTab.Page.Visible=false end
+            tab.Page.Visible=true
+            ActiveTab=tab
         end
     end
 
-    function Tabs:CreateTab(tabName)
-        local Button = CreateInstance("TextButton", {
-            Text = tabName,
-            Size = UDim2.new(1, 0, 0, 35),
-            BackgroundColor3 = Theme.Tab,
-            BorderSizePixel = 0,
-            TextColor3 = Theme.TextColor,
-            Font = Enum.Font.Gotham,
-            TextSize = 14,
-            Parent = TabsFrame
+    function Tabs:CreateTab(name)
+        local btn = CreateInstance("TextButton",{
+            Text=name,
+            Size=UDim2.new(1,0,0,35),
+            BackgroundColor3=Theme.Tab,
+            BorderSizePixel=0,
+            TextColor3=Theme.TextColor,
+            Font=Enum.Font.Gotham,
+            TextSize=14,
+            Parent=TabsFrame
         })
-
-        local Page = CreateInstance("Frame", {
-            Name = tabName .. "Page",
-            Visible = false,
-            Size = UDim2.new(1, 0, 1, 0),
-            BackgroundTransparency = 1,
-            Parent = ContentFrame
+        local page = CreateInstance("Frame",{
+            Name=name.."Page",
+            Size=UDim2.new(1,0,1,0),
+            BackgroundTransparency=1,
+            Visible=false,
+            Parent=ContentFrame
         })
+        CreateInstance("UIListLayout",{ Padding=UDim.new(0,6),SortOrder=Enum.SortOrder.LayoutOrder,Parent=page })
 
-        CreateInstance("UIListLayout", {
-            Padding = UDim.new(0, 6),
-            SortOrder = Enum.SortOrder.LayoutOrder,
-            Parent = Page
-        })
-
-        local tab = {
-            Page = Page,
-            Button = Button
-        }
-
-        Button.MouseButton1Click:Connect(function()
-            ToggleTab(tab)
-        end)
+        local tab = {Page=page, Button=btn}
+        btn.MouseButton1Click:Connect(function() ToggleTab(tab) end)
 
         function tab:CreateButton(opt)
-            local btn = CreateInstance("TextButton", {
-                Text = opt.Name,
-                Size = UDim2.new(1, -10, 0, 35),
-                BackgroundColor3 = Theme.Button,
-                BorderSizePixel = 0,
-                TextColor3 = Theme.TextColor,
-                Font = Enum.Font.Gotham,
-                TextSize = 14,
-                Parent = Page
+            local b = CreateInstance("TextButton",{
+                Text=opt.Name,
+                Size=UDim2.new(1,-10,0,30),
+                BackgroundColor3=Theme.Button,
+                BorderSizePixel=0,
+                TextColor3=Theme.TextColor,
+                Font=Enum.Font.Gotham,
+                TextSize=14,
+                Parent=page
             })
-
-            btn.MouseButton1Click:Connect(function()
-                opt.Callback()
-            end)
+            b.MouseButton1Click:Connect(opt.Callback)
         end
 
         function tab:CreateKeybind(opt)
-            local btn = CreateInstance("TextButton", {
-                Text = opt.Name .. ": [" .. (opt.Key or "None") .. "]",
-                Size = UDim2.new(1, -10, 0, 35),
-                BackgroundColor3 = Theme.Button,
-                BorderSizePixel = 0,
-                TextColor3 = Theme.TextColor,
-                Font = Enum.Font.Gotham,
-                TextSize = 14,
-                Parent = Page
+            local b = CreateInstance("TextButton",{
+                Text=opt.Name..": ["..(opt.Key or "None").."]",
+                Size=UDim2.new(1,-10,0,30),
+                BackgroundColor3=Theme.Button,
+                BorderSizePixel=0,
+                TextColor3=Theme.TextColor,
+                Font=Enum.Font.Gotham,
+                TextSize=14,
+                Parent=page
             })
-
-            local listening = false
-            btn.MouseButton1Click:Connect(function()
-                btn.Text = opt.Name .. ": [...]"
-                listening = true
+            local listening=false
+            b.MouseButton1Click:Connect(function()
+                listening=true
+                b.Text=opt.Name..": [...]"
             end)
+            UserInputService.InputBegan:Connect(function(i)
+                if listening and i.UserInputType==Enum.UserInputType.Keyboard then
+                    listening=false
+                    local s = i.KeyCode.Name
+                    b.Text = opt.Name..": ["..s.."]"
+                    opt.Callback(s)
+                end
+            end)
+        end
 
-            UserInputService.InputBegan:Connect(function(input)
-                if listening and input.UserInputType == Enum.UserInputType.Keyboard then
-                    listening = false
-                    btn.Text = opt.Name .. ": [" .. input.KeyCode.Name .. "]"
-                    opt.Callback(input.KeyCode.Name)
+        function tab:CreateToggle(opt)
+            local state = opt.CurrentValue or false
+            local b = CreateInstance("TextButton",{
+                Text=opt.Name.." : "..(state and "ON" or "OFF"),
+                Size=UDim2.new(1,-10,0,30),
+                BackgroundColor3=Theme.Button,
+                TextColor3=Theme.TextColor,
+                Parent=page
+            })
+            b.MouseButton1Click:Connect(function()
+                state = not state
+                b.Text = opt.Name.." : "..(state and "ON" or "OFF")
+                opt.Callback(state)
+            end)
+        end
+
+        function tab:CreateColorPicker(opt)
+            local col = opt.Color or Color3.new()
+            local b = CreateInstance("TextButton",{
+                Text=opt.Name,
+                Size=UDim2.new(1,-10,0,30),
+                BackgroundColor3=col, TextColor3=Theme.TextColor,
+                Parent=page
+            })
+            -- here implement color picker UI if needed
+            b.MouseButton1Click:Connect(function()
+                opt.Callback(col)
+            end)
+        end
+
+        function tab:CreateSlider(opt)
+            local val = opt.CurrentValue or opt.Range[1]
+            local holder = CreateInstance("Frame",{Size=UDim2.new(1,-10,0,20), BackgroundColor3=Theme.Button, Parent=page})
+            local slider = CreateInstance("TextButton",{
+                Text=opt.Name.." : "..val..opt.Suffix,
+                Size=UDim2.new(1,0,1,0), BackgroundColor3=Theme.Button,
+                TextColor3=Theme.TextColor, Parent=holder
+            })
+            slider.MouseButton1Down:Connect(function(input)
+                local conn; conn = UserInputService.InputChanged:Connect(function(i)
+                    if i.UserInputType==Enum.UserInputType.MouseMovement then
+                        local x = math.clamp((i.Position.X - holder.AbsolutePosition.X) / holder.AbsoluteSize.X, 0, 1)
+                        val = math.floor(opt.Range[1] + x*(opt.Range[2]-opt.Range[1]) + 0.5)
+                        if opt.Increment then val = math.floor(val/opt.Increment)*opt.Increment end
+                        slider.Text = opt.Name.." : "..val..opt.Suffix
+                        opt.Callback(val)
+                    end
+                end)
+                UserInputService.InputEnded:Connect(function(i)
+                    if i.UserInputType==Enum.UserInputType.MouseButton1 then conn:Disconnect() end
+                end)
+            end)
+        end
+
+        function tab:CreateInput(opt)
+            local box = CreateInstance("TextBox",{
+                Text=opt.CurrentValue or "",
+                PlaceholderText=opt.PlaceholderText or "",
+                Size=UDim2.new(1,-10,0,30),
+                BackgroundColor3=Theme.Button,
+                TextColor3=Theme.TextColor,
+                ClearTextOnFocus=opt.RemoveTextAfterFocusLost,
+                Parent=page
+            })
+            box.FocusLost:Connect(function()
+                opt.Callback(box.Text)
+            end)
+        end
+
+        function tab:CreateDropdown(opt)
+            local dropdown = CreateInstance("TextButton",{
+                Text=opt.Name.." : "..table.concat(opt.CurrentOption or {}, ", "),
+                Size=UDim2.new(1,-10,0,30),
+                BackgroundColor3=Theme.Button,
+                TextColor3=Theme.TextColor,
+                Parent=page
+            })
+            local open = false; local list
+            dropdown.MouseButton1Click:Connect(function()
+                if open then if list then list:Destroy() end; open=false
+                else
+                    open=true
+                    list = CreateInstance("Frame",{Position=dropdown.Position+UDim2.new(0,0,0,30), Size=UDim2.new(0,dropdown.AbsoluteSize.X,0,#opt.Options*30), BackgroundColor3=Theme.Button, Parent=page})
+                    for i,v in ipairs(opt.Options) do
+                        local optbtn = CreateInstance("TextButton",{
+                            Text=v,
+                            Size=UDim2.new(1,0,0,30),
+                            Position=UDim2.new(0,0,(i-1)*30,0),
+                            BackgroundColor3=Theme.Button,
+                            TextColor3=Theme.TextColor,
+                            Parent=list
+                        })
+                        optbtn.MouseButton1Click:Connect(function()
+                            if opt.MultipleOptions then
+                                -- toggle membership
+                                local chosen = {}
+                                for _,cv in ipairs(opt.CurrentOption) do if cv~=v then table.insert(chosen,cv) end end
+                                if not table.find(opt.CurrentOption,v) then table.insert(chosen,v) end
+                                opt.CurrentOption = chosen
+                            else
+                                opt.CurrentOption = {v}
+                                list:Destroy()
+                                open=false
+                            end
+                            dropdown.Text = opt.Name.." : "..table.concat(opt.CurrentOption,", ")
+                            opt.Callback(opt.CurrentOption)
+                        end)
+                    end
                 end
             end)
         end
@@ -244,27 +321,20 @@ function Framework:CreateWindow(options)
         return tab
     end
 
-    UserInputService.InputBegan:Connect(function(input)
-        if input.KeyCode.Name == ToggleKey then
+    UserInputService.InputBegan:Connect(function(i)
+        if i.KeyCode.Name==ToggleKey then
             ScreenGui.Enabled = not ScreenGui.Enabled
         end
     end)
 
     local SettingTab = Tabs:CreateTab("Setting")
-
     SettingTab:CreateKeybind({
-        Name = "Toggle Menu",
-        Key = ToggleKey,
-        Callback = function(key)
-            ToggleKey = key
-        end
+        Name="Toggle Menu",
+        Key=ToggleKey,
+        Callback=function(k) ToggleKey=k end
     })
 
-    return {
-        CreateTab = function(_, name)
-            return Tabs:CreateTab(name)
-        end
-    }
+    return { CreateTab = function(_,n) return Tabs:CreateTab(n) end }
 end
 
 return Framework
