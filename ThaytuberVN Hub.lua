@@ -717,7 +717,6 @@ local Topbar = Main.Topbar
 Topbar.Title.Text = "Thaytuber"
 local Elements = Main.Elements
 local LoadingFrame = Main.LoadingFrame
-LoadingFrame.Visible = false -- Ẩn splash screen Rayfield
 local TabList = Main.TabList
 local dragBar = Rayfield:FindFirstChild('Drag')
 local dragInteract = dragBar and dragBar.Interact or nil
@@ -730,7 +729,7 @@ Rayfield.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 
 -- Thanks to Latte Softworks for the Lucide integration for Roblox
-local Icons
+local Icons = useStudio and require(script.Parent.icons) or loadWithTimeout('https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/refs/heads/main/icons.lua')
 -- Variables
 
 local CFileName = nil
@@ -789,6 +788,48 @@ local function ChangeTheme(Theme)
 	end
 end
 
+local function getIcon(name : string): {id: number, imageRectSize: Vector2, imageRectOffset: Vector2}
+	if not Icons then
+		warn("Lucide Icons: Cannot use icons as icons library is not loaded")
+		return
+	end
+	name = string.match(string.lower(name), "^%s*(.*)%s*$") :: string
+	local sizedicons = Icons['48px']
+	local r = sizedicons[name]
+	if not r then
+		error(`Lucide Icons: Failed to find icon by the name of "{name}"`, 2)
+	end
+
+	local rirs = r[2]
+	local riro = r[3]
+
+	if type(r[1]) ~= "number" or type(rirs) ~= "table" or type(riro) ~= "table" then
+		error("Lucide Icons: Internal error: Invalid auto-generated asset entry")
+	end
+
+	local irs = Vector2.new(rirs[1], rirs[2])
+	local iro = Vector2.new(riro[1], riro[2])
+
+	local asset = {
+		id = r[1],
+		imageRectSize = irs,
+		imageRectOffset = iro,
+	}
+
+	return asset
+end
+-- Converts ID to asset URI. Returns rbxassetid://0 if ID is not a number
+local function getAssetUri(id: any): string
+	local assetUri = "rbxassetid://0" -- Default to empty image
+	if type(id) == "number" then
+		assetUri = "rbxassetid://" .. id
+	elseif type(id) == "string" and not Icons then
+		warn("Rayfield | Cannot use Lucide icons as icons library is not loaded")
+	else
+		warn("Rayfield | The icon argument must either be an icon ID (number) or a Lucide icon name (string)")
+	end
+	return assetUri
+end
 
 local function makeDraggable(object, dragObject, enableTaptic, tapticOffset)
 	local dragging = false
@@ -972,12 +1013,27 @@ function RayfieldLibrary:Notify(data) -- action e.g open messages
 		newNotification.Title.Text = data.Title or "Unknown Title"
 		newNotification.Description.Text = data.Content or "Unknown Content"
 
+		if data.Image then
+			if typeof(data.Image) == 'string' and Icons then
+				local asset = getIcon(data.Image)
+
+				newNotification.Icon.Image = 'rbxassetid://'..asset.id
+				newNotification.Icon.ImageRectOffset = asset.imageRectOffset
+				newNotification.Icon.ImageRectSize = asset.imageRectSize
+			else
+				newNotification.Icon.Image = getAssetUri(data.Image)
+			end
+		else
+			newNotification.Icon.Image = "rbxassetid://" .. 0
+		end
+
 		-- Set initial transparency values
 
 		newNotification.Title.TextColor3 = SelectedTheme.TextColor
 		newNotification.Description.TextColor3 = SelectedTheme.TextColor
 		newNotification.BackgroundColor3 = SelectedTheme.Background
 		newNotification.UIStroke.Color = SelectedTheme.TextColor
+		newNotification.Icon.ImageColor3 = SelectedTheme.TextColor
 
 		newNotification.BackgroundTransparency = 1
 		newNotification.Title.TextTransparency = 1
@@ -985,6 +1041,8 @@ function RayfieldLibrary:Notify(data) -- action e.g open messages
 		newNotification.UIStroke.Transparency = 1
 		newNotification.Shadow.ImageTransparency = 1
 		newNotification.Size = UDim2.new(1, 0, 0, 800)
+		newNotification.Icon.ImageTransparency = 1
+		newNotification.Icon.BackgroundTransparency = 1
 
 		task.wait()
 
@@ -999,6 +1057,9 @@ function RayfieldLibrary:Notify(data) -- action e.g open messages
 		local bounds = {newNotification.Title.TextBounds.Y, newNotification.Description.TextBounds.Y}
 		newNotification.Size = UDim2.new(1, -60, 0, -Notifications:FindFirstChild("UIListLayout").Padding.Offset)
 
+		newNotification.Icon.Size = UDim2.new(0, 32, 0, 32)
+		newNotification.Icon.Position = UDim2.new(0, 20, 0.5, 0)
+
 		TweenService:Create(newNotification, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, 0, 0, math.max(bounds[1] + bounds[2] + 31, 60))}):Play()
 
 		task.wait(0.15)
@@ -1007,6 +1068,7 @@ function RayfieldLibrary:Notify(data) -- action e.g open messages
 
 		task.wait(0.05)
 
+		TweenService:Create(newNotification.Icon, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
 
 		task.wait(0.05)
 		TweenService:Create(newNotification.Description, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0.35}):Play()
@@ -1016,6 +1078,7 @@ function RayfieldLibrary:Notify(data) -- action e.g open messages
 		local waitDuration = math.min(math.max((#newNotification.Description.Text * 0.1) + 2.5, 3), 10)
 		task.wait(data.Duration or waitDuration)
 
+		newNotification.Icon.Visible = false
 		TweenService:Create(newNotification, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 		TweenService:Create(newNotification.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 		TweenService:Create(newNotification.Shadow, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {ImageTransparency = 1}):Play()
@@ -1277,6 +1340,17 @@ local function Unhide()
 
 	dragInteract.Visible = true
 
+	for _, TopbarButton in ipairs(Topbar:GetChildren()) do
+		if TopbarButton.ClassName == "ImageButton" then
+			if TopbarButton.Name == 'Icon' then
+				TweenService:Create(TopbarButton, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
+			else
+				TweenService:Create(TopbarButton, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.8}):Play()
+			end
+
+		end
+	end
+
 	for _, tabbtn in ipairs(TabList:GetChildren()) do
 		if tabbtn.ClassName == "Frame" and tabbtn.Name ~= "Placeholder" then
 			if tostring(Elements.UIPageLayout.CurrentPage) == tabbtn.Title.Text then
@@ -1534,6 +1608,25 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	if Settings.LoadingTitle ~= "Rayfield Interface Suite" then
 		LoadingFrame.Version.Text = "Rayfield UI"
+	end
+
+	if Settings.Icon and Settings.Icon ~= 0 and Topbar:FindFirstChild('Icon') then
+		Topbar.Icon.Visible = true
+		Topbar.Title.Position = UDim2.new(0, 47, 0.5, 0)
+
+		if Settings.Icon then
+			if typeof(Settings.Icon) == 'string' and Icons then
+				local asset = getIcon(Settings.Icon)
+
+				Topbar.Icon.Image = 'rbxassetid://'..asset.id
+				Topbar.Icon.ImageRectOffset = asset.imageRectOffset
+				Topbar.Icon.ImageRectSize = asset.imageRectSize
+			else
+				Topbar.Icon.Image = getAssetUri(Settings.Icon)
+			end
+		else
+			Topbar.Icon.Image = "rbxassetid://" .. 0
+		end
 	end
 
 	if dragBar then
@@ -1869,6 +1962,24 @@ function RayfieldLibrary:CreateWindow(Settings)
 		TabButton.Parent = TabList
 		TabButton.Title.TextWrapped = false
 		TabButton.Size = UDim2.new(0, TabButton.Title.TextBounds.X + 30, 0, 30)
+
+		if Image and Image ~= 0 then
+			if typeof(Image) == 'string' and Icons then
+				local asset = getIcon(Image)
+
+				TabButton.Image.Image = 'rbxassetid://'..asset.id
+				TabButton.Image.ImageRectOffset = asset.imageRectOffset
+				TabButton.Image.ImageRectSize = asset.imageRectSize
+			else
+				TabButton.Image.Image = getAssetUri(Image)
+			end
+
+			TabButton.Title.AnchorPoint = Vector2.new(0, 0.5)
+			TabButton.Title.Position = UDim2.new(0, 37, 0.5, 0)
+			TabButton.Image.Visible = true
+			TabButton.Title.TextXAlignment = Enum.TextXAlignment.Left
+			TabButton.Size = UDim2.new(0, TabButton.Title.TextBounds.X + 52, 0, 30)
+		end
 
 
 
@@ -2330,6 +2441,102 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return DividerValue
 		end
+
+		-- Label
+		function Tab:CreateLabel(LabelText : string, Icon: number, Color : Color3, IgnoreTheme : boolean)
+			local LabelValue = {}
+
+			local Label = Elements.Template.Label:Clone()
+			Label.Title.Text = LabelText
+			Label.Visible = true
+			Label.Parent = TabPage
+
+			Label.BackgroundColor3 = Color or SelectedTheme.SecondaryElementBackground
+			Label.UIStroke.Color = Color or SelectedTheme.SecondaryElementStroke
+
+			if Icon then
+				if typeof(Icon) == 'string' and Icons then
+					local asset = getIcon(Icon)
+
+					Label.Icon.Image = 'rbxassetid://'..asset.id
+					Label.Icon.ImageRectOffset = asset.imageRectOffset
+					Label.Icon.ImageRectSize = asset.imageRectSize
+				else
+					Label.Icon.Image = getAssetUri(Icon)
+				end
+			else
+				Label.Icon.Image = "rbxassetid://" .. 0
+			end
+
+			if Icon and Label:FindFirstChild('Icon') then
+				Label.Title.Position = UDim2.new(0, 45, 0.5, 0)
+				Label.Title.Size = UDim2.new(1, -100, 0, 14)
+
+				if Icon then
+					if typeof(Icon) == 'string' and Icons then
+						local asset = getIcon(Icon)
+
+						Label.Icon.Image = 'rbxassetid://'..asset.id
+						Label.Icon.ImageRectOffset = asset.imageRectOffset
+						Label.Icon.ImageRectSize = asset.imageRectSize
+					else
+						Label.Icon.Image = getAssetUri(Icon)
+					end
+				else
+					Label.Icon.Image = "rbxassetid://" .. 0
+				end
+
+				Label.Icon.Visible = true
+			end
+
+			Label.Icon.ImageTransparency = 1
+			Label.BackgroundTransparency = 1
+			Label.UIStroke.Transparency = 1
+			Label.Title.TextTransparency = 1
+
+			TweenService:Create(Label, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = Color and 0.8 or 0}):Play()
+			TweenService:Create(Label.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = Color and 0.7 or 0}):Play()
+			TweenService:Create(Label.Icon, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.2}):Play()
+			TweenService:Create(Label.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = Color and 0.2 or 0}):Play()	
+
+			function LabelValue:Set(NewLabel, Icon, Color)
+				Label.Title.Text = NewLabel
+
+				if Color then
+					Label.BackgroundColor3 = Color or SelectedTheme.SecondaryElementBackground
+					Label.UIStroke.Color = Color or SelectedTheme.SecondaryElementStroke
+				end
+
+				if Icon and Label:FindFirstChild('Icon') then
+					Label.Title.Position = UDim2.new(0, 45, 0.5, 0)
+					Label.Title.Size = UDim2.new(1, -100, 0, 14)
+
+					if Icon then
+						if typeof(Icon) == 'string' and Icons then
+							local asset = getIcon(Icon)
+
+							Label.Icon.Image = 'rbxassetid://'..asset.id
+							Label.Icon.ImageRectOffset = asset.imageRectOffset
+							Label.Icon.ImageRectSize = asset.imageRectSize
+						else
+							Label.Icon.Image = getAssetUri(Icon)
+						end
+					else
+						Label.Icon.Image = "rbxassetid://" .. 0
+					end
+
+					Label.Icon.Visible = true
+				end
+			end
+
+			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
+				Label.BackgroundColor3 = IgnoreTheme and (Color or Label.BackgroundColor3) or SelectedTheme.SecondaryElementBackground
+				Label.UIStroke.Color = IgnoreTheme and (Color or Label.BackgroundColor3) or SelectedTheme.SecondaryElementStroke
+			end)
+
+			return LabelValue
+		end
+
 		-- Paragraph
 		function Tab:CreateParagraph(ParagraphSettings)
 			local ParagraphValue = {}
