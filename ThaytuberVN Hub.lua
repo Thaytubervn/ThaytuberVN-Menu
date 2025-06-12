@@ -717,6 +717,7 @@ local Topbar = Main.Topbar
 Topbar.Title.Text = "Thaytuber"
 local Elements = Main.Elements
 local LoadingFrame = Main.LoadingFrame
+LoadingFrame.Visible = false -- Ẩn splash screen Rayfield
 local TabList = Main.TabList
 local dragBar = Rayfield:FindFirstChild('Drag')
 local dragInteract = dragBar and dragBar.Interact or nil
