@@ -3972,4 +3972,4 @@ task.delay(4, function()
 	end
 end)
 
-return ThaytuberVN HubLibrary
+return ThaytuberVN_Hub
