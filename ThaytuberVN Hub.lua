@@ -731,7 +731,6 @@ LoadingFrame.Version.Text = Release
 
 -- Thanks to Latte Softworks for the Lucide integration for Roblox
 local Icons
-Icon.Image = "" -- Tự dùng icon bạn chọn
 
 -- Variables
 
