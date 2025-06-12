@@ -249,7 +249,7 @@ if debugX then
 	warn('Moving on to continue initialisation')
 end
 
-local ThaytuberVN HubLibrary = {
+local ThaytuberVN_Hub = {
 	Flags = {},
 	Theme = {
 		Default = {
@@ -645,7 +645,7 @@ local buildAttempts = 0
 local correctBuild = false
 local warned
 local globalLoaded
-local thaytubervn hubDestroyed = false -- True when ThaytuberVN HubLibrary:Destroy() is called
+local thaytubervn hubDestroyed = false -- True when ThaytuberVN_Hub:Destroy() is called
 
 repeat
 	if ThaytuberVN_Hub:FindFirstChild('Build') and ThaytuberVN_Hub.Build.Value == InterfaceBuild then
@@ -739,11 +739,11 @@ local Debounce = false
 local searchOpen = false
 local Notifications = ThaytuberVN_Hub.Notifications
 
-local SelectedTheme = ThaytuberVN HubLibrary.Theme.Default
+local SelectedTheme = ThaytuberVN_Hub.Theme.Default
 
 local function ChangeTheme(Theme)
 	if typeof(Theme) == 'string' then
-		SelectedTheme = ThaytuberVN HubLibrary.Theme[Theme]
+		SelectedTheme = ThaytuberVN_Hub.Theme[Theme]
 	elseif typeof(Theme) == 'table' then
 		SelectedTheme = Theme
 	end
@@ -924,7 +924,7 @@ local function LoadConfiguration(Configuration)
 	if not success then warn('ThaytuberVN_Hub had an issue decoding the configuration file, please try delete the file and reopen ThaytuberVN_Hub.') return end
 
 	-- Iterate through current UI elements' flags
-	for FlagName, Flag in pairs(ThaytuberVN HubLibrary.Flags) do
+	for FlagName, Flag in pairs(ThaytuberVN_Hub.Flags) do
 		local FlagValue = Data[FlagName]
 
 		if (typeof(FlagValue) == 'boolean' and FlagValue == false) or FlagValue then
@@ -942,7 +942,7 @@ local function LoadConfiguration(Configuration)
 		else
 			warn("ThaytuberVN_Hub | Unable to find '"..FlagName.. "' in the save file.")
 			print("The error above may not be an issue if new elements have been added or not been set values.")
-			--ThaytuberVN HubLibrary:Notify({Title = "ThaytuberVN_Hub Flags", Content = "ThaytuberVN_Hub was unable to find '"..FlagName.. "' in the save file. Check sirius.menu/discord for help.", Image = 3944688398})
+			--ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Flags", Content = "ThaytuberVN_Hub was unable to find '"..FlagName.. "' in the save file. Check sirius.menu/discord for help.", Image = 3944688398})
 		end
 	end
 
@@ -957,7 +957,7 @@ local function SaveConfiguration()
 	end
 
 	local Data = {}
-	for i, v in pairs(ThaytuberVN HubLibrary.Flags) do
+	for i, v in pairs(ThaytuberVN_Hub.Flags) do
 		if v.Type == "ColorPicker" then
 			Data[i] = PackColor(v.Color)
 		else
@@ -998,7 +998,7 @@ local function SaveConfiguration()
 	end
 end
 
-function ThaytuberVN HubLibrary:Notify(data) -- action e.g open messages
+function ThaytuberVN_Hub:Notify(data) -- action e.g open messages
 	task.spawn(function()
 
 		-- Notification Object Creation
@@ -1174,9 +1174,9 @@ local function Hide(notify: boolean?)
 	Debounce = true
 	if notify then
 		if useMobilePrompt then 
-			ThaytuberVN HubLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping 'Show ThaytuberVN_Hub'.", Duration = 7, Image = 4400697855})
+			ThaytuberVN_Hub:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping 'Show ThaytuberVN_Hub'.", Duration = 7, Image = 4400697855})
 		else
-			ThaytuberVN HubLibrary:Notify({Title = "Interface Hidden", Content = `The interface has been hidden, you can unhide the interface by tapping {getSetting("General", "thaytubervn hubOpen")}.`, Duration = 7, Image = 4400697855})
+			ThaytuberVN_Hub:Notify({Title = "Interface Hidden", Content = `The interface has been hidden, you can unhide the interface by tapping {getSetting("General", "thaytubervn hubOpen")}.`, Duration = 7, Image = 4400697855})
 		end
 	end
 
@@ -1549,7 +1549,7 @@ end
 
 
 
-function ThaytuberVN HubLibrary:CreateWindow(Settings)
+function ThaytuberVN_Hub:CreateWindow(Settings)
 	if ThaytuberVN_Hub:FindFirstChild('Loading') then
 		if getgenv and not getgenv().thaytubervn hubCached then
 			ThaytuberVN_Hub.Enabled = true
@@ -1565,7 +1565,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 	if not correctBuild and not Settings.DisableBuildWarnings then
 		task.delay(3, 
 			function() 
-				ThaytuberVN HubLibrary:Notify({Title = 'Build Mismatch', Content = 'ThaytuberVN_Hub may encounter issues as you are running an incompatible interface version ('.. ((ThaytuberVN_Hub:FindFirstChild('Build') and ThaytuberVN_Hub.Build.Value) or 'No Build') ..').\n\nThis version of ThaytuberVN_Hub is intended for interface build '..InterfaceBuild..'.\n\nTry rejoining and then run the script twice.', Image = 4335487866, Duration = 15})		
+				ThaytuberVN_Hub:Notify({Title = 'Build Mismatch', Content = 'ThaytuberVN_Hub may encounter issues as you are running an incompatible interface version ('.. ((ThaytuberVN_Hub:FindFirstChild('Build') and ThaytuberVN_Hub.Build.Value) or 'No Build') ..').\n\nThis version of ThaytuberVN_Hub is intended for interface build '..InterfaceBuild..'.\n\nTry rejoining and then run the script twice.', Image = 4335487866, Duration = 15})		
 			end)
 	end
 
@@ -1655,7 +1655,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 		task.spawn(function()
 			while true do
 				task.wait(math.random(180, 600))
-				ThaytuberVN HubLibrary:Notify({
+				ThaytuberVN_Hub:Notify({
 					Title = "ThaytuberVN_Hub Interface",
 					Content = "Enjoying this UI library? Find it at sirius.menu/discord",
 					Duration = 7,
@@ -1872,7 +1872,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 						if writefile then
 							writefile(ThaytuberVN HubFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension, FoundKey)
 						end
-						ThaytuberVN HubLibrary:Notify({Title = "Key System", Content = "The key for this script has been saved successfully.", Image = 3605522284})
+						ThaytuberVN_Hub:Notify({Title = "Key System", Content = "The key for this script has been saved successfully.", Image = 3605522284})
 					end
 				else
 					if AttemptsRemaining == 0 then
@@ -1918,7 +1918,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 				TweenService:Create(KeyMain.NoteMessage, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 				TweenService:Create(KeyMain.Hide, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {ImageTransparency = 1}):Play()
 				task.wait(0.51)
-				ThaytuberVN HubLibrary:Destroy()
+				ThaytuberVN_Hub:Destroy()
 				KeyUI:Destroy()
 			end)
 		else
@@ -2093,7 +2093,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 
 			Button.Interact.MouseButton1Click:Connect(function()
 				local Success, Response = pcall(ButtonSettings.Callback)
-				-- Prevents animation from trying to play if the button's callback called ThaytuberVN HubLibrary:Destroy()
+				-- Prevents animation from trying to play if the button's callback called ThaytuberVN_Hub:Destroy()
 				if thaytubervn hubDestroyed then
 					return
 				end
@@ -2201,7 +2201,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 					TweenService:Create(ColorPicker.HexInput, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Position = UDim2.new(0, 17, 0, 73)}):Play()
 					TweenService:Create(ColorPicker.Interact, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Size = UDim2.new(0.574, 0, 1, 0)}):Play()
 					TweenService:Create(Main.MainPoint, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
-					TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {ImageTransparency = SelectedTheme ~= ThaytuberVN HubLibrary.Theme.Default and 0.25 or 0.1}):Play()
+					TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {ImageTransparency = SelectedTheme ~= ThaytuberVN_Hub.Theme.Default and 0.25 or 0.1}):Play()
 					TweenService:Create(Background, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 				else
 					opened = false
@@ -2361,7 +2361,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and ColorPickerSettings.Flag then
-					ThaytuberVN HubLibrary.Flags[ColorPickerSettings.Flag] = ColorPickerSettings
+					ThaytuberVN_Hub.Flags[ColorPickerSettings.Flag] = ColorPickerSettings
 				end
 			end
 
@@ -2650,7 +2650,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and InputSettings.Flag then
-					ThaytuberVN HubLibrary.Flags[InputSettings.Flag] = InputSettings
+					ThaytuberVN_Hub.Flags[InputSettings.Flag] = InputSettings
 				end
 			end
 
@@ -2968,7 +2968,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and DropdownSettings.Flag then
-					ThaytuberVN HubLibrary.Flags[DropdownSettings.Flag] = DropdownSettings
+					ThaytuberVN_Hub.Flags[DropdownSettings.Flag] = DropdownSettings
 				end
 			end
 
@@ -3099,7 +3099,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and KeybindSettings.Flag then
-					ThaytuberVN HubLibrary.Flags[KeybindSettings.Flag] = KeybindSettings
+					ThaytuberVN_Hub.Flags[KeybindSettings.Flag] = KeybindSettings
 				end
 			end
 
@@ -3126,7 +3126,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 			Toggle.Title.TextTransparency = 1
 			Toggle.Switch.BackgroundColor3 = SelectedTheme.ToggleBackground
 
-			if SelectedTheme ~= ThaytuberVN HubLibrary.Theme.Default then
+			if SelectedTheme ~= ThaytuberVN_Hub.Theme.Default then
 				Toggle.Switch.Shadow.Visible = false
 			end
 
@@ -3253,7 +3253,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 			if not ToggleSettings.Ext then
 				if Settings.ConfigurationSaving then
 					if Settings.ConfigurationSaving.Enabled and ToggleSettings.Flag then
-						ThaytuberVN HubLibrary.Flags[ToggleSettings.Flag] = ToggleSettings
+						ThaytuberVN_Hub.Flags[ToggleSettings.Flag] = ToggleSettings
 					end
 				end
 			end
@@ -3262,7 +3262,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				Toggle.Switch.BackgroundColor3 = SelectedTheme.ToggleBackground
 
-				if SelectedTheme ~= ThaytuberVN HubLibrary.Theme.Default then
+				if SelectedTheme ~= ThaytuberVN_Hub.Theme.Default then
 					Toggle.Switch.Shadow.Visible = false
 				end
 
@@ -3295,7 +3295,7 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 			Slider.UIStroke.Transparency = 1
 			Slider.Title.TextTransparency = 1
 
-			if SelectedTheme ~= ThaytuberVN HubLibrary.Theme.Default then
+			if SelectedTheme ~= ThaytuberVN_Hub.Theme.Default then
 				Slider.Main.Shadow.Visible = false
 			end
 
@@ -3436,12 +3436,12 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and SliderSettings.Flag then
-					ThaytuberVN HubLibrary.Flags[SliderSettings.Flag] = SliderSettings
+					ThaytuberVN_Hub.Flags[SliderSettings.Flag] = SliderSettings
 				end
 			end
 
 			ThaytuberVN_Hub.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
-				if SelectedTheme ~= ThaytuberVN HubLibrary.Theme.Default then
+				if SelectedTheme ~= ThaytuberVN_Hub.Theme.Default then
 					Slider.Main.Shadow.Visible = false
 				end
 
@@ -3523,9 +3523,9 @@ function ThaytuberVN HubLibrary:CreateWindow(Settings)
 	function Window.ModifyTheme(NewTheme)
 		local success = pcall(ChangeTheme, NewTheme)
 		if not success then
-			ThaytuberVN HubLibrary:Notify({Title = 'Unable to Change Theme', Content = 'We are unable find a theme on file.', Image = 4400704299})
+			ThaytuberVN_Hub:Notify({Title = 'Unable to Change Theme', Content = 'We are unable find a theme on file.', Image = 4400704299})
 		else
-			ThaytuberVN HubLibrary:Notify({Title = 'Theme Changed', Content = 'Successfully changed theme to '..(typeof(NewTheme) == 'string' and NewTheme or 'Custom Theme')..'.', Image = 4483362748})
+			ThaytuberVN_Hub:Notify({Title = 'Theme Changed', Content = 'Successfully changed theme to '..(typeof(NewTheme) == 'string' and NewTheme or 'Custom Theme')..'.', Image = 4483362748})
 		end
 	end
 
@@ -3549,16 +3549,16 @@ local function setVisibility(visibility: boolean, notify: boolean?)
 	end
 end
 
-function ThaytuberVN HubLibrary:SetVisibility(visibility: boolean)
+function ThaytuberVN_Hub:SetVisibility(visibility: boolean)
 	setVisibility(visibility, false)
 end
 
-function ThaytuberVN HubLibrary:IsVisible(): boolean
+function ThaytuberVN_Hub:IsVisible(): boolean
 	return not Hidden
 end
 
 local hideHotkeyConnection -- Has to be initialized here since the connection is made later in the script
-function ThaytuberVN HubLibrary:Destroy()
+function ThaytuberVN_Hub:Destroy()
 	thaytubervn hubDestroyed = true
 	hideHotkeyConnection:Disconnect()
 	ThaytuberVN_Hub:Destroy()
@@ -3691,7 +3691,7 @@ for _, TopbarButton in ipairs(Topbar:GetChildren()) do
 end
 
 
-function ThaytuberVN HubLibrary:LoadConfiguration()
+function ThaytuberVN_Hub:LoadConfiguration()
 	local config
 
 	if debugX then
@@ -3718,15 +3718,15 @@ function ThaytuberVN HubLibrary:LoadConfiguration()
 				end
 			else
 				notified = true
-				ThaytuberVN HubLibrary:Notify({Title = "ThaytuberVN_Hub Configurations", Content = "We couldn't enable Configuration Saving as you are not using software with filesystem support.", Image = 4384402990})
+				ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Configurations", Content = "We couldn't enable Configuration Saving as you are not using software with filesystem support.", Image = 4384402990})
 			end
 		end)
 
 		if success and loaded and not notified then
-			ThaytuberVN HubLibrary:Notify({Title = "ThaytuberVN_Hub Configurations", Content = "The configuration file for this script has been loaded from a previous session.", Image = 4384403532})
+			ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Configurations", Content = "The configuration file for this script has been loaded from a previous session.", Image = 4384403532})
 		elseif not success and not notified then
 			warn('ThaytuberVN_Hub Configurations Error | '..tostring(result))
-			ThaytuberVN HubLibrary:Notify({Title = "ThaytuberVN_Hub Configurations", Content = "We've encountered an issue loading your configuration correctly.\n\nCheck the Developer Console for more information.", Image = 4384402990})
+			ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Configurations", Content = "We've encountered an issue loading your configuration correctly.\n\nCheck the Developer Console for more information.", Image = 4384402990})
 		end
 	end
 
@@ -3740,7 +3740,7 @@ if useStudio then
 	-- Feel free to place your own script here to see how it'd work in Roblox Studio before running it on your execution software.
 
 
-	local Window = ThaytuberVN HubLibrary:CreateWindow({
+	local Window = ThaytuberVN_Hub:CreateWindow({
 		Name = "ThaytuberVN_Hub Example Window",
 		LoadingTitle = "ThaytuberVN_Hub Interface Suite",
 		Theme = 'Default',
@@ -3810,7 +3810,7 @@ if useStudio then
 	})
 
 
-	--ThaytuberVN HubLibrary:Notify({Title = "ThaytuberVN_Hub Interface", Content = "Welcome to ThaytuberVN_Hub. These - are the brand new notification design for ThaytuberVN_Hub, with custom sizing and ThaytuberVN_Hub calculated wait times.", Image = 4483362458})
+	--ThaytuberVN_Hub:Notify({Title = "ThaytuberVN_Hub Interface", Content = "Welcome to ThaytuberVN_Hub. These - are the brand new notification design for ThaytuberVN_Hub, with custom sizing and ThaytuberVN_Hub calculated wait times.", Image = 4483362458})
 
 	local Section = Tab:CreateSection("Section Example")
 
@@ -3868,7 +3868,7 @@ if useStudio then
 	})
 
 	local thoptions = {}
-	for themename, theme in pairs(ThaytuberVN HubLibrary.Theme) do
+	for themename, theme in pairs(ThaytuberVN_Hub.Theme) do
 		table.insert(thoptions, themename)
 	end
 
@@ -3962,7 +3962,7 @@ end
 -- end
 
 task.delay(4, function()
-	ThaytuberVN HubLibrary.LoadConfiguration()
+	ThaytuberVN_Hub.LoadConfiguration()
 	if Main:FindFirstChild('Notice') and Main.Notice.Visible then
 		TweenService:Create(Main.Notice, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 100, 0, 25), Position = UDim2.new(0.5, 0, 0, -100), BackgroundTransparency = 1}):Play()
 		TweenService:Create(Main.Notice.Title, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
