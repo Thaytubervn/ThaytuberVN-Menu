@@ -716,13 +716,14 @@ local Main = Rayfield.Main
 -- === [ RGB BORDER EFFECT - BẮT ĐẦU ] ===
 local RGBBorder = Instance.new("Frame")
 RGBBorder.Name = "RGBBorder"
-RGBBorder.ZIndex = 0
 RGBBorder.AnchorPoint = Vector2.new(0.5, 0.5)
 RGBBorder.Position = UDim2.new(0.5, 0, 0.5, 0)
-RGBBorder.Size = UDim2.new(0, Main.Size.X.Offset + 8, 0, Main.Size.Y.Offset + 8)
+RGBBorder.Size = UDim2.new(1, 8, 1, 8)
 RGBBorder.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 RGBBorder.BorderSizePixel = 0
-RGBBorder.Parent = Rayfield
+RGBBorder.ZIndex = 0
+RGBBorder.Visible = false
+RGBBorder.Parent = Main.Parent
 
 Main.ZIndex = 1
 
@@ -731,12 +732,14 @@ task.spawn(function()
 	local hue = 0
 	while true do
 		hue = (hue + 1) % 360
-		local color = Color3.fromHSV(hue/360, 1, 1)
-		RGBBorder.BackgroundColor3 = color
+		RGBBorder.BackgroundColor3 = Color3.fromHSV(hue/360, 1, 1)
 		task.wait(0.03)
 	end
 end)
 -- === [ RGB BORDER EFFECT - KẾT THÚC ] ===
+
+
+
 
 local MPrompt = Rayfield:FindFirstChild('Prompt')
 local Topbar = Main.Topbar
@@ -1336,7 +1339,10 @@ end
 
 local function Unhide()
 	Debounce = true
-	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Main.Position =
+	RGBBorder.Visible = true
+	RGBBorder.Size = UDim2.new(0, 0, 0, 0)
+	TweenService:Create(RGBBorder, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, 8, 1, 8)}):Play() UDim2.new(0.5, 0, 0.5, 0)
 	Main.Visible = true
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)}):Play()
 	TweenService:Create(Main.Topbar, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = UDim2.new(0, 500, 0, 45)}):Play()
