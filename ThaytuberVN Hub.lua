@@ -1,3 +1,33 @@
+
+-- LANGUAGE LOCALIZATION SUPPORT
+local Localization = {
+    ["en"] = {
+        Tabs = {
+            Settings = "Settings",
+            Player = "Player"
+        },
+        Elements = {
+            ExampleButton = "Example Button",
+            ToggleUI = "Toggle UI"
+        }
+    },
+    ["vi"] = {
+        Tabs = {
+            Settings = "Cài đặt",
+            Player = "Người chơi"
+        },
+        Elements = {
+            ExampleButton = "Nút ví dụ",
+            ToggleUI = "Chuyển đổi giao diện"
+        }
+    }
+}
+local currentLanguage = "en"
+local function GetLocalizedText(section, key)
+    return Localization[currentLanguage] and Localization[currentLanguage][section] and Localization[currentLanguage][section][key] or key
+end
+
+
 --[[
 
 	Rayfield Interface Suite
@@ -712,35 +742,6 @@ end
 -- Object Variables
 
 local Main = Rayfield.Main
-
--- === [ RGB BORDER EFFECT - BẮT ĐẦU ] ===
-local RGBBorder = Instance.new("Frame")
-RGBBorder.Name = "RGBBorder"
-RGBBorder.AnchorPoint = Vector2.new(0.5, 0.5)
-RGBBorder.Position = UDim2.new(0.5, 0, 0.5, 0)
-RGBBorder.Size = UDim2.new(1, 8, 1, 8)
-RGBBorder.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-RGBBorder.BorderSizePixel = 0
-RGBBorder.ZIndex = 0
-RGBBorder.Visible = false
-RGBBorder.Parent = Main.Parent
-
-Main.ZIndex = 1
-
-local RunService = game:GetService("RunService")
-task.spawn(function()
-	local hue = 0
-	while true do
-		hue = (hue + 1) % 360
-		RGBBorder.BackgroundColor3 = Color3.fromHSV(hue/360, 1, 1)
-		task.wait(0.03)
-	end
-end)
--- === [ RGB BORDER EFFECT - KẾT THÚC ] ===
-
-
-
-
 local MPrompt = Rayfield:FindFirstChild('Prompt')
 local Topbar = Main.Topbar
 local Elements = Main.Elements
@@ -1339,10 +1340,7 @@ end
 
 local function Unhide()
 	Debounce = true
-	Main.Position =
-	RGBBorder.Visible = true
-	RGBBorder.Size = UDim2.new(0, 0, 0, 0)
-	TweenService:Create(RGBBorder, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, 8, 1, 8)}):Play() UDim2.new(0.5, 0, 0.5, 0)
+	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Main.Visible = true
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)}):Play()
 	TweenService:Create(Main.Topbar, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = UDim2.new(0, 500, 0, 45)}):Play()
