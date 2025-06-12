@@ -1934,22 +1934,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	Notifications.Visible = true
 	Rayfield.Enabled = true
 
-	-- 🌈 Luôn bật hiệu ứng Rainbow cho tất cả UIStroke
-	task.spawn(function()
-		local hue = 0
-		while true do
-			hue = (hue + 0.005) % 1
-			local color = Color3.fromHSV(hue, 1, 1)
-			for _, stroke in ipairs(Rayfield:GetDescendants()) do
-				if stroke:IsA("UIStroke") then
-					stroke.Color = color
-				end
-			end
-			task.wait(0.01)
-		end
-	end)
-
-
 	task.wait(0.5)
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
@@ -1966,6 +1950,22 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	Elements.UIPageLayout.FillDirection = Enum.FillDirection.Horizontal
 	TabList.Template.Visible = false
+
+		-- 🌈 Luôn bật hiệu ứng Rainbow cho tất cả UIStroke
+	task.spawn(function()
+		local hue = 0
+		while true do
+			hue = (hue + 0.005) % 1
+			local color = Color3.fromHSV(hue, 1, 1)
+			for _, stroke in ipairs(Rayfield:GetDescendants()) do
+				if stroke:IsA("UIStroke") then
+					stroke.Color = color
+				end
+			end
+			task.wait(0.01)
+		end
+	end)
+
 
 	-- Tab
 	local FirstTab = false
