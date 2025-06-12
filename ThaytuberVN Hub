@@ -501,3 +501,4 @@ function Library.Elements:CreateDropdown(Name, Flag, Options, CurrentOption, Cal
     if Flag then Library.Flags[Flag] = function() return Selected end end
 end
 
+return Library
