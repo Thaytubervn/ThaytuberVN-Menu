@@ -654,8 +654,6 @@ local warned
 local globalLoaded
 local rayfieldDestroyed = false -- True when RayfieldLibrary:Destroy() is called
 
-Rayfield.Enabled = false
-
 
 if gethui then
 	Rayfield.Parent = gethui()
