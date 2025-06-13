@@ -639,7 +639,7 @@ local CoreGui = getService("CoreGui")
 
 -- Interface Management
 
-local Rayfield = useStudio and game:GetObjects("rbxassetid://72096112243409")[1]
+local Rayfield = useStudio and game:GetObjects("rbxassetid://72096112243409")[1] or game:GetObjects("rbxassetid://72096112243409")[1]
 local buildAttempts = 0
 local correctBuild = true
 local warned
