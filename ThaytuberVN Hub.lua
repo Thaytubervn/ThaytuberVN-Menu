@@ -3350,9 +3350,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Slider.Main.Progress.Size =	UDim2.new(0, Slider.Main.AbsoluteSize.X * ((SliderSettings.CurrentValue + SliderSettings.Range[1]) / (SliderSettings.Range[2] - SliderSettings.Range[1])) > 5 and Slider.Main.AbsoluteSize.X * (SliderSettings.CurrentValue / (SliderSettings.Range[2] - SliderSettings.Range[1])) or 5, 1, 0)
 
 			if not SliderSettings.Suffix then
-				Slider.Main.Information.Text = tostring(SliderSettings.CurrentValue)
+				Slider.Information.Text = tostring(SliderSettings.CurrentValue)
 			else
-				Slider.Main.Information.Text = tostring(SliderSettings.CurrentValue) .. " " .. SliderSettings.Suffix
+				Slider.Information.Text = tostring(SliderSettings.CurrentValue) .. " " .. SliderSettings.Suffix
 			end
 
 			Slider.MouseEnter:Connect(function()
@@ -3412,9 +3412,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 						NewValue = math.clamp(NewValue, SliderSettings.Range[1], SliderSettings.Range[2])
 
 						if not SliderSettings.Suffix then
-							Slider.Main.Information.Text = tostring(NewValue)
+							Slider.Information.Text = tostring(NewValue)
 						else
-							Slider.Main.Information.Text = tostring(NewValue) .. " " .. SliderSettings.Suffix
+							Slider.Information.Text = tostring(NewValue) .. " " .. SliderSettings.Suffix
 						end
 
 						if SliderSettings.CurrentValue ~= NewValue then
@@ -3449,7 +3449,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				local NewVal = math.clamp(NewVal, SliderSettings.Range[1], SliderSettings.Range[2])
 
 				TweenService:Create(Slider.Main.Progress, TweenInfo.new(0.45, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, Slider.Main.AbsoluteSize.X * ((NewVal + SliderSettings.Range[1]) / (SliderSettings.Range[2] - SliderSettings.Range[1])) > 5 and Slider.Main.AbsoluteSize.X * (NewVal / (SliderSettings.Range[2] - SliderSettings.Range[1])) or 5, 1, 0)}):Play()
-				Slider.Main.Information.Text = tostring(NewVal) .. " " .. (SliderSettings.Suffix or "")
+				Slider.Information.Text = tostring(NewVal) .. " " .. (SliderSettings.Suffix or "")
 
 				local Success, Response = pcall(function()
 					SliderSettings.Callback(NewVal)
