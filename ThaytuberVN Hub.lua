@@ -679,9 +679,9 @@ local CoreGui = getService("CoreGui")
 
 local Rayfield
 if useStudio then
-	Rayfield = game:GetObjects("rbxassetid://89542067078419")[1]
+	Rayfield = game:GetObjects("rbxassetid://118701254374809")[1]
 else
-	Rayfield = game:GetObjects("rbxassetid://89542067078419")[1]
+	Rayfield = game:GetObjects("rbxassetid://118701254374809")[1]
 end
 
 local buildAttempts = 0
