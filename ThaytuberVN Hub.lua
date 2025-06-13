@@ -639,7 +639,15 @@ local CoreGui = getService("CoreGui")
 
 -- Interface Management
 
-local Rayfield = useStudio and game:GetObjects("rbxassetid://72096112243409")[1] or game:GetObjects("rbxassetid://72096112243409")[1]
+-- Interface Management
+
+local Rayfield
+if useStudio then
+	Rayfield = game:GetObjects("rbxassetid://72096112243409")[1]
+else
+	Rayfield = game:GetObjects("rbxassetid://72096112243409")[1]
+end
+
 local buildAttempts = 0
 local correctBuild = true
 local warned
@@ -647,6 +655,7 @@ local globalLoaded
 local rayfieldDestroyed = false -- True when RayfieldLibrary:Destroy() is called
 
 Rayfield.Enabled = false
+
 
 if gethui then
 	Rayfield.Parent = gethui()
