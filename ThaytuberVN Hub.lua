@@ -116,7 +116,6 @@ local useStudio = RunService:IsStudio() or false
 local settingsCreated = false
 local settingsInitialized = false -- Whether the UI elements in the settings page have been set to the proper values
 local cachedSettings
---local prompt = useStudio and require(script.Parent.prompt) or loadWithTimeout('https://raw.githubusercontent.com/SiriusSoftwareLtd/Sirius/refs/heads/request/prompt.lua')
 local request = (syn and syn.request) or (fluxus and fluxus.request) or (http and http.request) or http_request or request
 
 
@@ -640,7 +639,7 @@ local CoreGui = getService("CoreGui")
 
 -- Interface Management
 
-local Rayfield = game:GetObjects("rbxassetid://72096112243409")[1]
+local Rayfield = useStudio and game:GetObjects("rbxassetid://72096112243409")[1]
 local buildAttempts = 0
 local correctBuild = false
 local warned
@@ -661,7 +660,7 @@ repeat
 		warned = true
 	end
 
-	toDestroy, Rayfield = Rayfield, game:GetObjects("rbxassetid://72096112243409")[1]
+	toDestroy, Rayfield = Rayfield, useStudio and game:GetObjects("rbxassetid://72096112243409")[1]
 	if toDestroy and not useStudio then toDestroy:Destroy() end
 
 	buildAttempts = buildAttempts + 1
