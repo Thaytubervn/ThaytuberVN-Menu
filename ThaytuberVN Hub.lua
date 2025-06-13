@@ -647,12 +647,7 @@ local globalLoaded
 local rayfieldDestroyed = false -- True when RayfieldLibrary:Destroy() is called
 
 repeat
-	if Rayfield:FindFirstChild('Build') and Rayfield.Build.Value == InterfaceBuild then
-		correctBuild = true
-		break
-	end
-
-	correctBuild = false
+	correctBuild = true
 
 	if not warned then
 		warn('Rayfield | Build Mismatch')
