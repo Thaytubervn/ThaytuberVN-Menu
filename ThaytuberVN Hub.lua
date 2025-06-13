@@ -1,16 +1,12 @@
 --[[
 
-	Rayfield Interface Suite
-	by Sirius
-
-	shlex | Designing + Programming
-	iRay  | Programming
-	Max   | Programming
+	ThaytuberVN Hub Interface Suite
+	by ThaytuberVN
 
 ]]
 
 if debugX then
-	warn('Initialising Rayfield')
+	warn('Initialising ThaytuberVN Hub')
 end
 
 local function getService(name)
@@ -71,7 +67,7 @@ end
 local requestsDisabled = true --getgenv and getgenv().DISABLE_RAYFIELD_REQUESTS
 local InterfaceBuild = '3K3W'
 local Release = "Build 1.672"
-local RayfieldFolder = "Rayfield"
+local RayfieldFolder = "ThaytuberVN Hub"
 local ConfigurationFolder = RayfieldFolder.."/Configurations"
 local ConfigurationExtension = ".rfld"
 local settingsTable = {
@@ -174,7 +170,7 @@ local function loadSettings()
 	
 	if not success then 
 		if writefile then
-			warn('Rayfield had an issue accessing configuration saving capability.')
+			warn('ThaytuberVN Hub had an issue accessing configuration saving capability.')
 		end
 	end
 end
@@ -224,14 +220,14 @@ if not requestsDisabled then
 			if debugX then warn('Reporting Analytics') end
 			task.spawn(function()
 				local success, reporter = pcall(function()
-					return loadstring(game:HttpGet("https://analytics.sirius.menu/v1/reporter", true))()
+					return loadstring(game:HttpGet("", true))()
 				end)
 				if success and reporter then
 					pcall(function()
 						reporter.report("Rayfield", Release, InterfaceBuild)
 					end)
 				else
-					warn("Failed to load or execute the reporter. \nPlease notify Rayfield developers at sirius.menu/discord.")
+					warn("Failed to load or execute the reporter. \nPlease notify ThaytuberVN Hub developers.")
 				end
 			end)
 			if debugX then warn('Finished Report') end
@@ -643,9 +639,9 @@ local CoreGui = getService("CoreGui")
 
 local Rayfield
 if useStudio then
-	Rayfield = game:GetObjects("rbxassetid://72096112243409")[1]
+	Rayfield = game:GetObjects("rbxassetid://128035482814845")[1]
 else
-	Rayfield = game:GetObjects("rbxassetid://72096112243409")[1]
+	Rayfield = game:GetObjects("rbxassetid://128035482814845")[1]
 end
 
 local buildAttempts = 0
@@ -670,14 +666,14 @@ if gethui then
 	for _, Interface in ipairs(gethui():GetChildren()) do
 		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
 			Interface.Enabled = false
-			Interface.Name = "Rayfield-Old"
+			Interface.Name = "ThaytuberVN Hub-Old"
 		end
 	end
 elseif not useStudio then
 	for _, Interface in ipairs(CoreGui:GetChildren()) do
 		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
 			Interface.Enabled = false
-			Interface.Name = "Rayfield-Old"
+			Interface.Name = "ThaytuberVN Hub-Old"
 		end
 	end
 end
@@ -1549,13 +1545,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	if getgenv then getgenv().rayfieldCached = true end
 
-	if not correctBuild and not Settings.DisableBuildWarnings then
-		task.delay(3, 
-			function() 
-				RayfieldLibrary:Notify({Title = 'Build Mismatch', Content = 'Rayfield may encounter issues as you are running an incompatible interface version ('.. ((Rayfield:FindFirstChild('Build') and Rayfield.Build.Value) or 'No Build') ..').\n\nThis version of Rayfield is intended for interface build '..InterfaceBuild..'.\n\nTry rejoining and then run the script twice.', Image = 4335487866, Duration = 15})		
-			end)
-	end
-
 	if Settings.ToggleUIKeybind then -- Can either be a string or an Enum.KeyCode
 		local keybind = Settings.ToggleUIKeybind
 		if type(keybind) == "string" then
@@ -1579,7 +1568,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	local Passthrough = false
 	Topbar.Title.Text = Settings.Name
 
-	Main.Size = UDim2.new(0, 420, 0, 100)
 	Main.Visible = true
 	Main.BackgroundTransparency = 1
 	if Main:FindFirstChild('Notice') then Main.Notice.Visible = false end
@@ -1589,11 +1577,11 @@ function RayfieldLibrary:CreateWindow(Settings)
 	LoadingFrame.Subtitle.TextTransparency = 1
 
 	LoadingFrame.Version.TextTransparency = 1
-	LoadingFrame.Title.Text = Settings.LoadingTitle or "Rayfield"
+	LoadingFrame.Title.Text = Settings.LoadingTitle or "ThaytuberVN Hub"
 	LoadingFrame.Subtitle.Text = Settings.LoadingSubtitle or "Interface Suite"
 
-	if Settings.LoadingTitle ~= "Rayfield Interface Suite" then
-		LoadingFrame.Version.Text = "Rayfield UI"
+	if Settings.LoadingTitle ~= "ThaytuberVN Hub Interface Suite" then
+		LoadingFrame.Version.Text = "ThaytuberVN Hub UI"
 	end
 
 	if Settings.Icon and Settings.Icon ~= 0 and Topbar:FindFirstChild('Icon') then
@@ -1643,8 +1631,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 			while true do
 				task.wait(math.random(180, 600))
 				RayfieldLibrary:Notify({
-					Title = "Rayfield Interface",
-					Content = "Enjoying this UI library? Find it at sirius.menu/discord",
+					Title = "ThaytuberVN Hub Interface",
+					Content = "Enjoying this UI library?",
 					Duration = 7,
 					Image = 4370033185,
 				})
@@ -3314,9 +3302,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Slider.Main.Progress.Size =	UDim2.new(0, Slider.Main.AbsoluteSize.X * ((SliderSettings.CurrentValue + SliderSettings.Range[1]) / (SliderSettings.Range[2] - SliderSettings.Range[1])) > 5 and Slider.Main.AbsoluteSize.X * (SliderSettings.CurrentValue / (SliderSettings.Range[2] - SliderSettings.Range[1])) or 5, 1, 0)
 
 			if not SliderSettings.Suffix then
-				Slider.Main.Information.Text = tostring(SliderSettings.CurrentValue)
+				Slider.Information.Text = tostring(SliderSettings.CurrentValue)
 			else
-				Slider.Main.Information.Text = tostring(SliderSettings.CurrentValue) .. " " .. SliderSettings.Suffix
+				Slider.Information.Text = tostring(SliderSettings.CurrentValue) .. " " .. SliderSettings.Suffix
 			end
 
 			Slider.MouseEnter:Connect(function()
@@ -3413,7 +3401,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				local NewVal = math.clamp(NewVal, SliderSettings.Range[1], SliderSettings.Range[2])
 
 				TweenService:Create(Slider.Main.Progress, TweenInfo.new(0.45, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, Slider.Main.AbsoluteSize.X * ((NewVal + SliderSettings.Range[1]) / (SliderSettings.Range[2] - SliderSettings.Range[1])) > 5 and Slider.Main.AbsoluteSize.X * (NewVal / (SliderSettings.Range[2] - SliderSettings.Range[1])) or 5, 1, 0)}):Play()
-				Slider.Main.Information.Text = tostring(NewVal) .. " " .. (SliderSettings.Suffix or "")
+				Slider.Information.Text = tostring(NewVal) .. " " .. (SliderSettings.Suffix or "")
 
 				local Success, Response = pcall(function()
 					SliderSettings.Callback(NewVal)
@@ -3721,15 +3709,15 @@ function RayfieldLibrary:LoadConfiguration()
 				end
 			else
 				notified = true
-				RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "We couldn't enable Configuration Saving as you are not using software with filesystem support.", Image = 4384402990})
+				RayfieldLibrary:Notify({Title = "ThaytuberVN Hub Configurations", Content = "We couldn't enable Configuration Saving as you are not using software with filesystem support.", Image = 4384402990})
 			end
 		end)
 
 		if success and loaded and not notified then
-			RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "The configuration file for this script has been loaded from a previous session.", Image = 4384403532})
+			RayfieldLibrary:Notify({Title = "ThaytuberVN Hub Configurations", Content = "The configuration file for this script has been loaded from a previous session.", Image = 4384403532})
 		elseif not success and not notified then
 			warn('Rayfield Configurations Error | '..tostring(result))
-			RayfieldLibrary:Notify({Title = "Rayfield Configurations", Content = "We've encountered an issue loading your configuration correctly.\n\nCheck the Developer Console for more information.", Image = 4384402990})
+			RayfieldLibrary:Notify({Title = "ThaytuberVN Hub Configurations", Content = "We've encountered an issue loading your configuration correctly.\n\nCheck the Developer Console for more information.", Image = 4384402990})
 		end
 	end
 
@@ -3744,8 +3732,8 @@ if useStudio then
 
 
 	local Window = RayfieldLibrary:CreateWindow({
-		Name = "Rayfield Example Window",
-		LoadingTitle = "Rayfield Interface Suite",
+		Name = "ThaytuberVN Hub Example Window",
+		LoadingTitle = "ThaytuberVN Hub Interface Suite",
 		Theme = 'Default',
 		Icon = 0,
 		LoadingSubtitle = "by Sirius",
