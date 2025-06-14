@@ -1572,16 +1572,32 @@ end
 
 
 
-function RayfieldLibrary:CreateWindow(Settings)
-	if Rayfield:FindFirstChild('Loading') then
-		if getgenv and not getgenv().rayfieldCached then
-			Rayfield.Enabled = true
-			Rayfield.Loading.Visible = true
+	function RayfieldLibrary:CreateWindow(Settings)
+		if Rayfield:FindFirstChild('Loading') then
+			if getgenv and not getgenv().rayfieldCached then
+				Rayfield.Enabled = true
 
-			task.wait(1.4)
-			Rayfield.Loading.Visible = false
+				-- Ẩn mọi thứ trừ loading
+				for _, child in ipairs(Rayfield:GetChildren()) do
+					if child:IsA("Frame") and child.Name ~= "Loading" then
+						child.Visible = false
+					end
+				end
+
+				Rayfield.Loading.Visible = true
+				task.wait(1.4)
+
+				-- Ẩn loading, hiện lại phần khác
+				Rayfield.Loading.Visible = false
+				for _, child in ipairs(Rayfield:GetChildren()) do
+					if child:IsA("Frame") and child.Name ~= "Loading" then
+						child.Visible = true
+					end
+				end
+			end
 		end
 	end
+
 
 	if getgenv then getgenv().rayfieldCached = true end
 
@@ -1970,6 +1986,18 @@ function RayfieldLibrary:CreateWindow(Settings)
 			task.wait(0.01)
 		end
 	end)
+
+	Elements.Visible = false
+	task.wait(0.5)
+	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
+	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
+	task.wait(0.1)
+	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+	task.wait(0.05)
+	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+	task.wait(0.05)
+	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+
 
 	Elements.Template.LayoutOrder = 100000
 	Elements.Template.Visible = false
@@ -3499,6 +3527,18 @@ function RayfieldLibrary:CreateWindow(Settings)
 	end
 
 	Elements.Visible = true
+
+
+	task.wait(1.1)
+	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 390, 0, 90)}):Play()
+	task.wait(0.3)
+	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	task.wait(0.1)
+	Elements.Visible = true
+	TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)}):Play()
+	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
 
 	Topbar.BackgroundTransparency = 1
 	Topbar.Divider.Size = UDim2.new(0, 0, 0, 1)
