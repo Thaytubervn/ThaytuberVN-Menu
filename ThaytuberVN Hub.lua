@@ -1993,6 +1993,16 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end
 			task.wait(0.01)
 		end
+		while true do
+			hue = (hue + 0.005) % 1
+			local color = Color3.fromHSV(hue, 1, 1)
+			for _, stroke in ipairs(customLoadingGui:GetDescendants()) do
+				if stroke:IsA("UIStroke") then
+					stroke.Color = color
+				end
+			end
+			task.wait(0.01)
+		end
 	end)
 	task.wait(0.6)
 
