@@ -1970,7 +1970,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 			task.wait(0.01)
 		end
 	end)
-
+	Main.BackgroundTransparency = 1
+	Main.Shadow.Image.ImageTransparency = 1
 	-- Giữ hiệu ứng loading chữ
 	task.wait(0.1)
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
@@ -3513,15 +3514,15 @@ function RayfieldLibrary:CreateWindow(Settings)
 	task.wait(1.1)
 
 	-- Bỏ tween mở rộng Main, chỉ đặt size trực tiếp
-	Main.Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
-	Main.Shadow.Image.ImageTransparency = 0.6
-
 		-- Làm mờ chữ trong loading như cũ
 	task.wait(0.3)
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
-
+	Main.Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
+	Main.Shadow.Image.ImageTransparency = 0.6
+	Main.BackgroundTransparency = 0
+	Main.Shadow.Image.ImageTransparency = 0.6
 	task.wait(0.1)
 	Elements.Visible = true
 
