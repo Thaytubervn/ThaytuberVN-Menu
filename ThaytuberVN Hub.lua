@@ -761,6 +761,7 @@ if LoadingFrame and LoadingFrame:FindFirstChild("Version") then
 	LoadingFrame.Version.Text = Release
 end
 
+LoadingFrame.Visible = false -- ✅
 
 local dragOffset = 255
 local dragOffsetMobile = 150
@@ -1994,7 +1995,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	task.wait(0.6)
 
 	-- Hiện LoadingFrame
-	LoadingFrame.Enabled = true
+	LoadingFrame.Visible = true -- ✅
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 	task.wait(0.1)
 	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
@@ -3543,7 +3544,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	task.wait(0.1)
 
 	-- 🚫 Tắt loading, hiện lại nội dung chính
-	LoadingFrame.Enabled = false
+	LoadingFrame.Visible = false -- ✅
 	Elements.Visible = true
 
 	-- 🔼 Phóng lớn Main trở lại
