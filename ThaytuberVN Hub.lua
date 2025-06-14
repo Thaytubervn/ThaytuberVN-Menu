@@ -3555,11 +3555,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		ImageTransparency = 0.6
 	}):Play()
 
-	-- Ẩn UIStroke ngay khi loading bắt đầu
-	if Main:FindFirstChild("UIStroke") then
-		Main.UIStroke.Enabled = false
-	end
-
 	task.wait(0.3)
 
 	-- 🔁 Làm mờ từng phần của loading frame
