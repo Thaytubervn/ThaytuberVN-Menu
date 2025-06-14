@@ -738,11 +738,26 @@ local MPrompt = Rayfield:FindFirstChild('Prompt')
 local Topbar = Main.Topbar
 Topbar.Title.Text = "Thaytuber"
 local Elements = Main.Elements
-local LoadingFrame = Main.LoadingFrame
 local TabList = Main.TabList
 local dragBar = Rayfield:FindFirstChild('Drag')
 local dragInteract = dragBar and dragBar.Interact or nil
 local dragBarCosmetic = dragBar and dragBar.Drag or nil
+
+
+local customLoading = game:GetObjects("rbxassetid://106237473887784")[1]
+local LoadingFrame = customLoading
+
+-- Đưa LoadingFrame vào GUI đúng cách
+if gethui then
+    LoadingFrame.Parent = gethui()
+elseif syn and syn.protect_gui then 
+    syn.protect_gui(LoadingFrame)
+    LoadingFrame.Parent = CoreGui
+elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
+    LoadingFrame.Parent = CoreGui:FindFirstChild("RobloxGui")
+elseif not useStudio then
+    LoadingFrame.Parent = CoreGui
+end
 
 local dragOffset = 255
 local dragOffsetMobile = 150
@@ -1572,32 +1587,16 @@ end
 
 
 
-	function RayfieldLibrary:CreateWindow(Settings)
-		if Rayfield:FindFirstChild('Loading') then
-			if getgenv and not getgenv().rayfieldCached then
-				Rayfield.Enabled = true
+function RayfieldLibrary:CreateWindow(Settings)
+	if Rayfield:FindFirstChild('Loading') then
+		if getgenv and not getgenv().rayfieldCached then
+			Rayfield.Enabled = true
+			Rayfield.Loading.Visible = true
 
-				-- Ẩn mọi thứ trừ loading
-				for _, child in ipairs(Rayfield:GetChildren()) do
-					if child:IsA("Frame") and child.Name ~= "Loading" then
-						child.Visible = false
-					end
-				end
-
-				Rayfield.Loading.Visible = true
-				task.wait(1.4)
-
-				-- Ẩn loading, hiện lại phần khác
-				Rayfield.Loading.Visible = false
-				for _, child in ipairs(Rayfield:GetChildren()) do
-					if child:IsA("Frame") and child.Name ~= "Loading" then
-						child.Visible = true
-					end
-				end
-			end
+			task.wait(1.4)
+			Rayfield.Loading.Visible = false
 		end
 	end
-
 
 	if getgenv then getgenv().rayfieldCached = true end
 
@@ -1986,17 +1985,18 @@ end
 			task.wait(0.01)
 		end
 	end)
-
-	Elements.Visible = false
-	task.wait(0.5)
+	-- Làm mờ nền và bóng
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
+	task.wait(0.6)
+
+	-- Hiện LoadingFrame
+	LoadingFrame.Enabled = true
+	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 	task.wait(0.1)
-	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
-	task.wait(0.05)
-	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
-	task.wait(0.05)
-	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+	task.wait(0.1)
+	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 
 
 	Elements.Template.LayoutOrder = 100000
@@ -3526,19 +3526,33 @@ end
 		return Tab
 	end
 
-	Elements.Visible = true
-
-
+	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
+
+	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 390, 0, 90)}):Play()
 	task.wait(0.3)
+
+	-- 🔁 Ẩn dần chữ trong loading
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 	task.wait(0.1)
+
+	-- 🚫 Tắt loading, hiện lại nội dung chính
+	LoadingFrame.Enabled = false
 	Elements.Visible = true
-	TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)}):Play()
-	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
+
+	-- 🔼 Phóng lớn Main trở lại
+	TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+		Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
+	}):Play()
+
+	-- 💡 Hiện bóng đổ
+	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {
+		ImageTransparency = 0.6
+	}):Play()
+
 
 	Topbar.BackgroundTransparency = 1
 	Topbar.Divider.Size = UDim2.new(0, 0, 0, 1)
