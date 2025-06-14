@@ -746,6 +746,7 @@ local dragBarCosmetic = dragBar and dragBar.Drag or nil
 local customLoadingGui = game:GetObjects("rbxassetid://106237473887784")[1]
 local LoadingFrame = customLoadingGui:FindFirstChild("LoadingFrame")
 
+-- Gắn GUI vào CoreGui/gethui
 if gethui then
 	customLoadingGui.Parent = gethui()
 elseif syn and syn.protect_gui then 
@@ -757,11 +758,15 @@ else
 	customLoadingGui.Parent = CoreGui
 end
 
+-- Gán text Version
 if LoadingFrame and LoadingFrame:FindFirstChild("Version") then
 	LoadingFrame.Version.Text = Release
 end
 
-LoadingFrame.Visible = false -- ✅
+-- Ẩn hoặc hiện GUI đúng cách
+customLoadingGui.Enabled = false -- để hiển thị
+-- customLoadingGui.Enabled = false -- để ẩn
+
 
 local dragOffset = 255
 local dragOffsetMobile = 150
@@ -1995,7 +2000,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	task.wait(0.6)
 
 	-- Hiện LoadingFrame
-	LoadingFrame.Visible = true -- ✅
+	customLoadingGui.Enabled = true
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 	task.wait(0.1)
 	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
@@ -3544,7 +3549,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	task.wait(0.1)
 
 	-- 🚫 Tắt loading, hiện lại nội dung chính
-	LoadingFrame.Visible = false -- ✅
+	customLoadingGui.Enabled = false
 	Elements.Visible = true
 
 	-- 🔼 Phóng lớn Main trở lại
