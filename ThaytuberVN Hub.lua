@@ -1641,9 +1641,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 	Main.Size = UDim2.new(0, 500, 0, 475)
 	Main.Visible = true
 	Main.BackgroundTransparency = 1
-	Main.UIStroke.Transparency = 1
 	if Main:FindFirstChild('Notice') then Main.Notice.Visible = false end
 	Main.Shadow.Image.ImageTransparency = 1
+	Main.UIStroke.Transparency = 1
 
 	LoadingFrame.Title.TextTransparency = 1
 	LoadingFrame.Subtitle.TextTransparency = 1
@@ -1994,7 +1994,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			task.wait(0.01)
 		end
 	end)
-	-- Làm mờ nền và bóng
 	task.wait(0.6)
 
 	-- Hiện LoadingFrame
@@ -3536,6 +3535,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
+		-- Làm mờ nền và bóng
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
 	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
