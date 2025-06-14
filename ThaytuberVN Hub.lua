@@ -743,21 +743,26 @@ local dragBar = Rayfield:FindFirstChild('Drag')
 local dragInteract = dragBar and dragBar.Interact or nil
 local dragBarCosmetic = dragBar and dragBar.Drag or nil
 
-
 local customLoading = game:GetObjects("rbxassetid://106237473887784")[1]
-local LoadingFrame = customLoading
+local LoadingFrame = customLoading:FindFirstChild("LoadingFrame") -- lấy đúng frame chứa Title, Subtitle, Version
 
--- Đưa LoadingFrame vào GUI đúng cách
+-- Gắn vào GUI phù hợp
 if gethui then
-    LoadingFrame.Parent = gethui()
+	customLoading.Parent = gethui()
 elseif syn and syn.protect_gui then 
-    syn.protect_gui(LoadingFrame)
-    LoadingFrame.Parent = CoreGui
+	syn.protect_gui(customLoading)
+	customLoading.Parent = CoreGui
 elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
-    LoadingFrame.Parent = CoreGui:FindFirstChild("RobloxGui")
-elseif not useStudio then
-    LoadingFrame.Parent = CoreGui
+	customLoading.Parent = CoreGui:FindFirstChild("RobloxGui")
+else
+	customLoading.Parent = CoreGui
 end
+
+-- Gán nội dung nếu có
+if LoadingFrame and LoadingFrame:FindFirstChild("Version") then
+	LoadingFrame.Version.Text = Release
+end
+
 
 local dragOffset = 255
 local dragOffsetMobile = 150
