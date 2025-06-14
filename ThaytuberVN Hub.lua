@@ -3543,41 +3543,23 @@ function RayfieldLibrary:CreateWindow(Settings)
 		return Tab
 	end
 
-
-	-- ⏳ Đợi một chút cho cảm giác loading đầy đủ
+	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
-
-	-- 🔽 Làm mờ nền và bóng Main
-	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {
-		BackgroundTransparency = 0
-	}):Play()
-	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {
-		ImageTransparency = 0.6
-	}):Play()
-
+		-- Làm mờ nền và bóng
+	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
+	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
 	task.wait(0.3)
 
-	-- 🔁 Làm mờ từng phần của loading frame
-	TweenService:Create(LoadingFrame, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {
-		BackgroundTransparency = 1
-	}):Play()
-	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {
-		TextTransparency = 1
-	}):Play()
-	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {
-		TextTransparency = 1
-	}):Play()
-	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {
-		TextTransparency = 1
-	}):Play()
-
+	-- 🔁 Ẩn dần chữ trong loading
+	TweenService:Create(LoadingFrame, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 	task.wait(0.1)
 
-	-- 🚫 Ẩn loading frame và hiện nội dung chính
-	customLoadingGui.LoadingFrame.Visible = false
+	-- 🚫 Tắt loading, hiện lại nội dung chính
+	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
 	Elements.Visible = true
-
-
 
 
 	Topbar.BackgroundTransparency = 1
