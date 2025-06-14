@@ -745,6 +745,7 @@ local dragBarCosmetic = dragBar and dragBar.Drag or nil
 
 local customLoadingGui = game:GetObjects("rbxassetid://106237473887784")[1]
 local LoadingFrame = customLoadingGui:FindFirstChild("LoadingFrame")
+customLoadingGui.Enabled = false
 customLoadingGui.LoadingFrame.Visible = false -- để ẩn
 -- Gắn GUI vào CoreGui/gethui
 if gethui then
@@ -1595,6 +1596,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	if Rayfield:FindFirstChild('Loading') then
 		if getgenv and not getgenv().rayfieldCached then
 			Rayfield.Enabled = true
+			customLoadingGui.Enabled = true
 			customLoadingGui.LoadingFrame.Visible = false -- để ẩn
 			Rayfield.Loading.Visible = true
 
@@ -3536,10 +3538,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
 
-	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
-	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 390, 0, 90)}):Play()
-	task.wait(0.3)
-
 	-- 🔁 Ẩn dần chữ trong loading
 	TweenService:Create(LoadingFrame, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
@@ -3550,11 +3548,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	-- 🚫 Tắt loading, hiện lại nội dung chính
 	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
 	Elements.Visible = true
-
-	-- 🔼 Phóng lớn Main trở lại
-	TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
-		Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
-	}):Play()
 
 	-- 💡 Hiện bóng đổ
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {
