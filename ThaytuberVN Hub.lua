@@ -763,11 +763,6 @@ if LoadingFrame and LoadingFrame:FindFirstChild("Version") then
 	LoadingFrame.Version.Text = Release
 end
 
--- Ẩn hoặc hiện GUI đúng cách
-customLoadingGui.Enabled = false -- để hiển thị
--- customLoadingGui.Enabled = false -- để ẩn
-
-
 local dragOffset = 255
 local dragOffsetMobile = 150
 
@@ -1601,6 +1596,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 		if getgenv and not getgenv().rayfieldCached then
 			Rayfield.Enabled = true
 			Rayfield.Loading.Visible = true
+			customLoadingGui.LoadingFrame.Visible = false -- để ẩn
+
 
 			task.wait(1.4)
 			Rayfield.Loading.Visible = false
@@ -2000,7 +1997,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	task.wait(0.6)
 
 	-- Hiện LoadingFrame
-	customLoadingGui.Enabled = true
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 	task.wait(0.1)
 	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
@@ -3537,6 +3533,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
+
+	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
+	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 390, 0, 90)}):Play()
 	task.wait(0.3)
 
 	-- 🔁 Ẩn dần chữ trong loading
@@ -3546,8 +3545,12 @@ function RayfieldLibrary:CreateWindow(Settings)
 	task.wait(0.1)
 
 	-- 🚫 Tắt loading, hiện lại nội dung chính
-	customLoadingGui.Enabled = false
 	Elements.Visible = true
+
+	-- 🔼 Phóng lớn Main trở lại
+	TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+		Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
+	}):Play()
 
 	-- 💡 Hiện bóng đổ
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {
