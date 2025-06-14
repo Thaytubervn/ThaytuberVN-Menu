@@ -3514,18 +3514,21 @@ function RayfieldLibrary:CreateWindow(Settings)
 -- ĐÃ CHỈNH SỬA: BỎ TWEEN MỞ MAIN, THAY BẰNG SET SIZE TRỰC TIẾP
 
 	-- PHẦN SAU LOADING:
+-- BỎ TWEEN MỞ MAIN
 	task.wait(1.1)
 
-	-- Ẩn chữ của LoadingFrame
+	-- Thiết lập kích thước mặc định trực tiếp
+	Main.Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
+	Main.Shadow.Image.ImageTransparency = 0.6
+
+	-- Ẩn chữ trong LoadingFrame
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 
-	-- MỞ GIAO DIỆN
-
+	-- Hiện nội dung giao diện
+	task.wait(0.1)
 	Elements.Visible = true
-	Main.Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
-	Main.Shadow.Image.ImageTransparency = 0.6
 
 
 	Topbar.BackgroundTransparency = 1
