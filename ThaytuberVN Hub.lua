@@ -1994,8 +1994,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end
 	end)
 	-- Làm mờ nền và bóng
-	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
-	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
 	task.wait(0.6)
 
 	-- Hiện LoadingFrame
