@@ -734,7 +734,6 @@ end
 -- Object Variables
 
 local Main = Rayfield.Main
-if Main:FindFirstChild("UIStroke") then Main.UIStroke.Enabled = false end
 local MPrompt = Rayfield:FindFirstChild('Prompt')
 local Topbar = Main.Topbar
 Topbar.Title.Text = "Thaytuber"
@@ -3543,24 +3542,51 @@ function RayfieldLibrary:CreateWindow(Settings)
 		return Tab
 	end
 
-	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
-	if Main:FindFirstChild("UIStroke") then Main.UIStroke.Enabled = true end
+
+	-- ⏳ Đợi một chút cho cảm giác loading đầy đủ
 	task.wait(1.1)
-		-- Làm mờ nền và bóng
-	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
-	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
+
+	-- 🔽 Làm mờ nền và bóng Main
+	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {
+		BackgroundTransparency = 0
+	}):Play()
+	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {
+		ImageTransparency = 0.6
+	}):Play()
+
+	-- Ẩn UIStroke ngay khi loading bắt đầu
+	if Main:FindFirstChild("UIStroke") then
+		Main.UIStroke.Enabled = false
+	end
+
 	task.wait(0.3)
 
-	-- 🔁 Ẩn dần chữ trong loading
-	TweenService:Create(LoadingFrame, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
-	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
-	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
-	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	-- 🔁 Làm mờ từng phần của loading frame
+	TweenService:Create(LoadingFrame, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {
+		BackgroundTransparency = 1
+	}):Play()
+	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {
+		TextTransparency = 1
+	}):Play()
+	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {
+		TextTransparency = 1
+	}):Play()
+	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {
+		TextTransparency = 1
+	}):Play()
+
 	task.wait(0.1)
 
-	-- 🚫 Tắt loading, hiện lại nội dung chính
-	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
+	-- 🚫 Ẩn loading frame và hiện nội dung chính
+	customLoadingGui.LoadingFrame.Visible = false
 	Elements.Visible = true
+
+	-- ✅ Hiện lại UIStroke sau khi phóng to xong
+	task.delay(0.6, function()
+		if Main:FindFirstChild("UIStroke") then
+			Main.UIStroke.Enabled = true
+		end
+	end)
 
 
 	Topbar.BackgroundTransparency = 1
