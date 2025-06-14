@@ -3544,6 +3544,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	end
 
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
+	if Main:FindFirstChild("UIStroke") then Main.UIStroke.Enabled = true end
 	task.wait(1.1)
 		-- Làm mờ nền và bóng
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
@@ -3559,7 +3560,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	-- 🚫 Tắt loading, hiện lại nội dung chính
 	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
-	if Main:FindFirstChild("UIStroke") then Main.UIStroke.Enabled = true end
 	Elements.Visible = true
 
 
