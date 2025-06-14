@@ -1994,6 +1994,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			task.wait(0.01)
 		end
 	end)
+	Rayfield.Enabled = false
 	-- Làm mờ nền và bóng
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
@@ -3550,6 +3551,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	-- 🚫 Tắt loading, hiện lại nội dung chính
 	customLoadingGui.Enabled = false
+	Rayfield.Enabled = true
 	Elements.Visible = true
 
 	-- 🔼 Phóng lớn Main trở lại
