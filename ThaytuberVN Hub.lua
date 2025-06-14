@@ -3553,10 +3553,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
 	Elements.Visible = true
 
-	-- 🔼 Phóng lớn Main trở lại
-	TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
-		Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
-	}):Play()
 
 	-- 💡 Hiện bóng đổ
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {
