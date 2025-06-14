@@ -1644,7 +1644,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	if Main:FindFirstChild('Notice') then Main.Notice.Visible = false end
 	Main.Shadow.Image.ImageTransparency = 1
 	Main.UIStroke.Transparency = 1
-
 	LoadingFrame.Title.TextTransparency = 1
 	LoadingFrame.Subtitle.TextTransparency = 1
 
@@ -3538,8 +3537,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		-- Làm mờ nền và bóng
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
-	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
-	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 390, 0, 90)}):Play()
 	task.wait(0.3)
 
 	-- 🔁 Ẩn dần chữ trong loading
@@ -3553,6 +3550,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
 	Elements.Visible = true
 
+	-- 🔼 Phóng lớn Main trở lại
+	TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+		Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
+	}):Play()
 
 	-- 💡 Hiện bóng đổ
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {
