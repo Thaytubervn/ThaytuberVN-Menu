@@ -746,6 +746,7 @@ local dragBarCosmetic = dragBar and dragBar.Drag or nil
 local customLoadingGui = game:GetObjects("rbxassetid://106237473887784")[1]
 local LoadingFrame = customLoadingGui:FindFirstChild("LoadingFrame")
 
+-- Gắn GUI vào CoreGui/gethui
 if gethui then
 	customLoadingGui.Parent = gethui()
 elseif syn and syn.protect_gui then 
@@ -757,81 +758,14 @@ else
 	customLoadingGui.Parent = CoreGui
 end
 
+-- Gán text Version
 if LoadingFrame and LoadingFrame:FindFirstChild("Version") then
 	LoadingFrame.Version.Text = Release
 end
 
-LoadingFrame.Visible = false -- ✅
-
-
-
--- Custom Loading GUI setup
-local customLoadingGui = game:GetObjects("rbxassetid://106237473887784")[1]
-local LoadingFrame = customLoadingGui:FindFirstChild("LoadingFrame")
-
-if gethui then
-	customLoadingGui.Parent = gethui()
-elseif syn and syn.protect_gui then 
-	syn.protect_gui(customLoadingGui)
-	customLoadingGui.Parent = CoreGui
-elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
-	customLoadingGui.Parent = CoreGui:FindFirstChild("RobloxGui")
-else
-	customLoadingGui.Parent = CoreGui
-end
-
-if LoadingFrame and LoadingFrame:FindFirstChild("Version") then
-	LoadingFrame.Version.Text = Release
-end
-
-customLoadingGui.Enabled = false
-
--- Show/Hide functions
-function ShowLoading()
-	Rayfield.Enabled = false
-	customLoadingGui.Enabled = true
-
-	if LoadingFrame then
-		LoadingFrame.Visible = true
-
-		local title = LoadingFrame:FindFirstChild("Title")
-		local subtitle = LoadingFrame:FindFirstChild("Subtitle")
-		local version = LoadingFrame:FindFirstChild("Version")
-
-		if title then title.TextTransparency = 1 end
-		if subtitle then subtitle.TextTransparency = 1 end
-		if version then version.TextTransparency = 1 end
-
-		task.wait(0.1)
-		if title then TweenService:Create(title, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play() end
-		task.wait(0.1)
-		if subtitle then TweenService:Create(subtitle, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play() end
-		task.wait(0.1)
-		if version then TweenService:Create(version, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play() end
-	end
-end
-
-function HideLoading()
-	if LoadingFrame then
-		local title = LoadingFrame:FindFirstChild("Title")
-		local subtitle = LoadingFrame:FindFirstChild("Subtitle")
-		local version = LoadingFrame:FindFirstChild("Version")
-
-		if title then TweenService:Create(title, TweenInfo.new(0.3), {TextTransparency = 1}):Play() end
-		if subtitle then TweenService:Create(subtitle, TweenInfo.new(0.3), {TextTransparency = 1}):Play() end
-		if version then TweenService:Create(version, TweenInfo.new(0.3), {TextTransparency = 1}):Play() end
-
-		task.wait(0.3)
-		LoadingFrame.Visible = false
-	end
-
-	customLoadingGui.Enabled = false
-	Rayfield.Enabled = true
-end
-
--- Gọi thử loading
-ShowLoading()
-task.delay(3, HideLoading)
+-- Ẩn hoặc hiện GUI đúng cách
+customLoadingGui.Enabled = false -- để hiển thị
+-- customLoadingGui.Enabled = false -- để ẩn
 
 
 local dragOffset = 255
@@ -2066,7 +2000,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	task.wait(0.6)
 
 	-- Hiện LoadingFrame
-	LoadingFrame.Visible = true -- ✅
+	customLoadingGui.Enabled = true
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 	task.wait(0.1)
 	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
@@ -3603,9 +3537,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
-
-	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
-	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 390, 0, 90)}):Play()
 	task.wait(0.3)
 
 	-- 🔁 Ẩn dần chữ trong loading
@@ -3615,13 +3546,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 	task.wait(0.1)
 
 	-- 🚫 Tắt loading, hiện lại nội dung chính
-	LoadingFrame.Visible = false -- ✅
+	customLoadingGui.Enabled = false
 	Elements.Visible = true
-
-	-- 🔼 Phóng lớn Main trở lại
-	TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
-		Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
-	}):Play()
 
 	-- 💡 Hiện bóng đổ
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {
