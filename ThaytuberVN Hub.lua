@@ -3550,10 +3550,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	-- 🚫 Tắt loading, hiện lại nội dung chính
 	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
 	Elements.Visible = true
-	-- 💡 Hiện bóng đổ
-	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {
-		ImageTransparency = 0.6
-	}):Play()
 
 
 	Topbar.BackgroundTransparency = 1
