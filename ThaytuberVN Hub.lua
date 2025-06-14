@@ -3535,7 +3535,13 @@ function RayfieldLibrary:CreateWindow(Settings)
 		return Tab
 	end
 
-	task.wait(0.1)
+	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
+	task.wait(1.1)
+
+	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
+	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 0, 0, 0)}):Play()
+	task.wait(0.3)
+
 	-- 🔁 Ẩn dần chữ trong loading
 	TweenService:Create(LoadingFrame, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
