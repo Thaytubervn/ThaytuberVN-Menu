@@ -3535,39 +3535,25 @@ function RayfieldLibrary:CreateWindow(Settings)
 		return Tab
 	end
 
-	-- ⏳ Đợi để cảm giác loading đủ lâu
+	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
 
-	-- 🔽 Thu nhỏ Main trước khi chuyển cảnh
-	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {
-		Size = UDim2.new(0, 390, 0, 90)
-	}):Play()
+	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
+	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 0, 0, 0)}):Play()
 	task.wait(0.3)
 
-	-- 🔁 Fade-out toàn bộ loading (nền + chữ)
-	local fadeTime = 0.3
-	TweenService:Create(LoadingFrame, TweenInfo.new(fadeTime, Enum.EasingStyle.Exponential), {
-		BackgroundTransparency = 1
-	}):Play()
+	-- 🔁 Ẩn dần chữ trong loading
+	TweenService:Create(LoadingFrame, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	task.wait(0.1)
 
-	if LoadingFrame:FindFirstChild("Title") then
-		TweenService:Create(LoadingFrame.Title, TweenInfo.new(fadeTime), {TextTransparency = 1}):Play()
-	end
-	if LoadingFrame:FindFirstChild("Subtitle") then
-		TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(fadeTime), {TextTransparency = 1}):Play()
-	end
-	if LoadingFrame:FindFirstChild("Version") then
-		TweenService:Create(LoadingFrame.Version, TweenInfo.new(fadeTime), {TextTransparency = 1}):Play()
-	end
-
-	-- 🕒 Đợi fade-out xong
-	task.wait(fadeTime)
-
-	-- 🚫 Tắt loading frame, bật nội dung chính
-	LoadingFrame.Visible = false
+	-- 🚫 Tắt loading, hiện lại nội dung chính
+	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
 	Elements.Visible = true
 
-	-- 🔼 Phóng to Main trở lại mượt mà
+	-- 🔼 Phóng lớn Main trở lại
 	TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
 		Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
 	}):Play()
@@ -3576,7 +3562,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {
 		ImageTransparency = 0.6
 	}):Play()
-
 
 
 	Topbar.BackgroundTransparency = 1
