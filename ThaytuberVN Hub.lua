@@ -1638,6 +1638,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	local Passthrough = false
 	Topbar.Title.Text = Settings.Name
 
+	Main.Size = UDim2.new(0, 500, 0, 475)
 	Main.Visible = true
 	Main.BackgroundTransparency = 1
 	if Main:FindFirstChild('Notice') then Main.Notice.Visible = false end
@@ -3534,13 +3535,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		return Tab
 	end
 
-	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
-	task.wait(1.1)
-
-	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
-	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 390, 0, 90)}):Play()
-	task.wait(0.3)
-
+	task.wait(0.1)
 	-- 🔁 Ẩn dần chữ trong loading
 	TweenService:Create(LoadingFrame, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
