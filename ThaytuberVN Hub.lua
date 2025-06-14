@@ -3577,12 +3577,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	customLoadingGui.LoadingFrame.Visible = false
 	Elements.Visible = true
 
-	-- ✅ Hiện lại UIStroke sau khi phóng to xong
-	task.delay(0.6, function()
-		if Main:FindFirstChild("UIStroke") then
-			Main.UIStroke.Enabled = true
-		end
-	end)
+
 
 
 	Topbar.BackgroundTransparency = 1
