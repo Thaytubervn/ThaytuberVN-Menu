@@ -3549,6 +3549,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	-- 🚫 Tắt loading, hiện lại nội dung chính
 	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
+	Main.UIStroke.Transparency = 0
 	Elements.Visible = true
 
 
