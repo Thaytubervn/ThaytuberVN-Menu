@@ -1970,10 +1970,16 @@ function RayfieldLibrary:CreateWindow(Settings)
 			task.wait(0.01)
 		end
 	end)
-
+	
 	task.wait(0.5)
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
+	task.wait(0.1)
+	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+	task.wait(0.05)
+	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
+	task.wait(0.05)
+	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 
 
 	Elements.Template.LayoutOrder = 100000
@@ -3504,6 +3510,24 @@ function RayfieldLibrary:CreateWindow(Settings)
 	end
 
 	Elements.Visible = true
+
+-- ĐÃ CHỈNH SỬA: BỎ TWEEN MỞ MAIN, THAY BẰNG SET SIZE TRỰC TIẾP
+
+	-- PHẦN SAU LOADING:
+	task.wait(1.1)
+	Main.Size = UDim2.new(0, 390, 0, 90)
+
+	-- Ẩn chữ của LoadingFrame
+	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Subtitle, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+	TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
+
+	-- MỞ GIAO DIỆN
+
+	Elements.Visible = true
+	Main.Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)
+	Main.Shadow.Image.ImageTransparency = 0.6
+
 
 	Topbar.BackgroundTransparency = 1
 	Topbar.Divider.Size = UDim2.new(0, 0, 0, 1)
