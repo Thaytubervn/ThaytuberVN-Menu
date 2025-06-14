@@ -1978,6 +1978,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	Notifications.Template.Visible = false
 	Notifications.Visible = true
 	Rayfield.Enabled = true
+	Main.Visible = false
 
 	-- 🌈 Luôn bật hiệu ứng Rainbow cho tất cả UIStroke
 	task.spawn(function()
@@ -1994,7 +1995,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end
 	end)
 	-- Làm mờ nền và bóng
-	Main.Visible = false
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
 	task.wait(0.6)
@@ -3538,10 +3538,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
-
-	-- 🔽 Thu nhỏ Main để chuẩn bị chuyển cảnh
-	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 0, 0, 0)}):Play()
-	task.wait(0.3)
 
 	-- 🔁 Ẩn dần chữ trong loading
 	TweenService:Create(LoadingFrame, TweenInfo.new(0.2, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
