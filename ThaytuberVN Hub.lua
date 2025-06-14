@@ -1696,7 +1696,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	Topbar.Visible = false
 	Elements.Visible = false
-	LoadingFrame.Visible = true
 
 	if not Settings.DisableRayfieldPrompts then
 		task.spawn(function()
@@ -1979,6 +1978,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	Notifications.Template.Visible = false
 	Notifications.Visible = true
 	Rayfield.Enabled = true
+	LoadingFrame.Visible = true
 
 	-- 🌈 Luôn bật hiệu ứng Rainbow cho tất cả UIStroke
 	task.spawn(function()
