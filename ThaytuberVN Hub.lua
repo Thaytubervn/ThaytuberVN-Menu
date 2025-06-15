@@ -3543,6 +3543,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		return Tab
 	end
+	Main.Visible = true
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
 		-- Làm mờ nền và bóng
