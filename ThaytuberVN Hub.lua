@@ -1978,7 +1978,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	Notifications.Template.Visible = false
 	Notifications.Visible = true
 	Rayfield.Enabled = true
-	Main.Visible = false
 	LoadingFrame.Visible = true
 
 	-- 🌈 Luôn bật hiệu ứng Rainbow cho tất cả UIStroke
@@ -3543,7 +3542,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		return Tab
 	end
-	Main.Visible = true
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
 		-- Làm mờ nền và bóng
