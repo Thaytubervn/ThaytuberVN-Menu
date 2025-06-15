@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('8')
+print('9')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -735,7 +735,6 @@ end
 -- Object Variables
 
 local Main = Rayfield.Main
-if Main:FindFirstChild("UIStroke") then Main.UIStroke.Enabled = false end
 local MPrompt = Rayfield:FindFirstChild('Prompt')
 local Topbar = Main.Topbar
 Topbar.Title.Text = "Thaytuber"
