@@ -745,7 +745,7 @@ local dragBar = Rayfield:FindFirstChild('Drag')
 local dragInteract = dragBar and dragBar.Interact or nil
 local dragBarCosmetic = dragBar and dragBar.Drag or nil
 
-local customLoadingGui = game:GetObjects("rbxassetid://106237473887784")[1]
+local customLoadingGui = game:GetObjects("rbxassetid://123920250308699")[1]
 local LoadingFrame = customLoadingGui:FindFirstChild("LoadingFrame")
 customLoadingGui.Enabled = false
 customLoadingGui.LoadingFrame.Visible = false -- để ẩn
@@ -765,6 +765,8 @@ end
 if LoadingFrame and LoadingFrame:FindFirstChild("Version") then
 	LoadingFrame.Version.Text = Release
 end
+
+local loading = customLoadingGui:FindFirstChild("Loading")
 
 local dragOffset = 255
 local dragOffsetMobile = 150
@@ -1595,20 +1597,16 @@ end
 
 
 function RayfieldLibrary:CreateWindow(Settings)
-	if Rayfield:FindFirstChild('Loading') then
 		if getgenv and not getgenv().rayfieldCached then
 			Rayfield.Enabled = false
 			customLoadingGui.Enabled = true
 			customLoadingGui.LoadingFrame.Visible = false -- để ẩn
-			local loading = Rayfield.Loading
-			loading.Parent = customLoadingGui
 			loading.Visible = true
 
 
 			task.wait(1.4)
 			Loading.Visible = false
 		end
-	end
 
 	if getgenv then getgenv().rayfieldCached = true end
 
