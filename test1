@@ -1605,7 +1605,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 
 			task.wait(1.4)
-			Loading.Visible = false
+			loading.Visible = false
 		end
 
 	if getgenv then getgenv().rayfieldCached = true end
