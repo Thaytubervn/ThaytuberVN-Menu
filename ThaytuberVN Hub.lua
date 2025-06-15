@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('9')
+print('10')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -2019,7 +2019,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	Elements.UIPageLayout.FillDirection = Enum.FillDirection.Horizontal
 	TabList.Template.Visible = false
-	Rayfield.Enabled = true
 
 	-- Tab
 	local FirstTab = false
@@ -3559,6 +3558,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	-- 🚫 Tắt loading, hiện lại nội dung chính
 	customLoadingGui.LoadingFrame.Visible = false -- để ẩn
 	Elements.Visible = true
+	Rayfield.Enabled = true
 
 
 	Topbar.BackgroundTransparency = 1
