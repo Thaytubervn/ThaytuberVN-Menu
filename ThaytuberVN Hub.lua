@@ -5,6 +5,8 @@
 
 ]]
 
+print('1')
+
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
 end
