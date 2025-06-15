@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('7')
+print('8')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -1977,7 +1977,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	Notifications.Template.Visible = false
 	Notifications.Visible = true
-	Rayfield.Enabled = true
+	Rayfield.Enabled = false
 	LoadingFrame.Visible = true
 
 	-- 🌈 Luôn bật hiệu ứng Rainbow cho tất cả UIStroke
@@ -1986,24 +1986,23 @@ function RayfieldLibrary:CreateWindow(Settings)
 		while true do
 			hue = (hue + 0.005) % 1
 			local color = Color3.fromHSV(hue, 1, 1)
+
 			for _, stroke in ipairs(Rayfield:GetDescendants()) do
 				if stroke:IsA("UIStroke") then
 					stroke.Color = color
 				end
 			end
-			task.wait(0.01)
-		end
-		while true do
-			hue = (hue + 0.005) % 1
-			local color = Color3.fromHSV(hue, 1, 1)
+
 			for _, stroke in ipairs(customLoadingGui:GetDescendants()) do
 				if stroke:IsA("UIStroke") then
 					stroke.Color = color
 				end
 			end
+
 			task.wait(0.01)
 		end
 	end)
+
 	task.wait(0.6)
 
 	-- Hiện LoadingFrame
@@ -2021,6 +2020,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	Elements.UIPageLayout.FillDirection = Enum.FillDirection.Horizontal
 	TabList.Template.Visible = false
+	Rayfield.Enabled = true
 
 	-- Tab
 	local FirstTab = false
