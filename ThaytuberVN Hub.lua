@@ -4,8 +4,7 @@
 	by ThaytuberVN
 
 ]]
-
-print('3')
+print('4')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -1361,10 +1360,11 @@ local function Unhide()
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = useMobileSizing and UDim2.new(0, 500, 0, 275) or UDim2.new(0, 500, 0, 475)}):Play()
 	TweenService:Create(Main.Topbar, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = UDim2.new(0, 500, 0, 45)}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
+
+-- Hiện lại UIStroke sau khi loading kết thúc
 	if Main:FindFirstChild("UIStroke") then
 		Main.UIStroke.Transparency = 0
 	end
-
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Topbar, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Topbar.Divider, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
@@ -1649,6 +1649,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	Main.Visible = true
 	Main.BackgroundTransparency = 1
 	Main.Shadow.Image.ImageTransparency = 1
+	Main.UIStroke.Transparency = 1
 	LoadingFrame.BackgroundTransparency= 1
 	LoadingFrame.Title.TextTransparency = 1
 	LoadingFrame.Subtitle.TextTransparency = 1
@@ -2011,13 +2012,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	end)
 	task.wait(0.6)
 
-	-- Ẩn UIStroke của Main khi loading bắt đầu
-	if Main:FindFirstChild("UIStroke") then
-		Main.UIStroke.Transparency = 1
-	end
-
 	-- Hiện LoadingFrame
-
 	TweenService:Create(LoadingFrame, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	task.wait(0.1)
 	TweenService:Create(LoadingFrame.Title, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
@@ -3553,15 +3548,17 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		return Tab
 	end
+
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
 		-- Làm mờ nền và bóng
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
 	TweenService:Create(Main.Shadow.Image, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {ImageTransparency = 0.6}):Play()
+
+-- Hiện lại UIStroke sau khi loading kết thúc
 	if Main:FindFirstChild("UIStroke") then
 		Main.UIStroke.Transparency = 0
 	end
-
 	task.wait(0.3)
 
 	-- 🔁 Ẩn dần chữ trong loading
