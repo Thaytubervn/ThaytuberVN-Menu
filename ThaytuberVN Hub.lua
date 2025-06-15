@@ -5,7 +5,7 @@
 
 ]]
 
-print('1')
+print('2')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -1645,7 +1645,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	Main.Visible = true
 	Main.BackgroundTransparency = 1
 	Main.Shadow.Image.ImageTransparency = 1
-	Main.UIStroke.Transparency = 1
 	LoadingFrame.BackgroundTransparency= 1
 	LoadingFrame.Title.TextTransparency = 1
 	LoadingFrame.Subtitle.TextTransparency = 1
@@ -3544,8 +3543,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		return Tab
 	end
-	TweenService:Create(Main.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
-	task.wait(0.1)
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
 		-- Làm mờ nền và bóng
