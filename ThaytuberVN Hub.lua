@@ -3542,7 +3542,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		return Tab
 	end
-
+	TweenService:Create(Main.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {Transparency = 0}):Play()
+	task.wait(0.1)
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
 		-- Làm mờ nền và bóng
