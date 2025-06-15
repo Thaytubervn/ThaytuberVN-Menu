@@ -1642,7 +1642,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 	Main.Size = UDim2.new(0, 500, 0, 475)
 	Main.Visible = true
 	Main.BackgroundTransparency = 1
-	if Main:FindFirstChild('Notice') then Main.Notice.Visible = false end
 	Main.Shadow.Image.ImageTransparency = 1
 	Main.UIStroke.Transparency = 1
 	LoadingFrame.BackgroundTransparency= 1
@@ -1978,7 +1977,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	Notifications.Template.Visible = false
 	Notifications.Visible = true
-	Rayfield.Enabled = true
+	Rayfield.Enabled = false
 	LoadingFrame.Visible = true
 
 	-- 🌈 Luôn bật hiệu ứng Rainbow cho tất cả UIStroke
@@ -3543,7 +3542,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		return Tab
 	end
-
 	-- ⏳ Đợi đủ thời gian cho loading cảm giác đầy đủ
 	task.wait(1.1)
 		-- Làm mờ nền và bóng
