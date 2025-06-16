@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('10')
+print('1')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -3690,10 +3690,7 @@ Main.Search.Input:GetPropertyChangedSignal('Text'):Connect(function()
 end)
 
 Main.Search.Input.FocusLost:Connect(function(enterPressed)
-	if #Main.Search.Input.Text == 0 and searchOpen then
-		task.wait(0.12)
-		closeSearch()
-	end
+    -- Removed auto-close on empty input
 end)
 
 Topbar.Search.MouseButton1Click:Connect(function()
