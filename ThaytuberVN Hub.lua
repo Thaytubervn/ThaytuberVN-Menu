@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('10')
+print('2')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
