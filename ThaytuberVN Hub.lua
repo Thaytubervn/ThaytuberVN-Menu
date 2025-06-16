@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('6')
+print('1')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -811,6 +811,7 @@ local function ChangeTheme(Theme)
 	Main.Search.Shadow.ImageColor3 = SelectedTheme.TextColor
 	Main.Search.Search.ImageColor3 = SelectedTheme.TextColor
 	Main.Search.Input.PlaceholderColor3 = SelectedTheme.TextColor
+	Main.Search.UIStroke.Color = SelectedTheme.SecondaryElementStroke
 
 	if Main:FindFirstChild('Notice') then
 		Main.Notice.BackgroundColor3 = SelectedTheme.Background
@@ -1147,6 +1148,7 @@ local function openSearch()
 	Main.Search.Shadow.ImageTransparency = 1
 	Main.Search.Input.TextTransparency = 1
 	Main.Search.Search.ImageTransparency = 1
+	Main.Search.UIStroke.Transparency = 1
 	Main.Search.Size = UDim2.new(1, 0, 0, 80)
 
 	Main.Search.Input.Interactable = true
@@ -1165,6 +1167,7 @@ local function openSearch()
 
 	Main.Search.Input:CaptureFocus()
 	TweenService:Create(Main.Search.Shadow, TweenInfo.new(0.05, Enum.EasingStyle.Quint), {ImageTransparency = 0.95}):Play()
+	TweenService:Create(Main.Search.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 0.8}):Play()
 	TweenService:Create(Main.Search.Input, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0.2}):Play()
 	TweenService:Create(Main.Search.Search, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {ImageTransparency = 0.5}):Play()
 	TweenService:Create(Main.Search, TweenInfo.new(0.5, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, -35, 0, 35)}):Play()
