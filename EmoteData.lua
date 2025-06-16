@@ -1,1760 +1,354 @@
-[
-  {
-    "_comment": "YARHM-independently-pulled emote list, free to use! <3"
-  },
-  {
-    "id": 5938396308,
-    "animationid": "http://www.roblox.com/asset/?id=10714365721",
-    "name": "HOLIDAY Dance - Lil Nas X (LNX)"
-  },
-  {
-    "id": 10724075136,
-    "animationid": "http://www.roblox.com/asset/?id=10713981723",
-    "name": "Around Town Face"
-  },
-  {
-    "id": 10724743832,
-    "animationid": "http://www.roblox.com/asset/?id=10714403700",
-    "name": "Rock On Face"
-  },
-  {
-    "id": 10724100901,
-    "animationid": "http://www.roblox.com/asset/?id=10714004791",
-    "name": "Bunny Hop Face"
-  },
-  {
-    "id": 15506503658,
-    "animationid": "http://www.roblox.com/asset/?id=15505456446",
-    "name": "Victory Dance"
-  },
-  {
-    "id": 10724095946,
-    "animationid": "http://www.roblox.com/asset/?id=10717116749",
-    "name": "Boxing Punch Face"
-  },
-  {
-    "id": 6532844183,
-    "animationid": "http://www.roblox.com/asset/?id=10714074218",
-    "name": "Drum Solo - Royal Blood"
-  },
-  {
-    "id": 10724795160,
-    "animationid": "http://www.roblox.com/asset/?id=10714349738",
-    "name": "Swish Face"
-  },
-  {
-    "id": 7942964447,
-    "animationid": "http://www.roblox.com/asset/?id=10714022275",
-    "name": "Cobra Arms - Tai Verdes"
-  },
-  {
-    "id": 7202898984,
-    "animationid": "http://www.roblox.com/asset/?id=10714377090",
-    "name": "Show Dem Wrists - KSI"
-  },
-  {
-    "id": 3934984583,
-    "animationid": "http://www.roblox.com/asset/?id=10714345862",
-    "name": "Get Out"
-  },
-  {
-    "id": 16584496781,
-    "animationid": "http://www.roblox.com/asset/?id=16584481352",
-    "name": "Mae Stephens â€“ Arm Wave"
-  },
-  {
-    "id": 9178397781,
-    "animationid": "http://www.roblox.com/asset/?id=10714171628",
-    "name": "Victory - 24kGoldn"
-  },
-  {
-    "id": 12804173616,
-    "animationid": "http://www.roblox.com/asset/?id=12804157977",
-    "name": "Ay-Yo Dance Move - NCT 127"
-  },
-  {
-    "id": 14901369589,
-    "animationid": "http://www.roblox.com/asset/?id=14901306096",
-    "name": "BLACKPINK Shut Down - Part 1"
-  },
-  {
-    "id": 11753545334,
-    "animationid": "http://www.roblox.com/asset/?id=11753474067",
-    "name": "Elton John - Rock Out"
-  },
-  {
-    "id": 15392932768,
-    "animationid": "http://www.roblox.com/asset/?id=15392756794",
-    "name": "Paris Hilton - Iconic IT-Grrrl"
-  },
-  {
-    "id": 6869813008,
-    "animationid": "http://www.roblox.com/asset/?id=10714386947",
-    "name": "Samba"
-  },
-  {
-    "id": 15679958535,
-    "animationid": "http://www.roblox.com/asset/?id=15679624464",
-    "name": "BLACKPINK ROSÃ‰ On The Ground"
-  },
-  {
-    "id": 16303091119,
-    "animationid": "http://www.roblox.com/asset/?id=16302968986",
-    "name": "Beauty Touchdown"
-  },
-  {
-    "id": 10724578114,
-    "animationid": "http://www.roblox.com/asset/?id=10714360164",
-    "name": "Hero Landing Face"
-  },
-  {
-    "id": 10724561821,
-    "animationid": "http://www.roblox.com/asset/?id=10714349037",
-    "name": "Greatest Face"
-  },
-  {
-    "id": 10724720732,
-    "animationid": "http://www.roblox.com/asset/?id=10714389873",
-    "name": "Na Na Na Face"
-  },
-  {
-    "id": 3570649048,
-    "animationid": "http://www.roblox.com/asset/?id=10714375667",
-    "name": "Jacks"
-  },
-  {
-    "id": 10724545513,
-    "animationid": "http://www.roblox.com/asset/?id=10714091938",
-    "name": "Fashionable Face"
-  },
-  {
-    "id": 3576717965,
-    "animationid": "http://www.roblox.com/asset/?id=10714369325",
-    "name": "Shy"
-  },
-  {
-    "id": 16584496763,
-    "animationid": "http://www.roblox.com/asset/?id=16584481352",
-    "name": "ms2"
-  },
-  {
-    "id": 12715393154,
-    "animationid": "http://www.roblox.com/asset/?id=12714233242",
-    "name": "TWICE Moonlight Sunrise "
-  },
-  {
-    "id": 7422838770,
-    "animationid": "http://www.roblox.com/asset/?id=10714072822",
-    "name": "Drummer Moves - Twenty One Pilots"
-  },
-  {
-    "id": 14851597817,
-    "animationid": "http://www.roblox.com/asset/?id=14851541605",
-    "name": "hh2"
-  },
-  {
-    "id": 3576968026,
-    "animationid": "http://www.roblox.com/asset/?id=10714374484",
-    "name": "Shrug"
-  },
-  {
-    "id": 82163305721376,
-    "animationid": "http://www.roblox.com/asset/?id=132748833449150",
-    "name": "NBA Monster Dunk"
-  },
-  {
-    "id": 10706515130,
-    "animationid": "http://www.roblox.com/asset/?id=10713959108",
-    "name": "Emote_AirGuitar"
-  },
-  {
-    "id": 10724787518,
-    "animationid": "http://www.roblox.com/asset/?id=10714356920",
-    "name": "Stadium Face"
-  },
-  {
-    "id": 10275057230,
-    "animationid": "http://www.roblox.com/asset/?id=10275008655",
-    "name": "Uprise - Tommy Hilfiger"
-  },
-  {
-    "id": 10724718533,
-    "animationid": "http://www.roblox.com/asset/?id=10714388352",
-    "name": "Monkey Face"
-  },
-  {
-    "id": 18526338976,
-    "animationid": "http://www.roblox.com/asset/?id=18526288497",
-    "name": "Team USA Breaking Emote"
-  },
-  {
-    "id": 14851599382,
-    "animationid": "http://www.roblox.com/asset/?id=14851544078",
-    "name": "bby"
-  },
-  {
-    "id": 73683655527605,
-    "animationid": "http://www.roblox.com/asset/?id=136831243854748",
-    "name": "Fashion Roadkill"
-  },
-  {
-    "id": 7942960760,
-    "animationid": "http://www.roblox.com/asset/?id=10713962506",
-    "name": "AOK - Tai Verdes"
-  },
-  {
-    "id": 11394056822,
-    "animationid": "http://www.roblox.com/asset/?id=11394033602",
-    "name": "Elton John - Elevate"
-  },
-  {
-    "id": 4646302011,
-    "animationid": "http://www.roblox.com/asset/?id=10713957138",
-    "name": "Air Dance"
-  },
-  {
-    "id": 10724556943,
-    "animationid": "http://www.roblox.com/asset/?id=10714345862",
-    "name": "Get Out Face"
-  },
-  {
-    "id": 12507097350,
-    "animationid": "http://www.roblox.com/asset/?id=12507085924",
-    "name": "Alo Yoga Pose - Lotus Position"
-  },
-  {
-    "id": 117511481049460,
-    "animationid": "http://www.roblox.com/asset/?id=132748833449150",
-    "name": "NBA Monster Dunk"
-  },
-  {
-    "id": 10370929905,
-    "animationid": "http://www.roblox.com/asset/?id=10370351535",
-    "name": "Cartwheel - George Ezra"
-  },
-  {
-    "id": 12507106431,
-    "animationid": "http://www.roblox.com/asset/?id=12507083048",
-    "name": "Alo Yoga Pose - Warrior II"
-  },
-  {
-    "id": 4102317848,
-    "animationid": "http://www.roblox.com/asset/?id=10714372526",
-    "name": "Idol"
-  },
-  {
-    "id": 10724780384,
-    "animationid": "http://www.roblox.com/asset/?id=10714366910",
-    "name": "Side to Side Face"
-  },
-  {
-    "id": 14900151704,
-    "animationid": "http://www.roblox.com/asset/?id=14899979575",
-    "name": "TWICE LIKEY"
-  },
-  {
-    "id": 71389516735424,
-    "animationid": "http://www.roblox.com/asset/?id=129470135909814",
-    "name": "The Zabb"
-  },
-  {
-    "id": 3360692915,
-    "animationid": "http://www.roblox.com/asset/?id=10714338461",
-    "name": "Tilt"
-  },
-  {
-    "id": 4212496830,
-    "animationid": "http://www.roblox.com/asset/?id=10714089137",
-    "name": "Zombie"
-  },
-  {
-    "id": 10724435211,
-    "animationid": "http://www.roblox.com/asset/?id=10714345459",
-    "name": "Take Me Under Zara Larsson Face"
-  },
-  {
-    "id": 14620757085,
-    "animationid": "http://www.roblox.com/asset/?id=14620742793",
-    "name": "Samba Step Dance"
-  },
-  {
-    "id": 3762641826,
-    "animationid": "http://www.roblox.com/asset/?id=10714366910",
-    "name": "Side to Side"
-  },
-  {
-    "id": 16553249658,
-    "animationid": "http://www.roblox.com/asset/?id=16553163212",
-    "name": "Mae Stephens - Piano Hands"
-  },
-  {
-    "id": 5915779725,
-    "animationid": "http://www.roblox.com/asset/?id=5915711491",
-    "name": "Head Banging"
-  },
-  {
-    "id": 3994129128,
-    "animationid": "http://www.roblox.com/asset/?id=10714101749",
-    "name": "Fishing"
-  },
-  {
-    "id": 13694139364,
-    "animationid": "http://www.roblox.com/asset/?id=13694096724",
-    "name": "Man City Scorpion Kick"
-  },
-  {
-    "id": 10724591600,
-    "animationid": "http://www.roblox.com/asset/?id=10714366893",
-    "name": "Huddle Face"
-  },
-  {
-    "id": 14352435946,
-    "animationid": "http://www.roblox.com/asset/?id=14352353329",
-    "name": "newdance"
-  },
-  {
-    "id": 15694504637,
-    "animationid": "http://www.roblox.com/asset/?id=15693621070",
-    "name": "d4vd - Backflip"
-  },
-  {
-    "id": 3570535774,
-    "animationid": "http://www.roblox.com/asset/?id=10714336041",
-    "name": "Top Rock"
-  },
-  {
-    "id": 5915776835,
-    "animationid": "http://www.roblox.com/asset/?id=10714362852",
-    "name": "High Wave"
-  },
-  {
-    "id": 12259890638,
-    "animationid": "http://www.roblox.com/asset/?id=12259828678",
-    "name": "2 Baddies Dance Move - NCT 127"
-  },
-  {
-    "id": 106862678450011,
-    "animationid": "http://www.roblox.com/asset/?id=97311229290836",
-    "name": "TWICE Strategy"
-  },
-  {
-    "id": 16276506814,
-    "animationid": "http://www.roblox.com/asset/?id=16270690701",
-    "name": "Sol de Janeiro - Samba"
-  },
-  {
-    "id": 3934988903,
-    "animationid": "http://www.roblox.com/asset/?id=10714076981",
-    "name": "Fancy Feet"
-  },
-  {
-    "id": 6532155086,
-    "animationid": "http://www.roblox.com/asset/?id=10714393929",
-    "name": "Rock Guitar - Royal Blood"
-  },
-  {
-    "id": 12715397488,
-    "animationid": "http://www.roblox.com/asset/?id=12714231087",
-    "name": "TWICE Set Me Free - Dance 2"
-  },
-  {
-    "id": 9710994651,
-    "animationid": "http://www.roblox.com/asset/?id=10714361543",
-    "name": "High Hands"
-  },
-  {
-    "id": 14022978026,
-    "animationid": "http://www.roblox.com/asset/?id=14022936101",
-    "name": "YUNGBLUD â€“ HIGH KICK"
-  },
-  {
-    "id": 15392927897,
-    "animationid": "http://www.roblox.com/asset/?id=15392759696",
-    "name": "Paris Hilton - Sliving For The Groove"
-  },
-  {
-    "id": 10724599687,
-    "animationid": "http://www.roblox.com/asset/?id=10714371264",
-    "name": "Hyperfast 5G Dance Move Face"
-  },
-  {
-    "id": 15963348695,
-    "animationid": "http://www.roblox.com/asset/?id=15963314052",
-    "name": "Mean Girls Dance Break"
-  },
-  {
-    "id": 3696763549,
-    "animationid": "http://www.roblox.com/asset/?id=10714357129",
-    "name": "Heisman Pose"
-  },
-  {
-    "id": 10724587450,
-    "animationid": "http://www.roblox.com/asset/?id=10714364213",
-    "name": "Hips Poppin Zara Larsson Face"
-  },
-  {
-    "id": 5938365243,
-    "animationid": "http://www.roblox.com/asset/?id=10714068222",
-    "name": "Dolphin Dance"
-  },
-  {
-    "id": 4272351660,
-    "animationid": "http://www.roblox.com/asset/?id=10714100539",
-    "name": "Fast Hands"
-  },
-  {
-    "id": 4102315500,
-    "animationid": "http://www.roblox.com/asset/?id=10714350889",
-    "name": "Haha"
-  },
-  {
-    "id": 4391211308,
-    "animationid": "http://www.roblox.com/asset/?id=10714164866",
-    "name": "Y"
-  },
-  {
-    "id": 3696757129,
-    "animationid": "http://www.roblox.com/asset/?id=10714369624",
-    "name": "Hype Dance"
-  },
-  {
-    "id": 14353425085,
-    "animationid": "http://www.roblox.com/asset/?id=14352362059",
-    "name": "Baby Queen - Strut"
-  },
-  {
-    "id": 10370934040,
-    "animationid": "http://www.roblox.com/asset/?id=10370346995",
-    "name": "Boom Boom Clap - George Ezra"
-  },
-  {
-    "id": 15392937495,
-    "animationid": "http://www.roblox.com/asset/?id=15392752812",
-    "name": "Paris Hilton - Checking My Angles"
-  },
-  {
-    "id": 16646438742,
-    "animationid": "http://www.roblox.com/asset/?id=16646423316",
-    "name": "Wanna play?"
-  },
-  {
-    "id": 10724784852,
-    "animationid": "http://www.roblox.com/asset/?id=10714358528",
-    "name": "Sneaky Face"
-  },
-  {
-    "id": 15689315657,
-    "animationid": "http://www.roblox.com/asset/?id=15689278184",
-    "name": "GloRilla - \"Tomorrow\" Dance"
-  },
-  {
-    "id": 16126526506,
-    "animationid": "http://www.roblox.com/asset/?id=16126469463",
-    "name": "Paris Hilton Sanasa"
-  },
-  {
-    "id": 3994130516,
-    "animationid": "http://www.roblox.com/asset/?id=10713990381",
-    "name": "Bodybuilder"
-  },
-  {
-    "id": 13520623514,
-    "animationid": "http://www.roblox.com/asset/?id=13520524517",
-    "name": "TWICE Fancy"
-  },
-  {
-    "id": 10724554835,
-    "animationid": "http://www.roblox.com/asset/?id=10714342957",
-    "name": "Flowing Breeze Face"
-  },
-  {
-    "id": 10724777226,
-    "animationid": "http://www.roblox.com/asset/?id=10714369325",
-    "name": "Shy Face"
-  },
-  {
-    "id": 10724087630,
-    "animationid": "http://www.roblox.com/asset/?id=10713990381",
-    "name": "Bodybuilder Face"
-  },
-  {
-    "id": 16371235025,
-    "animationid": "http://www.roblox.com/asset/?id=16371217304",
-    "name": "Skadoosh Emote - Kung Fu Panda 4"
-  },
-  {
-    "id": 14548711723,
-    "animationid": "http://www.roblox.com/asset/?id=14548621256",
-    "name": "BLACKPINK Pink Venom - Straight to Ya Dome"
-  },
-  {
-    "id": 5915779043,
-    "animationid": "http://www.roblox.com/asset/?id=10713966026",
-    "name": "Applaud"
-  },
-  {
-    "id": 4849495710,
-    "animationid": "http://www.roblox.com/asset/?id=10714065135",
-    "name": "Disagree"
-  },
-  {
-    "id": 16181843366,
-    "animationid": "http://www.roblox.com/asset/?id=16181798319",
-    "name": "BLACKPINK Kill This Love"
-  },
-  {
-    "id": 18225077553,
-    "animationid": "http://www.roblox.com/asset/?id=18225053113",
-    "name": "Rock Out - Bebe Rexha"
-  },
-  {
-    "id": 10214418283,
-    "animationid": "http://www.roblox.com/asset/?id=10214319518",
-    "name": "V Pose - Tommy Hilfiger"
-  },
-  {
-    "id": 10724739787,
-    "animationid": "http://www.roblox.com/asset/?id=10714392151",
-    "name": "Robot Face"
-  },
-  {
-    "id": 15689314578,
-    "animationid": "http://www.roblox.com/asset/?id=15689279687",
-    "name": "Imagine Dragons - â€œBonesâ€ Dance"
-  },
-  {
-    "id": 4212499637,
-    "animationid": "http://www.roblox.com/asset/?id=10714069471",
-    "name": "Dorky Dance"
-  },
-  {
-    "id": 92859581691366,
-    "animationid": "http://www.roblox.com/asset/?id=107875941017127",
-    "name": "ALTÃ‰GO - Couldnâ€™t Care Less"
-  },
-  {
-    "id": 15679955281,
-    "animationid": "http://www.roblox.com/asset/?id=15679621440",
-    "name": "Festive Dance"
-  },
-  {
-    "id": 10724142022,
-    "animationid": "http://www.roblox.com/asset/?id=10714174918",
-    "name": "Up and Down Face"
-  },
-  {
-    "id": 15506496093,
-    "animationid": "http://www.roblox.com/asset/?id=15505458452",
-    "name": "Rock n Roll"
-  },
-  {
-    "id": 7202896732,
-    "animationid": "http://www.roblox.com/asset/?id=10717116749",
-    "name": "Boxing Punch - KSI"
-  },
-  {
-    "id": 11435175895,
-    "animationid": "http://www.roblox.com/asset/?id=11444441914",
-    "name": "Elton John - Cat Man"
-  },
-  {
-    "id": 4646306072,
-    "animationid": "http://www.roblox.com/asset/?id=10714380563",
-    "name": "Keeping Time"
-  },
-  {
-    "id": 10724146852,
-    "animationid": "http://www.roblox.com/asset/?id=10714177846",
-    "name": "Udzals Summoning Face"
-  },
-  {
-    "id": 4849497510,
-    "animationid": "http://www.roblox.com/asset/?id=10714389396",
-    "name": "Power Blast"
-  },
-  {
-    "id": 4849487550,
-    "animationid": "http://www.roblox.com/asset/?id=10713954623",
-    "name": "Agree"
-  },
-  {
-    "id": 14353419229,
-    "animationid": "http://www.roblox.com/asset/?id=14352337694",
-    "name": "Baby Queen - Dramatic Bow"
-  },
-  {
-    "id": 13694140956,
-    "animationid": "http://www.roblox.com/asset/?id=13694100677",
-    "name": "Man City Backflip"
-  },
-  {
-    "id": 120642514156293,
-    "animationid": "http://www.roblox.com/asset/?id=71243990877913",
-    "name": "Secret Handshake Dance"
-  },
-  {
-    "id": 10724745555,
-    "animationid": "http://www.roblox.com/asset/?id=10714400171",
-    "name": "Rock Star Royal Blood Face"
-  },
-  {
-    "id": 10724775065,
-    "animationid": "http://www.roblox.com/asset/?id=10714371274",
-    "name": "Shuffle Face"
-  },
-  {
-    "id": 10724092508,
-    "animationid": "http://www.roblox.com/asset/?id=10714168145",
-    "name": "Wake Up Call Face"
-  },
-  {
-    "id": 10724098469,
-    "animationid": "http://www.roblox.com/asset/?id=10714171628",
-    "name": "Victory ### #### Face"
-  },
-  {
-    "id": 10724126829,
-    "animationid": "http://www.roblox.com/asset/?id=10714066964",
-    "name": "Dizzy Face"
-  },
-  {
-    "id": 10724137593,
-    "animationid": "http://www.roblox.com/asset/?id=10714072822",
-    "name": "Drummer Moves Face"
-  },
-  {
-    "id": 10214411646,
-    "animationid": "http://www.roblox.com/asset/?id=10214314957",
-    "name": "Floor Rock Freeze - Tommy Hilfiger"
-  },
-  {
-    "id": 13768975574,
-    "animationid": "http://www.roblox.com/asset/?id=13768941455",
-    "name": "TWICE Pop by Nayeon"
-  },
-  {
-    "id": 10724082211,
-    "animationid": "http://www.roblox.com/asset/?id=10713986541",
-    "name": "Blah Blah Face"
-  },
-  {
-    "id": 10478368365,
-    "animationid": "http://www.roblox.com/asset/?id=10478338114",
-    "name": "Super Charge"
-  },
-  {
-    "id": 3716633898,
-    "animationid": "http://www.roblox.com/asset/?id=10714293450",
-    "name": "Twirl"
-  },
-  {
-    "id": 18526410572,
-    "animationid": "http://www.roblox.com/asset/?id=18526397037",
-    "name": "Vroom Vroom"
-  },
-  {
-    "id": 17000058939,
-    "animationid": "http://www.roblox.com/asset/?id=17000021306",
-    "name": "Mini Kong"
-  },
-  {
-    "id": 5915781665,
-    "animationid": "http://www.roblox.com/asset/?id=10714394082",
-    "name": "Panini Dance - Lil Nas X (LNX)"
-  },
-  {
-    "id": 15571536896,
-    "animationid": "http://www.roblox.com/asset/?id=15571446961",
-    "name": "Nicki Minaj That's That Super Bass Emote"
-  },
-  {
-    "id": 4849499887,
-    "animationid": "http://www.roblox.com/asset/?id=10714352626",
-    "name": "Happy"
-  },
-  {
-    "id": 4272484885,
-    "animationid": "http://www.roblox.com/asset/?id=10713983178",
-    "name": "Baby Dance"
-  },
-  {
-    "id": 14024722653,
-    "animationid": "http://www.roblox.com/asset/?id=14024642130",
-    "name": "Tommy K-Pop Mic Drop"
-  },
-  {
-    "id": 4646296016,
-    "animationid": "http://www.roblox.com/asset/?id=10714004791",
-    "name": "Bunny Hop"
-  },
-  {
-    "id": 10724583652,
-    "animationid": "http://www.roblox.com/asset/?id=10714362852",
-    "name": "High Wave Face"
-  },
-  {
-    "id": 14548709888,
-    "animationid": "http://www.roblox.com/asset/?id=14548619594",
-    "name": "BLACKPINK Pink Venom - Get em Get em Get em"
-  },
-  {
-    "id": 10724750483,
-    "animationid": "http://www.roblox.com/asset/?id=10714392876",
-    "name": "Sad Face"
-  },
-  {
-    "id": 14353417553,
-    "animationid": "http://www.roblox.com/asset/?id=14352335202",
-    "name": "Baby Queen - Air Guitar & Knee Slide"
-  },
-  {
-    "id": 5915782672,
-    "animationid": "http://www.roblox.com/asset/?id=10714403700",
-    "name": "Rock On"
-  },
-  {
-    "id": 13344121112,
-    "animationid": "http://www.roblox.com/asset/?id=13327655243",
-    "name": "TWICE What Is Love"
-  },
-  {
-    "id": 4390121879,
-    "animationid": "http://www.roblox.com/asset/?id=10714384494",
-    "name": "Sandwich Dance"
-  },
-  {
-    "id": 17748346932,
-    "animationid": "http://www.roblox.com/asset/?id=17748314784",
-    "name": "Elton John - Heart Shuffle"
-  },
-  {
-    "id": 10715267454,
-    "animationid": "http://www.roblox.com/asset/?id=10713988674",
-    "name": "Block Partier Face"
-  },
-  {
-    "id": 10724080069,
-    "animationid": "http://www.roblox.com/asset/?id=10713984554",
-    "name": "Beckon Face"
-  },
-  {
-    "id": 10724115841,
-    "animationid": "http://www.roblox.com/asset/?id=10714020158",
-    "name": "Chicken Dance Face"
-  },
-  {
-    "id": 4646306583,
-    "animationid": "http://www.roblox.com/asset/?id=10714061912",
-    "name": "Curtsy"
-  },
-  {
-    "id": 14900153406,
-    "animationid": "http://www.roblox.com/asset/?id=14899980745",
-    "name": "TWICE Feel Special"
-  },
-  {
-    "id": 4689362868,
-    "animationid": "http://www.roblox.com/asset/?id=10714360343",
-    "name": "Sleep"
-  },
-  {
-    "id": 16392120020,
-    "animationid": "http://www.roblox.com/asset/?id=16392075853",
-    "name": "Jawny - Stomp"
-  },
-  {
-    "id": 4849493309,
-    "animationid": "http://www.roblox.com/asset/?id=10714020158",
-    "name": "Chicken Dance"
-  },
-  {
-    "id": 3696761354,
-    "animationid": "http://www.roblox.com/asset/?id=10713959108",
-    "name": "Air Guitar"
-  },
-  {
-    "id": 4849502101,
-    "animationid": "http://www.roblox.com/asset/?id=10714392876",
-    "name": "Sad"
-  },
-  {
-    "id": 4940592718,
-    "animationid": "http://www.roblox.com/asset/?id=4940561610",
-    "name": "Confused"
-  },
-  {
-    "id": 10724722774,
-    "animationid": "http://www.roblox.com/asset/?id=10714391240",
-    "name": "Old Town Road Dance LNX Face"
-  },
-  {
-    "id": 10370922566,
-    "animationid": "http://www.roblox.com/asset/?id=10370362157",
-    "name": "Sidekicks - George Ezra"
-  },
-  {
-    "id": 5104377791,
-    "animationid": "http://www.roblox.com/asset/?id=10714360164",
-    "name": "Hero Landing"
-  },
-  {
-    "id": 5230615437,
-    "animationid": "http://www.roblox.com/asset/?id=10713984554",
-    "name": "Beckon"
-  },
-  {
-    "id": 10724792751,
-    "animationid": "http://www.roblox.com/asset/?id=10714352930",
-    "name": "Swan Dance Face"
-  },
-  {
-    "id": 10724092960,
-    "animationid": "http://www.roblox.com/asset/?id=10713999630",
-    "name": "Borocks Rage Face"
-  },
-  {
-    "id": 5230661597,
-    "animationid": "http://www.roblox.com/asset/?id=10713992055",
-    "name": "Bored"
-  },
-  {
-    "id": 11309263077,
-    "animationid": "http://www.roblox.com/asset/?id=11309255148",
-    "name": "Elton John - Heart Skip"
-  },
-  {
-    "id": 15679957363,
-    "animationid": "http://www.roblox.com/asset/?id=15679623052",
-    "name": "BLACKPINK LISA Money"
-  },
-  {
-    "id": 9408642191,
-    "animationid": "http://www.roblox.com/asset/?id=10714371264",
-    "name": "Hyperfast 5G Dance Move"
-  },
-  {
-    "id": 7405123844,
-    "animationid": "http://www.roblox.com/asset/?id=10714063823",
-    "name": "Dancin' Shoes - Twenty One Pilots"
-  },
-  {
-    "id": 14353421343,
-    "animationid": "http://www.roblox.com/asset/?id=14352340648",
-    "name": "Baby Queen - Face Frame"
-  },
-  {
-    "id": 5915773155,
-    "animationid": "http://www.roblox.com/asset/?id=5915648213",
-    "name": "Arm Wave"
-  },
-  {
-    "id": 5915773992,
-    "animationid": "http://www.roblox.com/asset/?id=10714003221",
-    "name": "Break Dance"
-  },
-  {
-    "id": 14109936431,
-    "animationid": "http://www.roblox.com/asset/?id=14109772540",
-    "name": "thhsv3"
-  },
-  {
-    "id": 5917570207,
-    "animationid": "http://www.roblox.com/asset/?id=10714340543",
-    "name": "Floss Dance"
-  },
-  {
-    "id": 3716636630,
-    "animationid": "http://www.roblox.com/asset/?id=10714388352",
-    "name": "Monkey"
-  },
-  {
-    "id": 18855603653,
-    "animationid": "http://www.roblox.com/asset/?id=18855536648",
-    "name": "BLACKPINK As If It's Your Last"
-  },
-  {
-    "id": 5938397555,
-    "animationid": "http://www.roblox.com/asset/?id=10714395175",
-    "name": "Rodeo Dance - Lil Nas X (LNX)"
-  },
-  {
-    "id": 6531538868,
-    "animationid": "http://www.roblox.com/asset/?id=10714070681",
-    "name": "Drum Master - Royal Blood"
-  },
-  {
-    "id": 6533100850,
-    "animationid": "http://www.roblox.com/asset/?id=10714400171",
-    "name": "Rock Star - Royal Blood"
-  },
-  {
-    "id": 6797919579,
-    "animationid": "http://www.roblox.com/asset/?id=10714364213",
-    "name": "Hips Poppin' - Zara Larsson"
-  },
-  {
-    "id": 13071993910,
-    "animationid": "http://www.roblox.com/asset/?id=12992262118",
-    "name": "Rise Above - The Chainsmokers"
-  },
-  {
-    "id": 3360686498,
-    "animationid": "http://www.roblox.com/asset/?id=10714356920",
-    "name": "Stadium"
-  },
-  {
-    "id": 6797938823,
-    "animationid": "http://www.roblox.com/asset/?id=10714345459",
-    "name": "Take Me Under - Zara Larsson"
-  },
-  {
-    "id": 6797948622,
-    "animationid": "http://www.roblox.com/asset/?id=10714374267",
-    "name": "It Ain't My Fault - Zara Larsson"
-  },
-  {
-    "id": 6865011755,
-    "animationid": "http://www.roblox.com/asset/?id=10713988674",
-    "name": "Block Partier"
-  },
-  {
-    "id": 10724580385,
-    "animationid": "http://www.roblox.com/asset/?id=10714361543",
-    "name": "High Hands Face"
-  },
-  {
-    "id": 6865013133,
-    "animationid": "http://www.roblox.com/asset/?id=6862001787",
-    "name": "Cha Cha"
-  },
-  {
-    "id": 14124050904,
-    "animationid": "http://www.roblox.com/asset/?id=14123781004",
-    "name": "TWICE Like Ooh-Ahh"
-  },
-  {
-    "id": 3576721660,
-    "animationid": "http://www.roblox.com/asset/?id=10714392151",
-    "name": "Robot"
-  },
-  {
-    "id": 16276501655,
-    "animationid": "http://www.roblox.com/asset/?id=16272432203",
-    "name": "Dave's Spin Move - Glass Animals"
-  },
-  {
-    "id": 10724589591,
-    "animationid": "http://www.roblox.com/asset/?id=10714365721",
-    "name": "Holiday Dance LNX Face"
-  },
-  {
-    "id": 7422833723,
-    "animationid": "http://www.roblox.com/asset/?id=10714382522",
-    "name": "Saturday Dance - Twenty One Pilots"
-  },
-  {
-    "id": 18148839527,
-    "animationid": "http://www.roblox.com/asset/?id=18148804340",
-    "name": "Rolling Stones Guitar Strum"
-  },
-  {
-    "id": 7422841700,
-    "animationid": "http://www.roblox.com/asset/?id=10714392953",
-    "name": "On The Outside - Twenty One Pilots"
-  },
-  {
-    "id": 10724070077,
-    "animationid": "http://www.roblox.com/asset/?id=10713966026",
-    "name": "Applaud Face"
-  },
-  {
-    "id": 7466046574,
-    "animationid": "http://www.roblox.com/asset/?id=10714390497",
-    "name": "Quiet Waves"
-  },
-  {
-    "id": 10724150438,
-    "animationid": "http://www.roblox.com/asset/?id=10714293450",
-    "name": "Twirl Face"
-  },
-  {
-    "id": 7466047578,
-    "animationid": "http://www.roblox.com/asset/?id=10714342957",
-    "name": "Flowing Breeze"
-  },
-  {
-    "id": 7466048475,
-    "animationid": "http://www.roblox.com/asset/?id=10714352930",
-    "name": "Swan Dance"
-  },
-  {
-    "id": 7942972744,
-    "animationid": "http://www.roblox.com/asset/?id=10714382225",
-    "name": "Lasso Turn - Tai Verdes"
-  },
-  {
-    "id": 10724549462,
-    "animationid": "http://www.roblox.com/asset/?id=10714101749",
-    "name": "Fishing Face"
-  },
-  {
-    "id": 15554013003,
-    "animationid": "http://www.roblox.com/asset/?id=15517862739",
-    "name": "Olivia Rodrigo good 4 u"
-  },
-  {
-    "id": 9528291779,
-    "animationid": "http://www.roblox.com/asset/?id=10714368233",
-    "name": "Hwaiting (í™”ì´íŒ…)"
-  },
-  {
-    "id": 14851596394,
-    "animationid": "http://www.roblox.com/asset/?id=14851539444",
-    "name": "hh1"
-  },
-  {
-    "id": 9528294735,
-    "animationid": "http://www.roblox.com/asset/?id=9527886709",
-    "name": "Gashina - SUNMI"
-  },
-  {
-    "id": 9710992846,
-    "animationid": "http://www.roblox.com/asset/?id=10713968716",
-    "name": "Arm Twist"
-  },
-  {
-    "id": 9830731012,
-    "animationid": "http://www.roblox.com/asset/?id=9830680869",
-    "name": "Face Calisthenics"
-  },
-  {
-    "id": 9983549160,
-    "animationid": "http://www.roblox.com/asset/?id=9983520970",
-    "name": "You can't sit with us - Sunmi"
-  },
-  {
-    "id": 18855609889,
-    "animationid": "http://www.roblox.com/asset/?id=18855531354",
-    "name": "BLACKPINK Don't know what to do"
-  },
-  {
-    "id": 10147919199,
-    "animationid": "http://www.roblox.com/asset/?id=10714007154",
-    "name": "BURBERRY LOLA ATTITUDE - BLOOM"
-  },
-  {
-    "id": 10147921916,
-    "animationid": "http://www.roblox.com/asset/?id=10714010337",
-    "name": "BURBERRY LOLA ATTITUDE - REFLEX"
-  },
-  {
-    "id": 16553262614,
-    "animationid": "http://www.roblox.com/asset/?id=16553170471",
-    "name": "BLACKPINK DDU-DU DDU-DU"
-  },
-  {
-    "id": 10147924028,
-    "animationid": "http://www.roblox.com/asset/?id=10147821284",
-    "name": "BURBERRY LOLA ATTITUDE - NIMBUS"
-  },
-  {
-    "id": 10724566501,
-    "animationid": "http://www.roblox.com/asset/?id=10714352626",
-    "name": "Happy Face"
-  },
-  {
-    "id": 3576751796,
-    "animationid": "http://www.roblox.com/asset/?id=10714385204",
-    "name": "Louder"
-  },
-  {
-    "id": 10214406616,
-    "animationid": "http://www.roblox.com/asset/?id=10214311282",
-    "name": "Frosty Flair - Tommy Hilfiger"
-  },
-  {
-    "id": 10214415687,
-    "animationid": "http://www.roblox.com/asset/?id=10214317325",
-    "name": "Mean Mug - Tommy Hilfiger"
-  },
-  {
-    "id": 10724596932,
-    "animationid": "http://www.roblox.com/asset/?id=10714369624",
-    "name": "Hype Dance Face"
-  },
-  {
-    "id": 5104374556,
-    "animationid": "http://www.roblox.com/asset/?id=10714340558",
-    "name": "Tantrum"
-  },
-  {
-    "id": 10370926562,
-    "animationid": "http://www.roblox.com/asset/?id=10370359115",
-    "name": "The Conductor - George Ezra"
-  },
-  {
-    "id": 16256253954,
-    "animationid": "http://www.roblox.com/asset/?id=16256203246",
-    "name": "TWICE I GOT YOU part 2"
-  },
-  {
-    "id": 10724734962,
-    "animationid": "http://www.roblox.com/asset/?id=10714389396",
-    "name": "Power Blast Face"
-  },
-  {
-    "id": 14901371589,
-    "animationid": "http://www.roblox.com/asset/?id=14901308987",
-    "name": "BLACKPINK Shut Down - Part 2"
-  },
-  {
-    "id": 18933761755,
-    "animationid": "http://www.roblox.com/asset/?id=18933706381",
-    "name": "TWICE ABCD by Nayeon"
-  },
-  {
-    "id": 10724429547,
-    "animationid": "http://www.roblox.com/asset/?id=10714340558",
-    "name": "Tantrum Face"
-  },
-  {
-    "id": 10724154153,
-    "animationid": "http://www.roblox.com/asset/?id=10714330764",
-    "name": "Tree Face"
-  },
-  {
-    "id": 3762654854,
-    "animationid": "http://www.roblox.com/asset/?id=10714349037",
-    "name": "Greatest"
-  },
-  {
-    "id": 10706508686,
-    "animationid": "http://www.roblox.com/asset/?id=10713954623",
-    "name": "Agree Face"
-  },
-  {
-    "id": 13823339506,
-    "animationid": "http://www.roblox.com/asset/?id=13823324057",
-    "name": "Tommy - Archer"
-  },
-  {
-    "id": 10706512017,
-    "animationid": "http://www.roblox.com/asset/?id=10713957138",
-    "name": "Air Dance Face"
-  },
-  {
-    "id": 4391208058,
-    "animationid": "http://www.roblox.com/asset/?id=10714371274",
-    "name": "Shuffle"
-  },
-  {
-    "id": 10719119055,
-    "animationid": "http://www.roblox.com/asset/?id=10714089137",
-    "name": "Zombie Face"
-  },
-  {
-    "id": 10719153702,
-    "animationid": "http://www.roblox.com/asset/?id=10714161572",
-    "name": "You Cant Sit With Us Face"
-  },
-  {
-    "id": 10724066517,
-    "animationid": "http://www.roblox.com/asset/?id=10713962506",
-    "name": "AOK Tai Verdes Face"
-  },
-  {
-    "id": 7422843994,
-    "animationid": "http://www.roblox.com/asset/?id=10714174918",
-    "name": "Up and Down - Twenty One Pilots"
-  },
-  {
-    "id": 10724789914,
-    "animationid": "http://www.roblox.com/asset/?id=10714355069",
-    "name": "Superhero Reveal Face"
-  },
-  {
-    "id": 10724072953,
-    "animationid": "http://www.roblox.com/asset/?id=10713968716",
-    "name": "Arm Twist Face"
-  },
-  {
-    "id": 10724077540,
-    "animationid": "http://www.roblox.com/asset/?id=10713983178",
-    "name": "Baby Dance Face"
-  },
-  {
-    "id": 14024725245,
-    "animationid": "http://www.roblox.com/asset/?id=14024645241",
-    "name": "th-afsc"
-  },
-  {
-    "id": 18443268949,
-    "animationid": "http://www.roblox.com/asset/?id=18443237526",
-    "name": "SpongeBob Imaginaaation ðŸŒˆ"
-  },
-  {
-    "id": 10724090645,
-    "animationid": "http://www.roblox.com/asset/?id=10713992055",
-    "name": "Bored Face"
-  },
-  {
-    "id": 10724103239,
-    "animationid": "http://www.roblox.com/asset/?id=10714007154",
-    "name": "Burberry Bloom Face"
-  },
-  {
-    "id": 10724105474,
-    "animationid": "http://www.roblox.com/asset/?id=10714008655",
-    "name": "Burberry Gem Face"
-  },
-  {
-    "id": 10724107909,
-    "animationid": "http://www.roblox.com/asset/?id=10714010337",
-    "name": "Burberry Reflex Face"
-  },
-  {
-    "id": 12259885838,
-    "animationid": "http://www.roblox.com/asset/?id=12259825026",
-    "name": "Sticker Dance Move - NCT 127"
-  },
-  {
-    "id": 10724113524,
-    "animationid": "http://www.roblox.com/asset/?id=10714018192",
-    "name": "Cha Cha Face"
-  },
-  {
-    "id": 10724117861,
-    "animationid": "http://www.roblox.com/asset/?id=10714022275",
-    "name": "Cobra Arms Tai Verdes Face"
-  },
-  {
-    "id": 10724119906,
-    "animationid": "http://www.roblox.com/asset/?id=10714061912",
-    "name": "Curtsy Face"
-  },
-  {
-    "id": 10724122704,
-    "animationid": "http://www.roblox.com/asset/?id=10714063823",
-    "name": "Dancin Shoes Face"
-  },
-  {
-    "id": 10724129066,
-    "animationid": "http://www.roblox.com/asset/?id=10714068222",
-    "name": "Dolphin Dance Face"
-  },
-  {
-    "id": 10724130955,
-    "animationid": "http://www.roblox.com/asset/?id=10714069471",
-    "name": "Dorky Dance Face"
-  },
-  {
-    "id": 13422286833,
-    "animationid": "http://www.roblox.com/asset/?id=13421057998",
-    "name": "Man City Bicycle Kick"
-  },
-  {
-    "id": 10724133813,
-    "animationid": "http://www.roblox.com/asset/?id=10714070681",
-    "name": "Drum Master Royal Blood Face"
-  },
-  {
-    "id": 10724158202,
-    "animationid": "http://www.roblox.com/asset/?id=10714336041",
-    "name": "Top Rock Face"
-  },
-  {
-    "id": 3934986896,
-    "animationid": "http://www.roblox.com/asset/?id=10714066964",
-    "name": "Dizzy"
-  },
-  {
-    "id": 10724542904,
-    "animationid": "http://www.roblox.com/asset/?id=10714076981",
-    "name": "Fancy Feet Face"
-  },
-  {
-    "id": 18666650035,
-    "animationid": "http://www.roblox.com/asset/?id=18665825805",
-    "name": "Olympic Dismount"
-  },
-  {
-    "id": 10724124755,
-    "animationid": "http://www.roblox.com/asset/?id=10714065135",
-    "name": "Disagree Face"
-  },
-  {
-    "id": 10724547467,
-    "animationid": "http://www.roblox.com/asset/?id=10714100539",
-    "name": "Fast Hands Face"
-  },
-  {
-    "id": 9528286240,
-    "animationid": "http://www.roblox.com/asset/?id=9527883498",
-    "name": "Annyeong (ì•ˆë…•)"
-  },
-  {
-    "id": 10724551787,
-    "animationid": "http://www.roblox.com/asset/?id=10714340543",
-    "name": "Floss Dance Face"
-  },
-  {
-    "id": 10724559140,
-    "animationid": "http://www.roblox.com/asset/?id=10714347256",
-    "name": "Godlike Face"
-  },
-  {
-    "id": 11309309359,
-    "animationid": "http://www.roblox.com/asset/?id=11309304959",
-    "name": "MANIAC - Stray Kids"
-  },
-  {
-    "id": 10724574725,
-    "animationid": "http://www.roblox.com/asset/?id=10714359093",
-    "name": "Hello Face"
-  },
-  {
-    "id": 10724594344,
-    "animationid": "http://www.roblox.com/asset/?id=10714368233",
-    "name": "Hwaiting Face"
-  },
-  {
-    "id": 16553259683,
-    "animationid": "http://www.roblox.com/asset/?id=16553164850",
-    "name": "BLACKPINK Boombayah Emote"
-  },
-  {
-    "id": 10370918044,
-    "animationid": "http://www.roblox.com/asset/?id=10370353969",
-    "name": "Chill Vibes - George Ezra"
-  },
-  {
-    "id": 16215060261,
-    "animationid": "http://www.roblox.com/asset/?id=16215030041",
-    "name": "TWICE I GOT YOU part 1"
-  },
-  {
-    "id": 7202900159,
-    "animationid": "http://www.roblox.com/asset/?id=10714168145",
-    "name": "Wake Up Call - KSI"
-  },
-  {
-    "id": 15506499986,
-    "animationid": "http://www.roblox.com/asset/?id=15505454268",
-    "name": "Air Guitar"
-  },
-  {
-    "id": 14548710952,
-    "animationid": "http://www.roblox.com/asset/?id=14548620495",
-    "name": "BLACKPINK Pink Venom - I Bring the Pain Likeâ€¦"
-  },
-  {
-    "id": 10724611182,
-    "animationid": "http://www.roblox.com/asset/?id=10714375667",
-    "name": "Jacks Face"
-  },
-  {
-    "id": 10724539752,
-    "animationid": "http://www.roblox.com/asset/?id=10714074218",
-    "name": "Drum Solo Royal Blood Face"
-  },
-  {
-    "id": 10724563898,
-    "animationid": "http://www.roblox.com/asset/?id=10714350889",
-    "name": "Haha Face"
-  },
-  {
-    "id": 10724709841,
-    "animationid": "http://www.roblox.com/asset/?id=10714383856",
-    "name": "Line Dance Face"
-  },
-  {
-    "id": 10724712331,
-    "animationid": "http://www.roblox.com/asset/?id=10714385204",
-    "name": "Louder Face"
-  },
-  {
-    "id": 3994127840,
-    "animationid": "http://www.roblox.com/asset/?id=10714016223",
-    "name": "Celebrate"
-  },
-  {
-    "id": 10724725042,
-    "animationid": "http://www.roblox.com/asset/?id=10714392953",
-    "name": "On the Outside Face"
-  },
-  {
-    "id": 16572756230,
-    "animationid": "http://www.roblox.com/asset/?id=16572740012",
-    "name": "HIPMOTION - Amaarae"
-  },
-  {
-    "id": 10724726812,
-    "animationid": "http://www.roblox.com/asset/?id=10714394082",
-    "name": "Panini Dance LNX Face"
-  },
-  {
-    "id": 10724732638,
-    "animationid": "http://www.roblox.com/asset/?id=10714395441",
-    "name": "Point 2 Face"
-  },
-  {
-    "id": 15698510244,
-    "animationid": "http://www.roblox.com/asset/?id=15698402762",
-    "name": "ericdoa - dance"
-  },
-  {
-    "id": 18305539673,
-    "animationid": "http://www.roblox.com/asset/?id=18305395285",
-    "name": "Vans Ollie"
-  },
-  {
-    "id": 10724737263,
-    "animationid": "http://www.roblox.com/asset/?id=10714390497",
-    "name": "Quiet Waves Face"
-  },
-  {
-    "id": 3696764866,
-    "animationid": "http://www.roblox.com/asset/?id=10714018192",
-    "name": "Cha-Cha"
-  },
-  {
-    "id": 10724757383,
-    "animationid": "http://www.roblox.com/asset/?id=10714384494",
-    "name": "Sandwhich Dance Face"
-  },
-  {
-    "id": 10724762302,
-    "animationid": "http://www.roblox.com/asset/?id=10714382522",
-    "name": "Saturday Dance Face"
-  },
-  {
-    "id": 10724764698,
-    "animationid": "http://www.roblox.com/asset/?id=10714379581",
-    "name": "Shiver Face"
-  },
-  {
-    "id": 10724767724,
-    "animationid": "http://www.roblox.com/asset/?id=10714377090",
-    "name": "Show Dem Wrists Face"
-  },
-  {
-    "id": 10724769921,
-    "animationid": "http://www.roblox.com/asset/?id=10714374484",
-    "name": "Shrug Face"
-  },
-  {
-    "id": 10724782174,
-    "animationid": "http://www.roblox.com/asset/?id=10714360343",
-    "name": "Sleep Face"
-  },
-  {
-    "id": 79312439851071,
-    "animationid": "http://www.roblox.com/asset/?id=85267023718407",
-    "name": "Chappell Roan HOT TO GO!"
-  },
-  {
-    "id": 16181840356,
-    "animationid": "http://www.roblox.com/asset/?id=16181797368",
-    "name": "BLACKPINK Ice Cream"
-  },
-  {
-    "id": 10724797869,
-    "animationid": "http://www.roblox.com/asset/?id=10714347453",
-    "name": "T Face"
-  },
-  {
-    "id": 130046968468383,
-    "animationid": "http://www.roblox.com/asset/?id=131669256082047",
-    "name": "Fashion Spin"
-  },
-  {
-    "id": 10724098896,
-    "animationid": "http://www.roblox.com/asset/?id=10714003221",
-    "name": "Break Dance Face"
-  },
-  {
-    "id": 10724703650,
-    "animationid": "http://www.roblox.com/asset/?id=10714380563",
-    "name": "Keeping Time Face"
-  },
-  {
-    "id": 3576754235,
-    "animationid": "http://www.roblox.com/asset/?id=10714358528",
-    "name": "Sneaky"
-  },
-  {
-    "id": 10724741789,
-    "animationid": "http://www.roblox.com/asset/?id=10714393929",
-    "name": "Rock Guitar Royal Blood Face"
-  },
-  {
-    "id": 3576747102,
-    "animationid": "http://www.roblox.com/asset/?id=10713981723",
-    "name": "Around Town"
-  },
-  {
-    "id": 17746270218,
-    "animationid": "http://www.roblox.com/asset/?id=17746180844",
-    "name": "Sturdy Dance - Ice Spice"
-  },
-  {
-    "id": 10724425256,
-    "animationid": "http://www.roblox.com/asset/?id=10714338461",
-    "name": "Tilt Face"
-  },
-  {
-    "id": 15439454888,
-    "animationid": "http://www.roblox.com/asset/?id=15439354020",
-    "name": "BLACKPINK JISOO Flower"
-  },
-  {
-    "id": 103102322875221,
-    "animationid": "http://www.roblox.com/asset/?id=134283166482394",
-    "name": "Skibidi Toilet - Titan Speakerman Laser Spin"
-  },
-  {
-    "id": 3576745472,
-    "animationid": "http://www.roblox.com/asset/?id=10714091938",
-    "name": "Fashionable"
-  },
-  {
-    "id": 10724747951,
-    "animationid": "http://www.roblox.com/asset/?id=10714395175",
-    "name": "Rodeo Dance LNX Face"
-  },
-  {
-    "id": 10724716280,
-    "animationid": "http://www.roblox.com/asset/?id=10714387027",
-    "name": "Making Faces Face"
-  },
-  {
-    "id": 10724707416,
-    "animationid": "http://www.roblox.com/asset/?id=10714382225",
-    "name": "Lasso Turn Tai Verdes Face"
-  },
-  {
-    "id": 17370797454,
-    "animationid": "http://www.roblox.com/asset/?id=17370775305",
-    "name": "Wisp - air guitar"
-  },
-  {
-    "id": 10147926081,
-    "animationid": "http://www.roblox.com/asset/?id=10147823318",
-    "name": "BURBERRY LOLA ATTITUDE - HYDRO"
-  },
-  {
-    "id": 5938394742,
-    "animationid": "http://www.roblox.com/asset/?id=10714391240",
-    "name": "Old Town Road Dance - Lil Nas X (LNX)"
-  },
-  {
-    "id": 3696759798,
-    "animationid": "http://www.roblox.com/asset/?id=10714355069",
-    "name": "Superhero Reveal"
-  },
-  {
-    "id": 10724754724,
-    "animationid": "http://www.roblox.com/asset/?id=10714386947",
-    "name": "Samba Face"
-  },
-  {
-    "id": 3823158750,
-    "animationid": "http://www.roblox.com/asset/?id=10714347256",
-    "name": "Godlike"
-  },
-  {
-    "id": 18524331128,
-    "animationid": "http://www.roblox.com/asset/?id=18524313628",
-    "name": "Shrek Roar"
-  },
-  {
-    "id": 3576686446,
-    "animationid": "http://www.roblox.com/asset/?id=10714359093",
-    "name": "Hello"
-  },
-  {
-    "id": 18665886405,
-    "animationid": "http://www.roblox.com/asset/?id=18665811005",
-    "name": "TMNT Dance"
-  },
-  {
-    "id": 10724572119,
-    "animationid": "http://www.roblox.com/asset/?id=10714357129",
-    "name": "Heisman Pose Face"
-  },
-  {
-    "id": 11435177473,
-    "animationid": "http://www.roblox.com/asset/?id=11444443576",
-    "name": "Elton John - Still Standing"
-  },
-  {
-    "id": 10724609066,
-    "animationid": "http://www.roblox.com/asset/?id=10714374267",
-    "name": "It Aint My Fault Zara Larsson Face"
-  },
-  {
-    "id": 12259888240,
-    "animationid": "http://www.roblox.com/asset/?id=12259826609",
-    "name": "Kick It Dance Move - NCT 127"
-  },
-  {
-    "id": 10724111025,
-    "animationid": "http://www.roblox.com/asset/?id=10714016223",
-    "name": "Celebrate Face"
-  },
-  {
-    "id": 18526373545,
-    "animationid": "http://www.roblox.com/asset/?id=18526362841",
-    "name": "NBA WNBA Fadeaway"
-  },
-  {
-    "id": 18946876350,
-    "animationid": "http://www.roblox.com/asset/?id=18946844622",
-    "name": "Charli xcx - Apple Dance"
-  },
-  {
-    "id": 12507120275,
-    "animationid": "http://www.roblox.com/asset/?id=12507084541",
-    "name": "Alo Yoga Pose - Triangle"
-  },
-  {
-    "id": 12715395038,
-    "animationid": "http://www.roblox.com/asset/?id=12714228341",
-    "name": "TWICE Set Me Free - Dance 1"
-  },
-  {
-    "id": 12874468267,
-    "animationid": "http://www.roblox.com/asset/?id=12874447851",
-    "name": "TWICE The Feels"
-  },
-  {
-    "id": 10724083642,
-    "animationid": "http://www.roblox.com/asset/?id=10714164866",
-    "name": "Y Face"
-  },
-  {
-    "id": 4940597758,
-    "animationid": "http://www.roblox.com/asset/?id=4940563117",
-    "name": "Cower"
-  },
-  {
-    "id": 4049646104,
-    "animationid": "http://www.roblox.com/asset/?id=10714383856",
-    "name": "Line Dance"
-  },
-  {
-    "id": 3360689775,
-    "animationid": "http://www.roblox.com/asset/?id=10714389988",
-    "name": "Salute"
-  },
-  {
-    "id": 10724752755,
-    "animationid": "http://www.roblox.com/asset/?id=10714389988",
-    "name": "Salute Face"
-  },
-  {
-    "id": 17360720445,
-    "animationid": "http://www.roblox.com/asset/?id=17360699557",
-    "name": "HUGO Let's Drive!"
-  },
-  {
-    "id": 13694143234,
-    "animationid": "http://www.roblox.com/asset/?id=13694101936",
-    "name": "gdmc"
-  },
-  {
-    "id": 4049634387,
-    "animationid": "http://www.roblox.com/asset/?id=10714330764",
-    "name": "Tree"
-  },
-  {
-    "id": 14353423348,
-    "animationid": "http://www.roblox.com/asset/?id=14352343065",
-    "name": "Baby Queen - Bouncy Twirl"
-  },
-  {
-    "id": 15554010118,
-    "animationid": "http://www.roblox.com/asset/?id=15517864808",
-    "name": "Olivia Rodrigo Head Bop"
-  },
-  {
-    "id": 15123050663,
-    "animationid": "http://www.roblox.com/asset/?id=15122972413",
-    "name": "Bone Chillin' Bop"
-  },
-  {
-    "id": 15571538346,
-    "animationid": "http://www.roblox.com/asset/?id=15571448688",
-    "name": "Nicki Minaj Boom Boom Boom"
-  },
-  {
-    "id": 3821527813,
-    "animationid": "http://www.roblox.com/asset/?id=10714349738",
-    "name": "Swish"
-  },
-  {
-    "id": 3576823880,
-    "animationid": "http://www.roblox.com/asset/?id=10714395441",
-    "name": "Point2"
-  },
-  {
-    "id": 15571539403,
-    "animationid": "http://www.roblox.com/asset/?id=15571450952",
-    "name": "Nicki Minaj Anaconda"
-  },
-  {
-    "id": 15571540519,
-    "animationid": "http://www.roblox.com/asset/?id=15571453761",
-    "name": "Nicki Minaj Starships"
-  },
-  {
-    "id": 15698511500,
-    "animationid": "http://www.roblox.com/asset/?id=15698404340",
-    "name": "Cuco - Levitate"
-  },
-  {
-    "id": 139021427684680,
-    "animationid": "http://www.roblox.com/asset/?id=135876612109535",
-    "name": "KATSEYE - Touch"
-  },
-  {
-    "id": 10724606884,
-    "animationid": "http://www.roblox.com/asset/?id=10714372526",
-    "name": "Idol Face"
-  },
-  {
-    "id": 15439457146,
-    "animationid": "http://www.roblox.com/asset/?id=15439356296",
-    "name": "BLACKPINK JENNIE You and Me"
-  },
-  {
-    "id": 16874596971,
-    "animationid": "http://www.roblox.com/asset/?id=16874470507",
-    "name": "BLACKPINK - How You Like That"
-  },
-  {
-    "id": 16874600526,
-    "animationid": "http://www.roblox.com/asset/?id=16874472321",
-    "name": "BLACKPINK - Lovesick Girls"
-  },
-  {
-    "id": 18443271885,
-    "animationid": "http://www.roblox.com/asset/?id=18443245017",
-    "name": "SpongeBob Dance"
-  },
-  {
-    "id": 10147916560,
-    "animationid": "http://www.roblox.com/asset/?id=10714008655",
-    "name": "BURBERRY LOLA ATTITUDE - GEM"
-  },
-  {
-    "id": 3576719440,
-    "animationid": "http://www.roblox.com/asset/?id=10714347453",
-    "name": "T"
-  },
-  {
-    "id": 5915780563,
-    "animationid": "http://www.roblox.com/asset/?id=5915712534",
-    "name": "Country Line Dance - Lil Nas X (LNX)"
-  }
-]
+-- EmoteData converted from JSON to Lua table
+return {
+    ["HOLIDAY Dance - Lil Nas X (LNX)"] = "rbxassetid://10714365721",
+    ["Around Town Face"] = "rbxassetid://10713981723",
+    ["Rock On Face"] = "rbxassetid://10714403700",
+    ["Bunny Hop Face"] = "rbxassetid://10714004791",
+    ["Victory Dance"] = "rbxassetid://15505456446",
+    ["Boxing Punch Face"] = "rbxassetid://10717116749",
+    ["Drum Solo - Royal Blood"] = "rbxassetid://10714074218",
+    ["Swish Face"] = "rbxassetid://10714349738",
+    ["Cobra Arms - Tai Verdes"] = "rbxassetid://10714022275",
+    ["Show Dem Wrists - KSI"] = "rbxassetid://10714377090",
+    ["Get Out"] = "rbxassetid://10714345862",
+    ["Mae Stephens â€“ Arm Wave"] = "rbxassetid://16584481352",
+    ["Victory - 24kGoldn"] = "rbxassetid://10714171628",
+    ["Ay-Yo Dance Move - NCT 127"] = "rbxassetid://12804157977",
+    ["BLACKPINK Shut Down - Part 1"] = "rbxassetid://14901306096",
+    ["Elton John - Rock Out"] = "rbxassetid://11753474067",
+    ["Paris Hilton - Iconic IT-Grrrl"] = "rbxassetid://15392756794",
+    ["Samba"] = "rbxassetid://10714386947",
+    ["BLACKPINK ROSÃ‰ On The Ground"] = "rbxassetid://15679624464",
+    ["Beauty Touchdown"] = "rbxassetid://16302968986",
+    ["Hero Landing Face"] = "rbxassetid://10714360164",
+    ["Greatest Face"] = "rbxassetid://10714349037",
+    ["Na Na Na Face"] = "rbxassetid://10714389873",
+    ["Jacks"] = "rbxassetid://10714375667",
+    ["Fashionable Face"] = "rbxassetid://10714091938",
+    ["Shy"] = "rbxassetid://10714369325",
+    ["ms2"] = "rbxassetid://16584481352",
+    ["TWICE Moonlight Sunrise "] = "rbxassetid://12714233242",
+    ["Drummer Moves - Twenty One Pilots"] = "rbxassetid://10714072822",
+    ["hh2"] = "rbxassetid://14851541605",
+    ["Shrug"] = "rbxassetid://10714374484",
+    ["NBA Monster Dunk"] = "rbxassetid://132748833449150",
+    ["Emote_AirGuitar"] = "rbxassetid://10713959108",
+    ["Stadium Face"] = "rbxassetid://10714356920",
+    ["Uprise - Tommy Hilfiger"] = "rbxassetid://10275008655",
+    ["Monkey Face"] = "rbxassetid://10714388352",
+    ["Team USA Breaking Emote"] = "rbxassetid://18526288497",
+    ["bby"] = "rbxassetid://14851544078",
+    ["Fashion Roadkill"] = "rbxassetid://136831243854748",
+    ["AOK - Tai Verdes"] = "rbxassetid://10713962506",
+    ["Elton John - Elevate"] = "rbxassetid://11394033602",
+    ["Air Dance"] = "rbxassetid://10713957138",
+    ["Get Out Face"] = "rbxassetid://10714345862",
+    ["Alo Yoga Pose - Lotus Position"] = "rbxassetid://12507085924",
+    ["NBA Monster Dunk"] = "rbxassetid://132748833449150",
+    ["Cartwheel - George Ezra"] = "rbxassetid://10370351535",
+    ["Alo Yoga Pose - Warrior II"] = "rbxassetid://12507083048",
+    ["Idol"] = "rbxassetid://10714372526",
+    ["Side to Side Face"] = "rbxassetid://10714366910",
+    ["TWICE LIKEY"] = "rbxassetid://14899979575",
+    ["The Zabb"] = "rbxassetid://129470135909814",
+    ["Tilt"] = "rbxassetid://10714338461",
+    ["Zombie"] = "rbxassetid://10714089137",
+    ["Take Me Under Zara Larsson Face"] = "rbxassetid://10714345459",
+    ["Samba Step Dance"] = "rbxassetid://14620742793",
+    ["Side to Side"] = "rbxassetid://10714366910",
+    ["Mae Stephens - Piano Hands"] = "rbxassetid://16553163212",
+    ["Head Banging"] = "rbxassetid://5915711491",
+    ["Fishing"] = "rbxassetid://10714101749",
+    ["Man City Scorpion Kick"] = "rbxassetid://13694096724",
+    ["Huddle Face"] = "rbxassetid://10714366893",
+    ["newdance"] = "rbxassetid://14352353329",
+    ["d4vd - Backflip"] = "rbxassetid://15693621070",
+    ["Top Rock"] = "rbxassetid://10714336041",
+    ["High Wave"] = "rbxassetid://10714362852",
+    ["2 Baddies Dance Move - NCT 127"] = "rbxassetid://12259828678",
+    ["TWICE Strategy"] = "rbxassetid://97311229290836",
+    ["Sol de Janeiro - Samba"] = "rbxassetid://16270690701",
+    ["Fancy Feet"] = "rbxassetid://10714076981",
+    ["Rock Guitar - Royal Blood"] = "rbxassetid://10714393929",
+    ["TWICE Set Me Free - Dance 2"] = "rbxassetid://12714231087",
+    ["High Hands"] = "rbxassetid://10714361543",
+    ["YUNGBLUD â€“ HIGH KICK"] = "rbxassetid://14022936101",
+    ["Paris Hilton - Sliving For The Groove"] = "rbxassetid://15392759696",
+    ["Hyperfast 5G Dance Move Face"] = "rbxassetid://10714371264",
+    ["Mean Girls Dance Break"] = "rbxassetid://15963314052",
+    ["Heisman Pose"] = "rbxassetid://10714357129",
+    ["Hips Poppin Zara Larsson Face"] = "rbxassetid://10714364213",
+    ["Dolphin Dance"] = "rbxassetid://10714068222",
+    ["Fast Hands"] = "rbxassetid://10714100539",
+    ["Haha"] = "rbxassetid://10714350889",
+    ["Y"] = "rbxassetid://10714164866",
+    ["Hype Dance"] = "rbxassetid://10714369624",
+    ["Baby Queen - Strut"] = "rbxassetid://14352362059",
+    ["Boom Boom Clap - George Ezra"] = "rbxassetid://10370346995",
+    ["Paris Hilton - Checking My Angles"] = "rbxassetid://15392752812",
+    ["Wanna play?"] = "rbxassetid://16646423316",
+    ["Sneaky Face"] = "rbxassetid://10714358528",
+    ["GloRilla - \"Tomorrow\" Dance"] = "rbxassetid://15689278184",
+    ["Paris Hilton Sanasa"] = "rbxassetid://16126469463",
+    ["Bodybuilder"] = "rbxassetid://10713990381",
+    ["TWICE Fancy"] = "rbxassetid://13520524517",
+    ["Flowing Breeze Face"] = "rbxassetid://10714342957",
+    ["Shy Face"] = "rbxassetid://10714369325",
+    ["Bodybuilder Face"] = "rbxassetid://10713990381",
+    ["Skadoosh Emote - Kung Fu Panda 4"] = "rbxassetid://16371217304",
+    ["BLACKPINK Pink Venom - Straight to Ya Dome"] = "rbxassetid://14548621256",
+    ["Applaud"] = "rbxassetid://10713966026",
+    ["Disagree"] = "rbxassetid://10714065135",
+    ["BLACKPINK Kill This Love"] = "rbxassetid://16181798319",
+    ["Rock Out - Bebe Rexha"] = "rbxassetid://18225053113",
+    ["V Pose - Tommy Hilfiger"] = "rbxassetid://10214319518",
+    ["Robot Face"] = "rbxassetid://10714392151",
+    ["Imagine Dragons - â€œBonesâ€ Dance"] = "rbxassetid://15689279687",
+    ["Dorky Dance"] = "rbxassetid://10714069471",
+    ["ALTÃ‰GO - Couldnâ€™t Care Less"] = "rbxassetid://107875941017127",
+    ["Festive Dance"] = "rbxassetid://15679621440",
+    ["Up and Down Face"] = "rbxassetid://10714174918",
+    ["Rock n Roll"] = "rbxassetid://15505458452",
+    ["Boxing Punch - KSI"] = "rbxassetid://10717116749",
+    ["Elton John - Cat Man"] = "rbxassetid://11444441914",
+    ["Keeping Time"] = "rbxassetid://10714380563",
+    ["Udzals Summoning Face"] = "rbxassetid://10714177846",
+    ["Power Blast"] = "rbxassetid://10714389396",
+    ["Agree"] = "rbxassetid://10713954623",
+    ["Baby Queen - Dramatic Bow"] = "rbxassetid://14352337694",
+    ["Man City Backflip"] = "rbxassetid://13694100677",
+    ["Secret Handshake Dance"] = "rbxassetid://71243990877913",
+    ["Rock Star Royal Blood Face"] = "rbxassetid://10714400171",
+    ["Shuffle Face"] = "rbxassetid://10714371274",
+    ["Wake Up Call Face"] = "rbxassetid://10714168145",
+    ["Victory ### #### Face"] = "rbxassetid://10714171628",
+    ["Dizzy Face"] = "rbxassetid://10714066964",
+    ["Drummer Moves Face"] = "rbxassetid://10714072822",
+    ["Floor Rock Freeze - Tommy Hilfiger"] = "rbxassetid://10214314957",
+    ["TWICE Pop by Nayeon"] = "rbxassetid://13768941455",
+    ["Blah Blah Face"] = "rbxassetid://10713986541",
+    ["Super Charge"] = "rbxassetid://10478338114",
+    ["Twirl"] = "rbxassetid://10714293450",
+    ["Vroom Vroom"] = "rbxassetid://18526397037",
+    ["Mini Kong"] = "rbxassetid://17000021306",
+    ["Panini Dance - Lil Nas X (LNX)"] = "rbxassetid://10714394082",
+    ["Nicki Minaj That's That Super Bass Emote"] = "rbxassetid://15571446961",
+    ["Happy"] = "rbxassetid://10714352626",
+    ["Baby Dance"] = "rbxassetid://10713983178",
+    ["Tommy K-Pop Mic Drop"] = "rbxassetid://14024642130",
+    ["Bunny Hop"] = "rbxassetid://10714004791",
+    ["High Wave Face"] = "rbxassetid://10714362852",
+    ["BLACKPINK Pink Venom - Get em Get em Get em"] = "rbxassetid://14548619594",
+    ["Sad Face"] = "rbxassetid://10714392876",
+    ["Baby Queen - Air Guitar & Knee Slide"] = "rbxassetid://14352335202",
+    ["Rock On"] = "rbxassetid://10714403700",
+    ["TWICE What Is Love"] = "rbxassetid://13327655243",
+    ["Sandwich Dance"] = "rbxassetid://10714384494",
+    ["Elton John - Heart Shuffle"] = "rbxassetid://17748314784",
+    ["Block Partier Face"] = "rbxassetid://10713988674",
+    ["Beckon Face"] = "rbxassetid://10713984554",
+    ["Chicken Dance Face"] = "rbxassetid://10714020158",
+    ["Curtsy"] = "rbxassetid://10714061912",
+    ["TWICE Feel Special"] = "rbxassetid://14899980745",
+    ["Sleep"] = "rbxassetid://10714360343",
+    ["Jawny - Stomp"] = "rbxassetid://16392075853",
+    ["Chicken Dance"] = "rbxassetid://10714020158",
+    ["Air Guitar"] = "rbxassetid://10713959108",
+    ["Sad"] = "rbxassetid://10714392876",
+    ["Confused"] = "rbxassetid://4940561610",
+    ["Old Town Road Dance LNX Face"] = "rbxassetid://10714391240",
+    ["Sidekicks - George Ezra"] = "rbxassetid://10370362157",
+    ["Hero Landing"] = "rbxassetid://10714360164",
+    ["Beckon"] = "rbxassetid://10713984554",
+    ["Swan Dance Face"] = "rbxassetid://10714352930",
+    ["Borocks Rage Face"] = "rbxassetid://10713999630",
+    ["Bored"] = "rbxassetid://10713992055",
+    ["Elton John - Heart Skip"] = "rbxassetid://11309255148",
+    ["BLACKPINK LISA Money"] = "rbxassetid://15679623052",
+    ["Hyperfast 5G Dance Move"] = "rbxassetid://10714371264",
+    ["Dancin' Shoes - Twenty One Pilots"] = "rbxassetid://10714063823",
+    ["Baby Queen - Face Frame"] = "rbxassetid://14352340648",
+    ["Arm Wave"] = "rbxassetid://5915648213",
+    ["Break Dance"] = "rbxassetid://10714003221",
+    ["thhsv3"] = "rbxassetid://14109772540",
+    ["Floss Dance"] = "rbxassetid://10714340543",
+    ["Monkey"] = "rbxassetid://10714388352",
+    ["BLACKPINK As If It's Your Last"] = "rbxassetid://18855536648",
+    ["Rodeo Dance - Lil Nas X (LNX)"] = "rbxassetid://10714395175",
+    ["Drum Master - Royal Blood"] = "rbxassetid://10714070681",
+    ["Rock Star - Royal Blood"] = "rbxassetid://10714400171",
+    ["Hips Poppin' - Zara Larsson"] = "rbxassetid://10714364213",
+    ["Rise Above - The Chainsmokers"] = "rbxassetid://12992262118",
+    ["Stadium"] = "rbxassetid://10714356920",
+    ["Take Me Under - Zara Larsson"] = "rbxassetid://10714345459",
+    ["It Ain't My Fault - Zara Larsson"] = "rbxassetid://10714374267",
+    ["Block Partier"] = "rbxassetid://10713988674",
+    ["High Hands Face"] = "rbxassetid://10714361543",
+    ["Cha Cha"] = "rbxassetid://6862001787",
+    ["TWICE Like Ooh-Ahh"] = "rbxassetid://14123781004",
+    ["Robot"] = "rbxassetid://10714392151",
+    ["Dave's Spin Move - Glass Animals"] = "rbxassetid://16272432203",
+    ["Holiday Dance LNX Face"] = "rbxassetid://10714365721",
+    ["Saturday Dance - Twenty One Pilots"] = "rbxassetid://10714382522",
+    ["Rolling Stones Guitar Strum"] = "rbxassetid://18148804340",
+    ["On The Outside - Twenty One Pilots"] = "rbxassetid://10714392953",
+    ["Applaud Face"] = "rbxassetid://10713966026",
+    ["Quiet Waves"] = "rbxassetid://10714390497",
+    ["Twirl Face"] = "rbxassetid://10714293450",
+    ["Flowing Breeze"] = "rbxassetid://10714342957",
+    ["Swan Dance"] = "rbxassetid://10714352930",
+    ["Lasso Turn - Tai Verdes"] = "rbxassetid://10714382225",
+    ["Fishing Face"] = "rbxassetid://10714101749",
+    ["Olivia Rodrigo good 4 u"] = "rbxassetid://15517862739",
+    ["Hwaiting (í™”ì´íŒ…)"] = "rbxassetid://10714368233",
+    ["hh1"] = "rbxassetid://14851539444",
+    ["Gashina - SUNMI"] = "rbxassetid://9527886709",
+    ["Arm Twist"] = "rbxassetid://10713968716",
+    ["Face Calisthenics"] = "rbxassetid://9830680869",
+    ["You can't sit with us - Sunmi"] = "rbxassetid://9983520970",
+    ["BLACKPINK Don't know what to do"] = "rbxassetid://18855531354",
+    ["BURBERRY LOLA ATTITUDE - BLOOM"] = "rbxassetid://10714007154",
+    ["BURBERRY LOLA ATTITUDE - REFLEX"] = "rbxassetid://10714010337",
+    ["BLACKPINK DDU-DU DDU-DU"] = "rbxassetid://16553170471",
+    ["BURBERRY LOLA ATTITUDE - NIMBUS"] = "rbxassetid://10147821284",
+    ["Happy Face"] = "rbxassetid://10714352626",
+    ["Louder"] = "rbxassetid://10714385204",
+    ["Frosty Flair - Tommy Hilfiger"] = "rbxassetid://10214311282",
+    ["Mean Mug - Tommy Hilfiger"] = "rbxassetid://10214317325",
+    ["Hype Dance Face"] = "rbxassetid://10714369624",
+    ["Tantrum"] = "rbxassetid://10714340558",
+    ["The Conductor - George Ezra"] = "rbxassetid://10370359115",
+    ["TWICE I GOT YOU part 2"] = "rbxassetid://16256203246",
+    ["Power Blast Face"] = "rbxassetid://10714389396",
+    ["BLACKPINK Shut Down - Part 2"] = "rbxassetid://14901308987",
+    ["TWICE ABCD by Nayeon"] = "rbxassetid://18933706381",
+    ["Tantrum Face"] = "rbxassetid://10714340558",
+    ["Tree Face"] = "rbxassetid://10714330764",
+    ["Greatest"] = "rbxassetid://10714349037",
+    ["Agree Face"] = "rbxassetid://10713954623",
+    ["Tommy - Archer"] = "rbxassetid://13823324057",
+    ["Air Dance Face"] = "rbxassetid://10713957138",
+    ["Shuffle"] = "rbxassetid://10714371274",
+    ["Zombie Face"] = "rbxassetid://10714089137",
+    ["You Cant Sit With Us Face"] = "rbxassetid://10714161572",
+    ["AOK Tai Verdes Face"] = "rbxassetid://10713962506",
+    ["Up and Down - Twenty One Pilots"] = "rbxassetid://10714174918",
+    ["Superhero Reveal Face"] = "rbxassetid://10714355069",
+    ["Arm Twist Face"] = "rbxassetid://10713968716",
+    ["Baby Dance Face"] = "rbxassetid://10713983178",
+    ["th-afsc"] = "rbxassetid://14024645241",
+    ["SpongeBob Imaginaaation ðŸŒˆ"] = "rbxassetid://18443237526",
+    ["Bored Face"] = "rbxassetid://10713992055",
+    ["Burberry Bloom Face"] = "rbxassetid://10714007154",
+    ["Burberry Gem Face"] = "rbxassetid://10714008655",
+    ["Burberry Reflex Face"] = "rbxassetid://10714010337",
+    ["Sticker Dance Move - NCT 127"] = "rbxassetid://12259825026",
+    ["Cha Cha Face"] = "rbxassetid://10714018192",
+    ["Cobra Arms Tai Verdes Face"] = "rbxassetid://10714022275",
+    ["Curtsy Face"] = "rbxassetid://10714061912",
+    ["Dancin Shoes Face"] = "rbxassetid://10714063823",
+    ["Dolphin Dance Face"] = "rbxassetid://10714068222",
+    ["Dorky Dance Face"] = "rbxassetid://10714069471",
+    ["Man City Bicycle Kick"] = "rbxassetid://13421057998",
+    ["Drum Master Royal Blood Face"] = "rbxassetid://10714070681",
+    ["Top Rock Face"] = "rbxassetid://10714336041",
+    ["Dizzy"] = "rbxassetid://10714066964",
+    ["Fancy Feet Face"] = "rbxassetid://10714076981",
+    ["Olympic Dismount"] = "rbxassetid://18665825805",
+    ["Disagree Face"] = "rbxassetid://10714065135",
+    ["Fast Hands Face"] = "rbxassetid://10714100539",
+    ["Annyeong (ì•ˆë…•)"] = "rbxassetid://9527883498",
+    ["Floss Dance Face"] = "rbxassetid://10714340543",
+    ["Godlike Face"] = "rbxassetid://10714347256",
+    ["MANIAC - Stray Kids"] = "rbxassetid://11309304959",
+    ["Hello Face"] = "rbxassetid://10714359093",
+    ["Hwaiting Face"] = "rbxassetid://10714368233",
+    ["BLACKPINK Boombayah Emote"] = "rbxassetid://16553164850",
+    ["Chill Vibes - George Ezra"] = "rbxassetid://10370353969",
+    ["TWICE I GOT YOU part 1"] = "rbxassetid://16215030041",
+    ["Wake Up Call - KSI"] = "rbxassetid://10714168145",
+    ["Air Guitar"] = "rbxassetid://15505454268",
+    ["BLACKPINK Pink Venom - I Bring the Pain Likeâ€¦"] = "rbxassetid://14548620495",
+    ["Jacks Face"] = "rbxassetid://10714375667",
+    ["Drum Solo Royal Blood Face"] = "rbxassetid://10714074218",
+    ["Haha Face"] = "rbxassetid://10714350889",
+    ["Line Dance Face"] = "rbxassetid://10714383856",
+    ["Louder Face"] = "rbxassetid://10714385204",
+    ["Celebrate"] = "rbxassetid://10714016223",
+    ["On the Outside Face"] = "rbxassetid://10714392953",
+    ["HIPMOTION - Amaarae"] = "rbxassetid://16572740012",
+    ["Panini Dance LNX Face"] = "rbxassetid://10714394082",
+    ["Point 2 Face"] = "rbxassetid://10714395441",
+    ["ericdoa - dance"] = "rbxassetid://15698402762",
+    ["Vans Ollie"] = "rbxassetid://18305395285",
+    ["Quiet Waves Face"] = "rbxassetid://10714390497",
+    ["Cha-Cha"] = "rbxassetid://10714018192",
+    ["Sandwhich Dance Face"] = "rbxassetid://10714384494",
+    ["Saturday Dance Face"] = "rbxassetid://10714382522",
+    ["Shiver Face"] = "rbxassetid://10714379581",
+    ["Show Dem Wrists Face"] = "rbxassetid://10714377090",
+    ["Shrug Face"] = "rbxassetid://10714374484",
+    ["Sleep Face"] = "rbxassetid://10714360343",
+    ["Chappell Roan HOT TO GO!"] = "rbxassetid://85267023718407",
+    ["BLACKPINK Ice Cream"] = "rbxassetid://16181797368",
+    ["T Face"] = "rbxassetid://10714347453",
+    ["Fashion Spin"] = "rbxassetid://131669256082047",
+    ["Break Dance Face"] = "rbxassetid://10714003221",
+    ["Keeping Time Face"] = "rbxassetid://10714380563",
+    ["Sneaky"] = "rbxassetid://10714358528",
+    ["Rock Guitar Royal Blood Face"] = "rbxassetid://10714393929",
+    ["Around Town"] = "rbxassetid://10713981723",
+    ["Sturdy Dance - Ice Spice"] = "rbxassetid://17746180844",
+    ["Tilt Face"] = "rbxassetid://10714338461",
+    ["BLACKPINK JISOO Flower"] = "rbxassetid://15439354020",
+    ["Skibidi Toilet - Titan Speakerman Laser Spin"] = "rbxassetid://134283166482394",
+    ["Fashionable"] = "rbxassetid://10714091938",
+    ["Rodeo Dance LNX Face"] = "rbxassetid://10714395175",
+    ["Making Faces Face"] = "rbxassetid://10714387027",
+    ["Lasso Turn Tai Verdes Face"] = "rbxassetid://10714382225",
+    ["Wisp - air guitar"] = "rbxassetid://17370775305",
+    ["BURBERRY LOLA ATTITUDE - HYDRO"] = "rbxassetid://10147823318",
+    ["Old Town Road Dance - Lil Nas X (LNX)"] = "rbxassetid://10714391240",
+    ["Superhero Reveal"] = "rbxassetid://10714355069",
+    ["Samba Face"] = "rbxassetid://10714386947",
+    ["Godlike"] = "rbxassetid://10714347256",
+    ["Shrek Roar"] = "rbxassetid://18524313628",
+    ["Hello"] = "rbxassetid://10714359093",
+    ["TMNT Dance"] = "rbxassetid://18665811005",
+    ["Heisman Pose Face"] = "rbxassetid://10714357129",
+    ["Elton John - Still Standing"] = "rbxassetid://11444443576",
+    ["It Aint My Fault Zara Larsson Face"] = "rbxassetid://10714374267",
+    ["Kick It Dance Move - NCT 127"] = "rbxassetid://12259826609",
+    ["Celebrate Face"] = "rbxassetid://10714016223",
+    ["NBA WNBA Fadeaway"] = "rbxassetid://18526362841",
+    ["Charli xcx - Apple Dance"] = "rbxassetid://18946844622",
+    ["Alo Yoga Pose - Triangle"] = "rbxassetid://12507084541",
+    ["TWICE Set Me Free - Dance 1"] = "rbxassetid://12714228341",
+    ["TWICE The Feels"] = "rbxassetid://12874447851",
+    ["Y Face"] = "rbxassetid://10714164866",
+    ["Cower"] = "rbxassetid://4940563117",
+    ["Line Dance"] = "rbxassetid://10714383856",
+    ["Salute"] = "rbxassetid://10714389988",
+    ["Salute Face"] = "rbxassetid://10714389988",
+    ["HUGO Let's Drive!"] = "rbxassetid://17360699557",
+    ["gdmc"] = "rbxassetid://13694101936",
+    ["Tree"] = "rbxassetid://10714330764",
+    ["Baby Queen - Bouncy Twirl"] = "rbxassetid://14352343065",
+    ["Olivia Rodrigo Head Bop"] = "rbxassetid://15517864808",
+    ["Bone Chillin' Bop"] = "rbxassetid://15122972413",
+    ["Nicki Minaj Boom Boom Boom"] = "rbxassetid://15571448688",
+    ["Swish"] = "rbxassetid://10714349738",
+    ["Point2"] = "rbxassetid://10714395441",
+    ["Nicki Minaj Anaconda"] = "rbxassetid://15571450952",
+    ["Nicki Minaj Starships"] = "rbxassetid://15571453761",
+    ["Cuco - Levitate"] = "rbxassetid://15698404340",
+    ["KATSEYE - Touch"] = "rbxassetid://135876612109535",
+    ["Idol Face"] = "rbxassetid://10714372526",
+    ["BLACKPINK JENNIE You and Me"] = "rbxassetid://15439356296",
+    ["BLACKPINK - How You Like That"] = "rbxassetid://16874470507",
+    ["BLACKPINK - Lovesick Girls"] = "rbxassetid://16874472321",
+    ["SpongeBob Dance"] = "rbxassetid://18443245017",
+    ["BURBERRY LOLA ATTITUDE - GEM"] = "rbxassetid://10714008655",
+    ["T"] = "rbxassetid://10714347453",
+    ["Country Line Dance - Lil Nas X (LNX)"] = "rbxassetid://5915712534",
+}
