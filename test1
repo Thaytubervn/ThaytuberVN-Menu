@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('3')
+print('4')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -680,9 +680,9 @@ local CoreGui = getService("CoreGui")
 
 local Rayfield
 if useStudio then
-	Rayfield = game:GetObjects("rbxassetid://76713325675109")[1]
+	Rayfield = game:GetObjects("rbxassetid://124021070923161")[1]
 else
-	Rayfield = game:GetObjects("rbxassetid://76713325675109")[1]
+	Rayfield = game:GetObjects("rbxassetid://124021070923161")[1]
 end
 
 local buildAttempts = 0
