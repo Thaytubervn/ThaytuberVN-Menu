@@ -4042,3 +4042,42 @@ task.delay(4, function()
 end)
 
 return RayfieldLibrary
+--[[ Dropdown:Update Support ]]--
+-- Adds Dropdown:Update(options) to update the list dynamically
+for _, obj in pairs(getgc(true)) do
+    if typeof(obj) == "table" and rawget(obj, "Set") and rawget(obj, "Get") and not rawget(obj, "Update") then
+        obj.Update = function(self, newOptions)
+            if typeof(newOptions) ~= "table" then
+                warn("Dropdown:Update expects a table of strings")
+                return
+            end
+
+            local dropdownFrame = self._dropdownFrame or self._frame
+            if not dropdownFrame then return end
+
+            for _, child in ipairs(dropdownFrame:GetChildren()) do
+                if child:IsA("TextButton") and child.Name == "OptionButton" then
+                    child:Destroy()
+                end
+            end
+
+            for _, option in ipairs(newOptions) do
+                local button = Instance.new("TextButton")
+                button.Name = "OptionButton"
+                button.Text = tostring(option)
+                button.BackgroundTransparency = 1
+                button.Size = UDim2.new(1, 0, 0, 24)
+                button.Parent = dropdownFrame
+
+                button.MouseButton1Click:Connect(function()
+                    if self.Set then
+                        self:Set(option)
+                    end
+                    if self.Callback then
+                        self.Callback(option)
+                    end
+                end)
+            end
+        end
+    end
+end
