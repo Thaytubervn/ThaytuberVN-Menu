@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('3')
+print('5')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -1149,8 +1149,8 @@ local function openSearch()
 	Main.Search.Input.TextTransparency = 1
 	Main.Search.Search.ImageTransparency = 1
 	Main.Search.UIStroke.Transparency = 1
-	Main.Search.Size = UDim2.new(1, 0, 0, 80)
-	Main.Search.Position = UDim2.new(0.5, 0, 0, 70)
+    -- removed to keep GUI layout from Studio: Main.Search.Size = UDim2.new(1, 0, 0, 80)
+    -- removed to keep GUI layout from Studio: Main.Search.Position = UDim2.new(0.5, 0, 0, 70)
 
 	Main.Search.Input.Interactable = true
 
