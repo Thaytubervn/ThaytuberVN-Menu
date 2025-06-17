@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('0')
+print('1')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -1988,6 +1988,12 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end
 
 			for _, stroke in ipairs(customLoadingGui:GetDescendants()) do
+				if stroke:IsA("UIStroke") then
+					stroke.Color = color
+				end
+			end
+
+			for _, stroke in ipairs(KeyUI:GetDescendants()) do
 				if stroke:IsA("UIStroke") then
 					stroke.Color = color
 				end
