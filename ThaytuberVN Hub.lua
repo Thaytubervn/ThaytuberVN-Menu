@@ -4,7 +4,7 @@
 	by ThaytuberVN
 
 ]]
-print('1')
+print('2')
 
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
@@ -1975,33 +1975,37 @@ function RayfieldLibrary:CreateWindow(Settings)
 	LoadingFrame.Visible = true
 
 	-- 🌈 Luôn bật hiệu ứng Rainbow cho tất cả UIStroke
-	task.spawn(function()
-		local hue = 0
-		while true do
-			hue = (hue + 0.005) % 1
-			local color = Color3.fromHSV(hue, 1, 1)
+	local allStrokes = {}
 
-			for _, stroke in ipairs(Rayfield:GetDescendants()) do
+local function cacheStrokes()
+	allStrokes = {}
+	for _, gui in {Rayfield, customLoadingGui, KeyUI} do
+		if gui then
+			for _, stroke in ipairs(gui:GetDescendants()) do
 				if stroke:IsA("UIStroke") then
-					stroke.Color = color
+					table.insert(allStrokes, stroke)
 				end
 			end
-
-			for _, stroke in ipairs(customLoadingGui:GetDescendants()) do
-				if stroke:IsA("UIStroke") then
-					stroke.Color = color
-				end
-			end
-
-			for _, stroke in ipairs(KeyUI:GetDescendants()) do
-				if stroke:IsA("UIStroke") then
-					stroke.Color = color
-				end
-			end
-
-			task.wait(0.01)
 		end
-	end)
+	end
+end
+
+cacheStrokes()
+
+task.spawn(function()
+	local hue = 0
+	while true do
+		hue = (hue + 0.005) % 1
+		local color = Color3.fromHSV(hue, 1, 1)
+
+		for _, stroke in ipairs(allStrokes) do
+			stroke.Color = color
+		end
+
+		task.wait(0.02)
+	end
+end)
+
 
 	task.wait(0.6)
 
