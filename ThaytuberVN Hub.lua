@@ -6,6 +6,16 @@
 ]]
 print('1')
 
+local soundMenu = Instance.new("Sound", game.Players.LocalPlayer:WaitForChild("PlayerGui"))
+soundMenu.SoundId = "rbxassetid://8120936755"
+soundMenu.Volume = 1
+
+local sound = Instance.new("Sound", game.Players.LocalPlayer:WaitForChild("PlayerGui"))
+sound.SoundId = "rbxassetid://3779053277"
+sound.Volume = 1
+
+soundMenu:Play()
+
 if debugX then
 	warn('Initialising ThaytuberVN_Hub')
 end
